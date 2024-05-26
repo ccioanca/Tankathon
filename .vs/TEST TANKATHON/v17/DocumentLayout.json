@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "G:\\Projects Dev\\Test-Tankathon\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{737290E2-E0F9-4994-BFED-1382B3BC0FB1}|Test Tankathon.csproj|g:\\projects dev\\test-tankathon\\mytank\\mytank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{737290E2-E0F9-4994-BFED-1382B3BC0FB1}|Test Tankathon.csproj|solutionrelative:mytank\\mytank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{737290E2-E0F9-4994-BFED-1382B3BC0FB1}|Test Tankathon.csproj|g:\\projects dev\\test-tankathon\\api\\actions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{737290E2-E0F9-4994-BFED-1382B3BC0FB1}|Test Tankathon.csproj|solutionrelative:api\\actions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{737290E2-E0F9-4994-BFED-1382B3BC0FB1}|Test Tankathon.csproj|g:\\projects dev\\test-tankathon\\api\\tank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{737290E2-E0F9-4994-BFED-1382B3BC0FB1}|Test Tankathon.csproj|solutionrelative:api\\tank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{737290E2-E0F9-4994-BFED-1382B3BC0FB1}|Test Tankathon.csproj|g:\\projects dev\\test-tankathon\\api\\itank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{737290E2-E0F9-4994-BFED-1382B3BC0FB1}|Test Tankathon.csproj|solutionrelative:api\\itank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,17 +26,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Tank.cs",
+              "DocumentMoniker": "G:\\Projects Dev\\Test-Tankathon\\API\\Tank.cs",
+              "RelativeDocumentMoniker": "API\\Tank.cs",
+              "ToolTip": "G:\\Projects Dev\\Test-Tankathon\\API\\Tank.cs",
+              "RelativeToolTip": "API\\Tank.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T21:11:21.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MyTank.cs",
+              "DocumentMoniker": "G:\\Projects Dev\\Test-Tankathon\\MyTank\\MyTank.cs",
+              "RelativeDocumentMoniker": "MyTank\\MyTank.cs",
+              "ToolTip": "G:\\Projects Dev\\Test-Tankathon\\MyTank\\MyTank.cs",
+              "RelativeToolTip": "MyTank\\MyTank.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T20:23:33.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Actions.cs",
+              "DocumentMoniker": "G:\\Projects Dev\\Test-Tankathon\\API\\Actions.cs",
+              "RelativeDocumentMoniker": "API\\Actions.cs",
+              "ToolTip": "G:\\Projects Dev\\Test-Tankathon\\API\\Actions.cs",
+              "RelativeToolTip": "API\\Actions.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABkAAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T20:05:07.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ITank.cs",
               "DocumentMoniker": "G:\\Projects Dev\\Test-Tankathon\\API\\ITank.cs",
               "RelativeDocumentMoniker": "API\\ITank.cs",
               "ToolTip": "G:\\Projects Dev\\Test-Tankathon\\API\\ITank.cs",
               "RelativeToolTip": "API\\ITank.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-24T20:19:27.548Z",
               "EditorCaption": ""

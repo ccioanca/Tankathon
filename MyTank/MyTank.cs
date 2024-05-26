@@ -1,20 +1,13 @@
 using Godot;
 using System;
 using Tankathon.API;
+using TestTankathon.API;
 
-public partial class MyTank : Node2D, ITank
+public partial class MyTank : Tank
 {
-	public string _name;
-	public string Name { get => _name; set => _name = value; }
-
-	public void Setup()
-	{
-		Name = "MyTankName";
-	}
-
-	public void Do(Actions actions)
+	//Logic to do every frame
+	public void Do()
 	{
 		actions.MoveForward();
-		GD.Print("Doing Do");
 	}
 }

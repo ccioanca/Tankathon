@@ -1,26 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5gvdx6q0b6gv"]
+[gd_scene load_steps=6 format=3 uid="uid://c5gvdx6q0b6gv"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_a4ey1"]
 [ext_resource type="Texture2D" uid="uid://dhknxynfjugol" path="res://Assets/Red Tank.png" id="2_flw5r"]
 [ext_resource type="Script" path="res://MyTank/MyTank.cs" id="3_wmkpo"]
 [ext_resource type="Texture2D" uid="uid://d0e3ydgyayvjt" path="res://Assets/Blue Tank.png" id="4_ty3pt"]
+[ext_resource type="Script" path="res://API/Actions.cs" id="5_itouf"]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_a4ey1")
 
-[node name="EnemyTank" type="Node2D" parent="."]
+[node name="RedTank" type="Node2D" parent="."]
 position = Vector2(500, 90)
 scale = Vector2(1, -1)
 
-[node name="RedTank" type="Sprite2D" parent="EnemyTank"]
+[node name="RedTank" type="Sprite2D" parent="RedTank"]
 texture = ExtResource("2_flw5r")
 
-[node name="RayCast2D" type="RayCast2D" parent="EnemyTank"]
+[node name="RayCast2D" type="RayCast2D" parent="RedTank"]
 target_position = Vector2(0, 0)
 
-[node name="MyTank" type="Node2D" parent="."]
+[node name="BlueTank" type="Node2D" parent="."]
+position = Vector2(500, 550)
 script = ExtResource("3_wmkpo")
 
-[node name="BlueTank" type="Sprite2D" parent="MyTank"]
-position = Vector2(500, 550)
+[node name="BlueTank" type="Sprite2D" parent="BlueTank"]
 texture = ExtResource("4_ty3pt")
+
+[node name="Actions" type="Node2D" parent="BlueTank"]
+script = ExtResource("5_itouf")
