@@ -8,10 +8,7 @@ namespace TestTankathon.API
 {
     public interface IEntity
     {
-        string Name { get; set; }
-
-        EntityType Type { get; set; }
-
+        EntityType eType { get; }
     }
 
     public enum EntityType

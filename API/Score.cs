@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace TestTankathon.API
 {
-    internal class Score
+    public class Score
     {
+        public int blueScore;
+        public int redScore;
+        public Score(int blueScore, int redScore)
+        {
+            this.blueScore = blueScore;
+            this.redScore = redScore;
+        }
     }
 }

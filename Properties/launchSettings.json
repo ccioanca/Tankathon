@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Test Tankathon": {
+      "commandName": "Project"
+    },
+    "Godot Executable": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\cristian.cioanca\\Downloads\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64.exe",
+      "workingDirectory": ".",
+      "nativeDebugging": true
+    }
+  }
+}

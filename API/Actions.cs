@@ -1,30 +1,29 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Godot;
 using TestTankathon.API;
 
 namespace Tankathon.API;
 
-public partial class Actions : Node2D
+public partial class Actions : Node2D, IActions
 {
-	Tank tank;
+	TestTank tank;
 
     public override void _Ready()
     {
-		tank = GetParent<Tank>();
-		GD.Print(tank.Name);
+		tank = GetParent<TestTank>();
+		GD.Print(tank.TankName);
         base._Ready();
     }
 
-    public List<IEntity> Scan()
+    public IEntity Scan()
 	{
-		return new List<IEntity>();
+		return null;
 	}
 
 	public void MoveForward() 
 	{
 		tank.GlobalPosition = new Vector2(tank.GlobalPosition.X, tank.GlobalPosition.Y - 10f * (float)GetProcessDeltaTime());
-        GD.Print($"Doing MoveForward {tank.Name} - Position: {tank.GlobalPosition.ToString()}");
     }
 
 	public void Aim(Vector2 aim) { }

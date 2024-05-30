@@ -3,11 +3,15 @@ using System;
 using Tankathon.API;
 using TestTankathon.API;
 
-public partial class MyTank : Tank
+
+namespace Tankathon.MyTank;
+public class MyTank : ITank
 {
 	//Logic to do every frame
-	public void Do()
+	public void Do(IActions actions, IScoreboard scoreboard)
 	{
 		actions.MoveForward();
+		GD.Print($"Time Left: {scoreboard.timer}");
 	}
+
 }

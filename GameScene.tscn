@@ -1,13 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5gvdx6q0b6gv"]
+[gd_scene load_steps=7 format=3 uid="uid://c5gvdx6q0b6gv"]
 
-[ext_resource type="Script" path="res://GameManager.gd" id="1_a4ey1"]
+[ext_resource type="Script" path="res://GameManager.cs" id="1_ur7qd"]
 [ext_resource type="Texture2D" uid="uid://dhknxynfjugol" path="res://Assets/Red Tank.png" id="2_flw5r"]
-[ext_resource type="Script" path="res://MyTank/MyTank.cs" id="3_wmkpo"]
+[ext_resource type="Script" path="res://API/Scoreboard.cs" id="2_j6n1q"]
+[ext_resource type="Script" path="res://API/TestTank.cs" id="3_vpwtt"]
 [ext_resource type="Texture2D" uid="uid://d0e3ydgyayvjt" path="res://Assets/Blue Tank.png" id="4_ty3pt"]
 [ext_resource type="Script" path="res://API/Actions.cs" id="5_itouf"]
 
 [node name="GameScene" type="Node2D"]
-script = ExtResource("1_a4ey1")
+script = ExtResource("1_ur7qd")
+
+[node name="Scoreboard" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_j6n1q")
+blueScore = 3
+redScore = 2
+TimeRemaining = 100
 
 [node name="RedTank" type="Node2D" parent="."]
 position = Vector2(500, 90)
@@ -21,7 +29,7 @@ target_position = Vector2(0, 0)
 
 [node name="BlueTank" type="Node2D" parent="."]
 position = Vector2(500, 550)
-script = ExtResource("3_wmkpo")
+script = ExtResource("3_vpwtt")
 
 [node name="BlueTank" type="Sprite2D" parent="BlueTank"]
 texture = ExtResource("4_ty3pt")
