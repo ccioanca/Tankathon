@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-using TestTankathon.API;
+using Tankathon.API;
 
 namespace Tankathon.API;
 
 public partial class Actions : Node2D, IActions
 {
-	TestTank tank;
+	Tank tank;
 
     public override void _Ready()
     {
-		tank = GetParent<TestTank>();
+		tank = GetParent<Tank>();
 		GD.Print(tank.TankName);
         base._Ready();
     }

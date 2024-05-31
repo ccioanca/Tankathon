@@ -6,7 +6,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestTankathon.API
+namespace Tankathon.API
 {
     public partial class Scoreboard : Node2D, IScoreboard
     {

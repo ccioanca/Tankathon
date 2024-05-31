@@ -2,9 +2,9 @@ using System;
 using Godot;
 using Tankathon.API;
 
-namespace TestTankathon.API;
+namespace Tankathon.API;
 
-public partial class TestTank : Node2D, IEntity
+public partial class Tank : Node2D, IEntity
 {
 	[Export]
 	public string TankName = "TankName";
@@ -19,15 +19,15 @@ public partial class TestTank : Node2D, IEntity
 
 	public override void _Ready()
 	{
-		thisTank = new Tankathon.MyTank.MyTank();
 		_passedActions = GetNode<Actions>("Actions");
 		_scoreboard = GetParent().GetNode<Scoreboard>("Scoreboard");
 		base._Ready();
 	}
 
-	public void Do()
-	{
-		thisTank.Do(_passedActions, _scoreboard);
-	}
+    public override void _Process(double delta)
+    {
+        thisTank.Do(_passedActions, _scoreboard);
+        base._Process(delta);
+    }
 }
 

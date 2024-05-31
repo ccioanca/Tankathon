@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace TestTankathon.API
+namespace Tankathon.API
 {
     public interface IScoreboard
     {
