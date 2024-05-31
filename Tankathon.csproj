@@ -6,4 +6,9 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>TestTankathon</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="EvilTank\" />
+    <Folder Include="OLD.godot\mono\" />
+  </ItemGroup>
 </Project>

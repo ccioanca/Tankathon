@@ -7,24 +7,25 @@ namespace Tankathon.API;
 
 public partial class Actions : Node2D, IActions
 {
-	Tank tank;
+	TheTank tank;
 
-    public override void _Ready()
-    {
-		tank = GetParent<Tank>();
+	public override void _Ready()
+	{
+		tank = GetParent<TheTank>();
 		GD.Print(tank.TankName);
-        base._Ready();
-    }
+		base._Ready();
+	}
 
-    public IEntity Scan()
+	public IEntity Scan()
 	{
 		return null;
 	}
 
 	public void MoveForward() 
 	{
-		tank.GlobalPosition = new Vector2(tank.GlobalPosition.X, tank.GlobalPosition.Y - 10f * (float)GetProcessDeltaTime());
-    }
+		tank.Velocity = -tank.Transform.Y * 2000 * (float)GetPhysicsProcessDeltaTime();
+		//tank.GlobalPosition = new Vector2(tank.GlobalPosition.X, tank.GlobalPosition.Y - 10f * (float)GetProcessDeltaTime());
+	}
 
 	public void Aim(Vector2 aim) { }
 

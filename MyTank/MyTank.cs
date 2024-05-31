@@ -1,7 +1,6 @@
 using System;
 using Tankathon.API;
 
-
 namespace Tankathon.MyTank;
 public class MyTank : ITank
 {

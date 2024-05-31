@@ -1,36 +1,28 @@
 [gd_scene load_steps=7 format=3 uid="uid://c5gvdx6q0b6gv"]
 
 [ext_resource type="Script" path="res://GameManager.cs" id="1_ur7qd"]
-[ext_resource type="Texture2D" uid="uid://dhknxynfjugol" path="res://Assets/Red Tank.png" id="2_flw5r"]
 [ext_resource type="Script" path="res://API/Scoreboard.cs" id="2_j6n1q"]
-[ext_resource type="Script" path="res://API/Tank.cs" id="4_d1u5n"]
+[ext_resource type="Script" path="res://API/TheTank.cs" id="4_de8lu"]
 [ext_resource type="Texture2D" uid="uid://d0e3ydgyayvjt" path="res://Assets/Blue Tank.png" id="4_ty3pt"]
 [ext_resource type="Script" path="res://API/Actions.cs" id="5_itouf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f3huc"]
+radius = 24.0
+height = 68.0
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_ur7qd")
 
 [node name="Scoreboard" type="Node2D" parent="."]
-unique_name_in_owner = true
 script = ExtResource("2_j6n1q")
 blueScore = 3
 redScore = 2
 TimeRemaining = 100
 
-[node name="RedTank" type="Node2D" parent="."]
-position = Vector2(500, 90)
-scale = Vector2(1, -1)
-
-[node name="EvilTank" type="Sprite2D" parent="RedTank"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_flw5r")
-
-[node name="RayCast2D" type="RayCast2D" parent="RedTank"]
-target_position = Vector2(0, 0)
-
-[node name="BlueTank" type="Node2D" parent="."]
+[node name="BlueTank" type="CharacterBody2D" parent="."]
 position = Vector2(500, 550)
-script = ExtResource("4_d1u5n")
+motion_mode = 1
+script = ExtResource("4_de8lu")
 
 [node name="MyTank" type="Sprite2D" parent="BlueTank"]
 scale = Vector2(0.5, 0.5)
@@ -38,3 +30,7 @@ texture = ExtResource("4_ty3pt")
 
 [node name="Actions" type="Node2D" parent="BlueTank"]
 script = ExtResource("5_itouf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlueTank"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_f3huc")

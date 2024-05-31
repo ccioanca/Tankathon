@@ -4,7 +4,7 @@ using Tankathon.API;
 
 namespace Tankathon.API;
 
-public partial class Tank : Node2D, IEntity
+public partial class TheTank : CharacterBody2D, IEntity
 {
 	[Export]
 	public string TankName = "TankName";
@@ -24,10 +24,16 @@ public partial class Tank : Node2D, IEntity
 		base._Ready();
 	}
 
-    public override void _Process(double delta)
-    {
-        thisTank.Do(_passedActions, _scoreboard);
-        base._Process(delta);
-    }
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		thisTank.Do(_passedActions, _scoreboard);
+		MoveAndSlide();
+		base._PhysicsProcess(delta);
+	}
 }
 
