@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5gvdx6q0b6gv"]
+[gd_scene load_steps=9 format=3 uid="uid://c5gvdx6q0b6gv"]
 
 [ext_resource type="Script" path="res://GameManager.cs" id="1_ur7qd"]
 [ext_resource type="Script" path="res://API/Scoreboard.cs" id="2_j6n1q"]
 [ext_resource type="Script" path="res://API/TheTank.cs" id="4_de8lu"]
+[ext_resource type="Shader" path="res://Shaders/Pixelate.gdshader" id="4_txh86"]
 [ext_resource type="Texture2D" uid="uid://d0e3ydgyayvjt" path="res://Assets/Blue Tank.png" id="4_ty3pt"]
 [ext_resource type="Script" path="res://API/Actions.cs" id="5_itouf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7gq4"]
+shader = ExtResource("4_txh86")
+shader_parameter/amount = 16
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f3huc"]
 radius = 24.0
@@ -25,6 +30,7 @@ motion_mode = 1
 script = ExtResource("4_de8lu")
 
 [node name="MyTank" type="Sprite2D" parent="BlueTank"]
+material = SubResource("ShaderMaterial_d7gq4")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ty3pt")
 
