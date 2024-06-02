@@ -37,11 +37,15 @@ public partial class Actions : Node2D, IActions
 		return true;
 	}
 
-	public void Aim(int degrees) {
-	
+	public float Aim(Rotation direction) 
+	{
+		if(direction == API.Rotation.CW)
+            tank.Rotate(1 * (float)GetPhysicsProcessDeltaTime());
+		else if (direction == API.Rotation.CCW)
+            tank.Rotate(-1 * (float)GetPhysicsProcessDeltaTime());
 
-
-	}
+		return tank.RotationDegrees;
+    }
 
 	public void Fire() { }
 }

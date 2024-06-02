@@ -20,3 +20,4 @@ position = Vector2(511.43, 550)
 [node name="RedTank" parent="." instance=ExtResource("4_nvxsl")]
 position = Vector2(500, 75)
 rotation = 3.14159
+motion_mode = 1

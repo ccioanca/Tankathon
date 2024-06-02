@@ -7,6 +7,8 @@ public class EvilTank : ITank
 {
 	int doForward = 100;
 
+	bool doRotate = true;
+
     public void Setup()
     {
 
@@ -15,16 +17,19 @@ public class EvilTank : ITank
     //Logic to do every frame
     public void Do(IActions actions, IScoreboard scoreboard)
 	{
-		if (doForward > 0)
-		{
-			actions.MoveForward();
-			doForward -= 1;
-		}
-		//bool col = actions.MoveForward();
-		//if (!col)
+		//if (doForward > 0)
 		//{
-		//	GD.Print("Col detected");
+		//	actions.MoveForward();
+		//	doForward -= 1;
 		//}
+		
+		actions.Aim(Rotation.CCW);
+
+        if (doRotate)
+		{
+			doRotate = false;
+		}
+
 	}
 
 }

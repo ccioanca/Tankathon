@@ -9,7 +9,6 @@ radius = 24.0
 height = 68.0
 
 [node name="BlueTank" type="CharacterBody2D"]
-motion_mode = 1
 script = ExtResource("1_rftbn")
 
 [node name="TankSprite" type="Sprite2D" parent="."]
