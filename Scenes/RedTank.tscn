@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnb5p5wv4lsq4"]
+
+[ext_resource type="PackedScene" uid="uid://dojx2g71ojb0q" path="res://Scenes/GenericTank.tscn" id="1_5d0vt"]
+[ext_resource type="Texture2D" uid="uid://dhknxynfjugol" path="res://Assets/Red Tank.png" id="2_807b1"]
+
+[node name="BlueTank" instance=ExtResource("1_5d0vt")]
+
+[node name="TankSprite" parent="." index="0"]
+texture = ExtResource("2_807b1")

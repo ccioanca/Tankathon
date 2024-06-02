@@ -9,25 +9,39 @@ public partial class Actions : Node2D, IActions
 {
 	TheTank tank;
 
-	public override void _Ready()
+	public int tankSpeed => 100;
+
+    public override void _Ready()
 	{
 		tank = GetParent<TheTank>();
 		GD.Print(tank.TankName);
 		base._Ready();
 	}
 
-	public IEntity Scan()
+    public override void _PhysicsProcess(double delta)
+    {
+		tank._velocity = Vector2.Zero;
+        base._PhysicsProcess(delta);
+    }
+
+    public IEntity Scan()
 	{
 		return null;
 	}
 
-	public void MoveForward() 
+    public bool MoveForward() 
 	{
-		tank.Velocity = -tank.Transform.Y * 2000 * (float)GetPhysicsProcessDeltaTime();
-		//tank.GlobalPosition = new Vector2(tank.GlobalPosition.X, tank.GlobalPosition.Y - 10f * (float)GetProcessDeltaTime());
+		tank._velocity = -tank.Transform.Y * tankSpeed * (float)GetPhysicsProcessDeltaTime();
+		if (tank.col)
+			return false;
+		return true;
 	}
 
-	public void Aim(Vector2 aim) { }
+	public void Aim(int degrees) {
+	
+
+
+	}
 
 	public void Fire() { }
 }

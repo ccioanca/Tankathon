@@ -7,8 +7,10 @@
     <RootNamespace>TestTankathon</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="OLD.godot\**" />
+    <EmbeddedResource Remove="OLD.godot\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Helpers\" />
-    <Folder Include="EvilTank\" />
-    <Folder Include="OLD.godot\mono\" />
   </ItemGroup>
 </Project>

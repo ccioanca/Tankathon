@@ -10,9 +10,12 @@ public partial class GameManager : Node2D
 	public override void _Ready()
 	{
 		blueTank = GetNode<TheTank>("BlueTank");
-		//redTank = GetNode<TheTank>("RedTank");
+		redTank = GetNode<TheTank>("RedTank");
 
 		blueTank.thisTank = new Tankathon.MyTank.MyTank();
-		//redTank.thisTank = new Tankathon.MyTank.MyOtherTank();
-	}
+		redTank.thisTank = new Tankathon.EvilTank.EvilTank();
+
+		blueTank.thisTank.Setup();
+        redTank.thisTank.Setup();
+    }
 }

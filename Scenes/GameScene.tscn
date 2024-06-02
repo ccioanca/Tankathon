@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5gvdx6q0b6gv"]
+
+[ext_resource type="Script" path="res://GameManager.cs" id="1_ud4g5"]
+[ext_resource type="Script" path="res://API/Scoreboard.cs" id="2_tppn5"]
+[ext_resource type="PackedScene" uid="uid://dojx2g71ojb0q" path="res://Scenes/GenericTank.tscn" id="3_hohl4"]
+[ext_resource type="PackedScene" uid="uid://cnb5p5wv4lsq4" path="res://Scenes/RedTank.tscn" id="4_nvxsl"]
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_ud4g5")
+
+[node name="Scoreboard" type="Node2D" parent="."]
+script = ExtResource("2_tppn5")
+blueScore = 3
+redScore = 2
+TimeRemaining = 100
+
+[node name="BlueTank" parent="." instance=ExtResource("3_hohl4")]
+position = Vector2(511.43, 550)
+
+[node name="RedTank" parent="." instance=ExtResource("4_nvxsl")]
+position = Vector2(500, 75)
+rotation = 3.14159
