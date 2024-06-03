@@ -15,6 +15,7 @@ public partial class Actions : Node2D, IActions
 	float cooldownT = 10f; //cooldown timer
 
 	public int tankSpeed => 100;
+	public int rotateSpeed => 2;
 
     public override void _Ready()
 	{
@@ -76,9 +77,9 @@ public partial class Actions : Node2D, IActions
 	public float Aim(Rotation direction) 
 	{
 		if(direction == API.Rotation.CW)
-            tank.Rotate(1 * (float)GetPhysicsProcessDeltaTime());
+            tank.Rotate(rotateSpeed * (float)GetPhysicsProcessDeltaTime());
 		else if (direction == API.Rotation.CCW)
-            tank.Rotate(-1 * (float)GetPhysicsProcessDeltaTime());
+            tank.Rotate(-rotateSpeed * (float)GetPhysicsProcessDeltaTime());
 
 		return tank.RotationDegrees;
     }

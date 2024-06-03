@@ -15,7 +15,7 @@ redScore = 2
 TimeRemaining = 100
 
 [node name="BlueTank" parent="." instance=ExtResource("3_hohl4")]
-position = Vector2(511.43, 550)
+position = Vector2(500, 550)
 
 [node name="RedTank" parent="." instance=ExtResource("4_nvxsl")]
 position = Vector2(500, 75)
