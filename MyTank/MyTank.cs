@@ -16,7 +16,7 @@ public class MyTank : ITank
 	public void Do(IActions actions, IScoreboard scoreboard)
 	{
 		//Your Tank Brain logic starts here.
-		actions.MoveForward();
+		//actions.MoveForward();
 	}
 
 }

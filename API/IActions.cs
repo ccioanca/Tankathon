@@ -9,7 +9,8 @@ using Tankathon.API;
 namespace Tankathon.API;
 public interface IActions
 {
-    public int tankSpeed { get; }
+    TankStats stats { get; }
+
     public IEntity Scan();
 
 
@@ -26,7 +27,11 @@ public interface IActions
     ///	<returns>A float representing the current rotation of the tank. </returns>
     public float Aim(Rotation direction);
 
-    public void Fire();
+    /// <summary>
+    /// Fire the canon! Careful, this has a cooldown! 
+    /// </summary>
+    ///	<returns>A double representing the time in seconds that's left for the cooldown, if any </returns>
+    public float Fire();
 }
 
 public enum Rotation

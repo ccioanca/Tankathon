@@ -5,9 +5,8 @@ using Tankathon.API;
 namespace Tankathon.EvilTank;
 public class EvilTank : ITank
 {
-	int doForward = 100;
-
-	bool doRotate = true;
+	bool moveRight = false;
+	bool moveLeft = false;
 
     public void Setup()
     {
@@ -22,13 +21,24 @@ public class EvilTank : ITank
 		//	actions.MoveForward();
 		//	doForward -= 1;
 		//}
-		
-		actions.Aim(Rotation.CCW);
 
-        if (doRotate)
+		actions.Fire();
+
+
+		//rotate to point right
+		if (actions.stats.rotation > 90)
 		{
-			doRotate = false;
+			actions.Aim(Rotation.CCW);
 		}
+		else
+		{
+			moveRight = true;
+			moveLeft = false;
+		}
+		
+		//move to the right
+
+		//GD.Print(actions.stats.rotation);
 
 	}
 
