@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5gvdx6q0b6gv"]
+[gd_scene load_steps=7 format=3 uid="uid://c5gvdx6q0b6gv"]
 
 [ext_resource type="Script" path="res://GameManager.cs" id="1_ud4g5"]
 [ext_resource type="Script" path="res://API/Scoreboard.cs" id="2_tppn5"]
 [ext_resource type="PackedScene" uid="uid://dojx2g71ojb0q" path="res://Scenes/GenericTank.tscn" id="3_hohl4"]
 [ext_resource type="PackedScene" uid="uid://cnb5p5wv4lsq4" path="res://Scenes/RedTank.tscn" id="4_nvxsl"]
+[ext_resource type="Texture2D" uid="uid://0rfxgyjsilid" path="res://Assets/Rectangle 1.png" id="5_38iu6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y64ry"]
+size = Vector2(80, 80)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_ud4g5")
@@ -21,3 +25,13 @@ position = Vector2(500, 550)
 position = Vector2(500, 75)
 rotation = 3.14159
 motion_mode = 1
+
+[node name="Node2D" type="RigidBody2D" parent="."]
+position = Vector2(503, 321)
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
+shape = SubResource("RectangleShape2D_y64ry")
+
+[node name="Rectangle1" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("5_38iu6")
