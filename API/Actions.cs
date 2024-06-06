@@ -12,7 +12,7 @@ public partial class Actions : Node2D, IActions
 
 	Timer _timer = new Timer();
     bool canShoot = true;
-	float cooldownT = 10f; //cooldown timer
+	float cooldownT = 5f; //cooldown timer
 
 	public int tankSpeed => 100;
 	public int rotateSpeed => 2;
@@ -96,6 +96,13 @@ public partial class Actions : Node2D, IActions
 		}
 		else return (float)_timer.TimeLeft;
 	}
+
+    public float FireCooldown()
+    {
+		if (canShoot)
+			return 0;
+        return (float)_timer.TimeLeft;
+    }
 }
 
 public class TankStats

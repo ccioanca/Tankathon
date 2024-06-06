@@ -26,12 +26,20 @@ position = Vector2(500, 75)
 rotation = 3.14159
 motion_mode = 1
 
-[node name="Node2D" type="RigidBody2D" parent="."]
+[node name="Node2D" type="StaticBody2D" parent="."]
 position = Vector2(503, 321)
-gravity_scale = 0.0
+
+[node name="Rectangle1" type="NinePatchRect" parent="Node2D"]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_38iu6")
+region_rect = Rect2(0, 0.006, 81, 81)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
 shape = SubResource("RectangleShape2D_y64ry")
-
-[node name="Rectangle1" type="Sprite2D" parent="Node2D"]
-texture = ExtResource("5_38iu6")
