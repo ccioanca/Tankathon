@@ -14,8 +14,8 @@ public partial class Actions : Node2D, IActions
     bool canShoot = true;
 	float cooldownT = 5f; //cooldown timer
 
-	public int tankSpeed => 100;
-	public int rotateSpeed => 2;
+	public int tankSpeed => 200; //~100 orig
+	public int rotateSpeed => 2; //~2 orig
 
     public override void _Ready()
 	{
@@ -84,7 +84,7 @@ public partial class Actions : Node2D, IActions
 		return tank.RotationDegrees;
     }
 
-	public float Fire() 
+    public float Fire() 
 	{
 		if (canShoot)
 		{

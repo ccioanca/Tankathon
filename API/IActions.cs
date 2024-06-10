@@ -30,13 +30,13 @@ public interface IActions
     /// <summary>
     /// Fire the canon! Careful, this has a cooldown! 
     /// </summary>
-    ///	<returns>A double representing the time in seconds that's left for the cooldown, if any </returns>
+    ///	<returns>A float representing the time in seconds that's left for the cooldown, if any </returns>
     public float Fire();
 
     /// <summary>
     /// Check to see if we can fire the canon without actually firing
     /// </summary>
-    ///	<returns>A double representing the time in seconds that's left for the cooldown. Returns 0 if the canon is ready to fire </returns>
+    ///	<returns>A float representing the time in seconds that's left for the cooldown. Returns 0 if the canon is ready to fire </returns>
     public float FireCooldown();
 }
 

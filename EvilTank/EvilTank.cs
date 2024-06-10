@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 using Tankathon.API;
 
 namespace Tankathon.EvilTank;
@@ -8,6 +9,9 @@ public class EvilTank : ITank
 	bool movingRight = false;
 	bool movingLeft = false;
 
+    bool midFromRight = false;
+    bool midFromLeft = false;
+
 	bool posSetup = false;
 
     int randoShoots = 0;
@@ -15,10 +19,13 @@ public class EvilTank : ITank
 	Vector2 origPos = new Vector2();
 	State _s;
 
+    Random rand;
+
     public void Setup()
 	{
         //set starting state
         _s = State.MoveRight;
+        rand = new Random();
     }
 
     //Logic to do every frame
@@ -35,7 +42,7 @@ public class EvilTank : ITank
                 movingRight = true;
             }
 			//rotate to point right
-			if (Math.Abs(actions.stats.rotation) > 90 && movingRight)
+			if (!Mathf.IsEqualApprox(actions.stats.rotation, 90f) && Math.Abs(actions.stats.rotation) > 90 && movingRight)
 			{
                 actions.Fire();
                 actions.Aim(Rotation.CCW);
@@ -52,7 +59,7 @@ public class EvilTank : ITank
                     movingRight = false;
 
                     //we finished moving right, lets shoot down again 
-                    if (actions.stats.rotation < 179 && actions.stats.rotation > -179 && !movingRight && !movingLeft)
+                    if (!Mathf.IsEqualApprox(actions.stats.rotation, 180) && !movingRight && !movingLeft)
                     {
                         actions.Aim(Rotation.CW);
                         //GD.Print($"rotation: {actions.stats.rotation}");
@@ -67,18 +74,18 @@ public class EvilTank : ITank
                             origPos.X = actions.stats.xPos;
                             origPos.Y = actions.stats.yPos;
                             movingLeft = true;
+                            midFromRight = true;
                         }
                     }
                 }
             }
 
         }
-		else if (_s == State.MoveMiddle)
+		else if (_s == State.MoveMiddle && midFromRight)
 		{
             //start by rotating back towards the left
-            if (Math.Abs(actions.stats.rotation) > 90 && movingLeft)
+            if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), -90) && movingLeft)
             {
-                //GD.Print("Rotate! ");
                 actions.Aim(Rotation.CW);
             }
             else
@@ -92,9 +99,8 @@ public class EvilTank : ITank
                 {
                     movingLeft = false;
                     //lets shoot again! but this time, in a random direction! (lets do it 3 times)
-                    if(actions.FireCooldown() != 0 && randoShoots < 3)
+                    if(actions.FireCooldown() != 0 && randoShoots < rand.Next(1, 4))
                     {
-                        
                         actions.Aim(Rotation.CCW);
                     }
                     else
@@ -102,17 +108,16 @@ public class EvilTank : ITank
                         actions.Fire();
                         randoShoots++;
                         //alright we're done, lets move more left. Lets rotate first
-
-                        if (Math.Abs(actions.stats.rotation) > 90)
+                        if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), -90) && Math.Abs(actions.stats.rotation) > 90)
                         {
                             GD.Print("Rotate CW");
                             actions.Aim(Rotation.CW);
                         }
-                        //else if (Math.Abs(actions.stats.rotation) < 90)
-                        //{
-                        //    GD.Print("Rotate CCW");
-                        //    actions.Aim(Rotation.CCW);
-                        //}
+                        else if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), -90) && Math.Abs(actions.stats.rotation) < 90)
+                        {
+                            GD.Print("Rotate CCW");
+                            actions.Aim(Rotation.CCW);
+                        }
                         else
                         {
                             _s = State.MoveLeft;
@@ -120,6 +125,7 @@ public class EvilTank : ITank
                             origPos.X = actions.stats.xPos;
                             origPos.Y = actions.stats.yPos;
                             movingLeft = true;
+                            midFromRight = false;
                         }
                     }
 
@@ -137,9 +143,56 @@ public class EvilTank : ITank
             {
                 movingLeft = false;
 
-                if (Math.Abs(actions.stats.rotation) > 90)
+                if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 180) && actions.stats.rotation < 180)
                 {
                     actions.Aim(Rotation.CCW);
+                }
+                else if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 180) && actions.stats.rotation > 180)
+                {
+                    actions.Aim(Rotation.CW);
+                }
+                else
+                {
+                    //shoot down, and then reset
+                    if(actions.FireCooldown() == 0)
+                    {
+                        actions.Fire();
+                        movingRight = true;
+                        midFromLeft = true;
+                        _s = State.MoveMiddle;
+                        origPos.X = actions.stats.xPos;
+                        origPos.Y = actions.stats.yPos;
+
+                    }
+                }
+            }
+        }
+        else if (_s == State.MoveMiddle && midFromLeft)
+        {
+            if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 90) && movingRight)
+            {
+                actions.Aim(Rotation.CCW);
+            }
+            else if(movingRight && actions.stats.xPos < origPos.X + 250)
+            {
+                actions.MoveForward();
+            }
+            else
+            {
+                movingRight = false;
+                //point back down
+                GD.Print(Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 180));
+                if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 180))
+                {
+                    actions.Aim(Rotation.CW);
+                }
+                else if (actions.FireCooldown() == 0)
+                {
+                    actions.Fire();
+                    midFromRight = false;
+                    midFromLeft = false;
+                    posSetup = false;
+                    _s = State.MoveRight;
                 }
             }
         }
