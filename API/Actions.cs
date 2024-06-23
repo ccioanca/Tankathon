@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 using Tankathon.API;
+using TestTankathon.API;
 
 namespace Tankathon.API.Internal;
 
@@ -61,9 +62,9 @@ internal partial class Actions : Node2D, IActions
 		get => _stats;
 	}
 
-    public IEntity Scan()
+    public Entity Scan()
 	{
-		return null;
+		return tank.LookAt();
 	}
 
     public bool MoveForward() 

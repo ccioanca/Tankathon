@@ -18,6 +18,11 @@ public class MyTank : ITank
 		//Your Tank Brain logic starts here.
 		//actions.Fire();
 		actions.MoveForward();
-	}
+		var obj = actions.Scan();
+		GD.Print("Type: " + obj.eType);
+		GD.Print("Pos: " + obj.globalPosition);
+		GD.Print("Rot: " + obj.rotation);
+		GD.Print("Dist: " + obj.distanceTo);
+    }
 
 }

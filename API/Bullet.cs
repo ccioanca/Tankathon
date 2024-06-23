@@ -3,10 +3,12 @@ using System;
 using Tankathon.API;
 using Tankathon.API.Internal;
 
-public partial class Bullet : Area2D
+public partial class Bullet : Area2D, IEntity
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    public EntityType eType => EntityType.Bullet;
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 	}
 
@@ -20,9 +22,8 @@ public partial class Bullet : Area2D
 	{
 		if (body is TheTank)
 		{
-            GD.Print("Explode Tank!");
+			(body as TheTank).Hurt();
         }
-        GD.Print("Explode!");
         QueueFree();
 	}
 }

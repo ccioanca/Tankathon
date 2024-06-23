@@ -62,7 +62,6 @@ public class EvilTank : ITank
                     if (!Mathf.IsEqualApprox(actions.stats.rotation, 180) && !movingRight && !movingLeft)
                     {
                         actions.Aim(Rotation.CW);
-                        //GD.Print($"rotation: {actions.stats.rotation}");
                     }
                     else
                     {
@@ -110,12 +109,12 @@ public class EvilTank : ITank
                         //alright we're done, lets move more left. Lets rotate first
                         if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), -90) && Math.Abs(actions.stats.rotation) > 90)
                         {
-                            GD.Print("Rotate CW");
+                            //GD.Print("Rotate CW");
                             actions.Aim(Rotation.CW);
                         }
                         else if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), -90) && Math.Abs(actions.stats.rotation) < 90)
                         {
-                            GD.Print("Rotate CCW");
+                            //GD.Print("Rotate CCW");
                             actions.Aim(Rotation.CCW);
                         }
                         else
@@ -181,7 +180,6 @@ public class EvilTank : ITank
             {
                 movingRight = false;
                 //point back down
-                GD.Print(Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 180));
                 if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 180))
                 {
                     actions.Aim(Rotation.CW);

@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8bl3fg1j15cw"]
+[gd_scene load_steps=4 format=3 uid="uid://b8bl3fg1j15cw"]
 
+[ext_resource type="Script" path="res://API/Obstacle.cs" id="1_ace70"]
 [ext_resource type="Texture2D" uid="uid://0rfxgyjsilid" path="res://Assets/Rectangle 1.png" id="1_j1w6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y64ry"]
 size = Vector2(80, 80)
 
 [node name="Node2D" type="StaticBody2D"]
+script = ExtResource("1_ace70")
 
 [node name="Rectangle1" type="NinePatchRect" parent="."]
 offset_left = -40.0

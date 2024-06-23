@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tankathon.API.Internal;
+using TestTankathon.API;
 
 namespace Tankathon.API;
 public interface IActions
 {
     TankStats stats { get; }
 
-    public IEntity Scan();
+    public Entity Scan();
 
 
     /// <summary>
