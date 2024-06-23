@@ -5,30 +5,83 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using Tankathon.API.Internal;
 
 namespace Tankathon.API
 {
-	public partial class Scoreboard : Node2D, IScoreboard
+	public partial class Scoreboard : Control, IScoreboard
 	{
 		[Export]
 		public int blueScore { get; set; }
 		[Export]
 		public int redScore { get; set; }
-		[Export]
-		public int TimeRemaining { get; set; }
 
-		public int timer => TimeRemaining;
+		public int timer => (int)_timer.TimeLeft;
 
 		public Score score => new Score(blueScore, redScore);
 
-		public override void _Ready()
+
+        //private members
+        Timer _timer = new Timer();
+		Label _timeLeft;
+		Label _blueScore;
+		Label _redScore;
+
+        public override void _Ready()
 		{
 			base._Ready();
-		}
 
-		public override void _Process(double delta)
+			//Add the 5 Minute Round Timer
+            AddChild(_timer);
+            _timer.Timeout += () => Timeout();
+            _timer.Start(5*60); //start the 5 minute timer
+			_timeLeft = GetNode<Label>("Panel/TimeLeft");
+
+			//score
+            _blueScore = GetNode<Label>("Panel/Panel2/BlueScore");
+			_redScore = GetNode<Label>("Panel/Panel/RedScore");
+
+        }
+
+        public override void _Process(double delta)
 		{
 			base._Process(delta);
 		}
+
+        public override void _PhysicsProcess(double delta)
+        {
+            base._PhysicsProcess(delta);
+
+			_timeLeft.Text = TimeSpan.FromSeconds(_timer.TimeLeft).ToString(@"mm\:ss");
+        }
+
+        private void Timeout()
+		{
+			//timer is done, restart? 
+			GD.Print("Restarting");
+            GetTree().ReloadCurrentScene();
+        }
+
+		public void ScoreChanged(TankTeam teamHurt)
+		{
+			//score changed
+			GD.Print("Score Changed for " + teamHurt);
+			switch (teamHurt)
+			{
+				case TankTeam.Red:
+					_blueScore.Text = (_blueScore.Text.ToInt() + 1).ToString();
+					break;
+				case TankTeam.Blue:
+                    _redScore.Text = (_redScore.Text.ToInt() + 1).ToString();
+                    break;
+				default:
+					break;
+			}
+		}
+
+		public void RestartPressed()
+		{
+            GetTree().ReloadCurrentScene();
+        }
 	}
 }

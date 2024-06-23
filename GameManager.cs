@@ -15,10 +15,12 @@ public partial class GameManager : Node2D
 		blueTank = GetNode<TheTank>("BlueTank");
 		redTank = GetNode<TheTank>("RedTank");
 
+		//Swap this initialization around to try from the other side! 
+		//Alternatively, try to pit your own tank against itself by initializing it for both tanks!
 		blueTank.thisTank = new Tankathon.MyTank.MyTank();
 		redTank.thisTank = new Tankathon.EvilTank.EvilTank();
 
-		blueTank.thisTank.Setup();
-        redTank.thisTank.Setup();
+		blueTank.Init(TankTeam.Blue);
+		redTank.Init(TankTeam.Red);
     }
 }

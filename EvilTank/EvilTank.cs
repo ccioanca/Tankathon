@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Runtime.CompilerServices;
 using Tankathon.API;
 
 namespace Tankathon.EvilTank;
@@ -21,7 +20,7 @@ public class EvilTank : ITank
 
     Random rand;
 
-    public void Setup()
+    public void Setup(TankStats stats)
 	{
         //set starting state
         _s = State.MoveRight;

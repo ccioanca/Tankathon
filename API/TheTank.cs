@@ -20,7 +20,7 @@ public partial class TheTank : CharacterBody2D, IEntity
     public ITank thisTank;
 	Actions actions;
 	private IActions _passedActions;
-	private IScoreboard _scoreboard;
+	private Scoreboard _scoreboard;
 
 	//collision shape
 	CollisionShape2D _collisionShape;
@@ -34,6 +34,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 	private Dictionary result;
 	private Entity entityInPath = new Entity();
 
+	TankTeam team;
 
     public override void _Ready()
 	{
@@ -50,6 +51,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 		//get sel references
 		_collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+
         base._Ready();
     }
 
@@ -69,6 +71,12 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 		base._PhysicsProcess(delta);
 	}
+
+	internal void Init(TankTeam _team)
+	{
+		team = _team;
+        thisTank.Setup(_passedActions.stats);
+    }
 
 	internal void Shoot()
 	{
@@ -95,8 +103,6 @@ public partial class TheTank : CharacterBody2D, IEntity
 			entityInPath.rotation = entity.Rotation;
 			entityInPath.distanceTo = entity.GlobalPosition.DistanceTo(_collisionShape.GlobalPosition) - (_collisionShape.Shape.GetRect().Size.Y/2) - (entity.GetNode<CollisionShape2D>("CollisionShape2D").Shape.GetRect().Size.Y / 2);
 
-            GD.Print((result["collider"].As<CollisionObject2D>() as IEntity).eType);
-
 			return entityInPath;
 		}
 		return new Entity();
@@ -110,6 +116,7 @@ public partial class TheTank : CharacterBody2D, IEntity
     internal void Hurt()
 	{
         GD.Print("Tank Hurt: " + Name);
+		_scoreboard.ScoreChanged(team);
     }
 
 }

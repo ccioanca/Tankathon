@@ -105,11 +105,3 @@ internal partial class Actions : Node2D, IActions
         return (float)_timer.TimeLeft;
     }
 }
-
-public class TankStats
-{
-	public float rotation;
-	public float xPos;
-	public float yPos;
-
-}
