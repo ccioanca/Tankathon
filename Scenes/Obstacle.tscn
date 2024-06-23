@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8bl3fg1j15cw"]
+
+[ext_resource type="Texture2D" uid="uid://0rfxgyjsilid" path="res://Assets/Rectangle 1.png" id="1_j1w6o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y64ry"]
+size = Vector2(80, 80)
+
+[node name="Node2D" type="StaticBody2D"]
+
+[node name="Rectangle1" type="NinePatchRect" parent="."]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_j1w6o")
+region_rect = Rect2(0, 0, 81, 81)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y64ry")

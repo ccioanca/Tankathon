@@ -15,7 +15,6 @@ namespace Tankathon.API
     {
         Unknown = 0,
         Tank, 
-        Obstacle, 
-        Collectable
+        Obstacle
     }
 }

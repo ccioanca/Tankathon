@@ -1,6 +1,6 @@
-using Godot;
 using System;
 using Tankathon.API;
+using GD = Godot.GD;
 
 namespace Tankathon.MyTank;
 public class MyTank : ITank
@@ -16,6 +16,7 @@ public class MyTank : ITank
 	public void Do(IActions actions, IScoreboard scoreboard)
 	{
 		//Your Tank Brain logic starts here.
+		//actions.Fire();
 		actions.MoveForward();
 	}
 

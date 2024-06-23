@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using Tankathon.API;
 
+namespace Tankathon.API.Internal;
 public partial class GameManager : Node2D
 {
 	TheTank blueTank = null;

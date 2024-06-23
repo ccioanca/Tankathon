@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Godot;
 using Tankathon.API;
 
-namespace Tankathon.API;
+namespace Tankathon.API.Internal;
 
-public partial class Actions : Node2D, IActions
+internal partial class Actions : Node2D, IActions
 {
 	TheTank tank;
 	TankStats _stats;
@@ -88,7 +88,7 @@ public partial class Actions : Node2D, IActions
 	{
 		if (canShoot)
 		{
-			GD.Print("SHOOT!");
+			tank.Shoot();
 			_timer.Start(cooldownT);
 			canShoot = false;
 			return cooldownT;

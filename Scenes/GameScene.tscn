@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5gvdx6q0b6gv"]
+[gd_scene load_steps=8 format=3 uid="uid://c5gvdx6q0b6gv"]
 
 [ext_resource type="Script" path="res://GameManager.cs" id="1_ud4g5"]
 [ext_resource type="Script" path="res://API/Scoreboard.cs" id="2_tppn5"]
 [ext_resource type="PackedScene" uid="uid://dojx2g71ojb0q" path="res://Scenes/GenericTank.tscn" id="3_hohl4"]
 [ext_resource type="PackedScene" uid="uid://cnb5p5wv4lsq4" path="res://Scenes/RedTank.tscn" id="4_nvxsl"]
-[ext_resource type="Texture2D" uid="uid://0rfxgyjsilid" path="res://Assets/Rectangle 1.png" id="5_38iu6"]
+[ext_resource type="PackedScene" uid="uid://b8bl3fg1j15cw" path="res://Scenes/Obstacle.tscn" id="5_a4yga"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y64ry"]
-size = Vector2(80, 80)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_el57v"]
+size = Vector2(1362.5, 81)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sdgab"]
+size = Vector2(80, 800)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_ud4g5")
@@ -19,27 +22,57 @@ redScore = 2
 TimeRemaining = 100
 
 [node name="BlueTank" parent="." instance=ExtResource("3_hohl4")]
-position = Vector2(500, 550)
+position = Vector2(640, 620)
 
 [node name="RedTank" parent="." instance=ExtResource("4_nvxsl")]
-position = Vector2(500, 75)
+position = Vector2(640, 100)
 rotation = 3.14159
 motion_mode = 1
 
-[node name="Node2D" type="StaticBody2D" parent="."]
-position = Vector2(503, 321)
+[node name="Obstacles" type="Node" parent="."]
 
-[node name="Rectangle1" type="NinePatchRect" parent="Node2D"]
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("5_38iu6")
-region_rect = Rect2(0, 0.006, 81, 81)
-patch_margin_left = 9
-patch_margin_top = 9
-patch_margin_right = 9
-patch_margin_bottom = 9
+[node name="Node2D" parent="Obstacles" instance=ExtResource("5_a4yga")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
-shape = SubResource("RectangleShape2D_y64ry")
+[node name="Rectangle1" parent="Obstacles/Node2D" index="0"]
+offset_right = 1320.0
+
+[node name="CollisionShape2D" parent="Obstacles/Node2D" index="1"]
+position = Vector2(640, 0)
+shape = SubResource("RectangleShape2D_el57v")
+
+[node name="Node2D2" parent="Obstacles" instance=ExtResource("5_a4yga")]
+position = Vector2(0, 720)
+
+[node name="Rectangle1" parent="Obstacles/Node2D2" index="0"]
+offset_right = 1320.0
+
+[node name="CollisionShape2D" parent="Obstacles/Node2D2" index="1"]
+position = Vector2(640, 0)
+shape = SubResource("RectangleShape2D_el57v")
+
+[node name="Node2D3" parent="Obstacles" instance=ExtResource("5_a4yga")]
+position = Vector2(640, 360)
+
+[node name="Node2D4" parent="Obstacles" instance=ExtResource("5_a4yga")]
+
+[node name="Rectangle1" parent="Obstacles/Node2D4" index="0"]
+custom_minimum_size = Vector2(0, 800)
+
+[node name="CollisionShape2D" parent="Obstacles/Node2D4" index="1"]
+position = Vector2(0, 360)
+shape = SubResource("RectangleShape2D_sdgab")
+
+[node name="Node2D5" parent="Obstacles" instance=ExtResource("5_a4yga")]
+position = Vector2(1280, 0)
+
+[node name="Rectangle1" parent="Obstacles/Node2D5" index="0"]
+custom_minimum_size = Vector2(0, 800)
+
+[node name="CollisionShape2D" parent="Obstacles/Node2D5" index="1"]
+position = Vector2(0, 360)
+shape = SubResource("RectangleShape2D_sdgab")
+
+[editable path="Obstacles/Node2D"]
+[editable path="Obstacles/Node2D2"]
+[editable path="Obstacles/Node2D4"]
+[editable path="Obstacles/Node2D5"]
