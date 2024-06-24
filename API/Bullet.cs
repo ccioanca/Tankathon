@@ -22,10 +22,13 @@ public partial class Bullet : Area2D, IEntity
 
 	public void _BodyEntered(Node body)
 	{
-		if (body is TheTank && body != initializer)
+		if (body != initializer)
 		{
-			(body as TheTank).Hurt();
-            QueueFree();
-        }
-	}
+			if (body is TheTank)
+			{
+				(body as TheTank).Hurt();
+			}
+			QueueFree();
+		}
+    }
 }

@@ -12,13 +12,11 @@ namespace Tankathon.API
 	public partial class Scoreboard : Control, IScoreboard
 	{
 		[Export]
-		public int blueScore { get; set; }
+		private int blueScore { get; set; }
 		[Export]
-		public int redScore { get; set; }
+		private int redScore { get; set; }
 
-		public int timer => (int)_timer.TimeLeft;
-
-		public Score score => new Score(blueScore, redScore);
+		public int timeLeft => (int)_timer.TimeLeft;
 
 
         //private members
@@ -34,7 +32,7 @@ namespace Tankathon.API
 			//Add the 5 Minute Round Timer
             AddChild(_timer);
             _timer.Timeout += () => Timeout();
-            _timer.Start(5*60); //start the 5 minute timer
+            _timer.Start(5*60); //start the 5 minute timeLeft
 			_timeLeft = GetNode<Label>("Panel/TimeLeft");
 
 			//score
@@ -57,7 +55,7 @@ namespace Tankathon.API
 
         private void Timeout()
 		{
-			//timer is done, restart? 
+			//timeLeft is done, restart? 
 			GD.Print("Restarting");
             GetTree().ReloadCurrentScene();
         }
@@ -69,19 +67,34 @@ namespace Tankathon.API
 			switch (teamHurt)
 			{
 				case TankTeam.Red:
-					_blueScore.Text = (_blueScore.Text.ToInt() + 1).ToString();
+					blueScore++;
+					_blueScore.Text = (blueScore).ToString();
 					break;
 				case TankTeam.Blue:
-                    _redScore.Text = (_redScore.Text.ToInt() + 1).ToString();
+					redScore++;
+                    _redScore.Text = (redScore).ToString();
                     break;
 				default:
 					break;
 			}
 		}
 
+		public int GetScoreForTeam(TankTeam team)
+        {
+            switch(team)
+			{
+				case TankTeam.Red:
+					return redScore;
+				case TankTeam.Blue:
+					return blueScore;
+				default: return -1;
+			}
+        }
+
 		public void RestartPressed()
 		{
             GetTree().ReloadCurrentScene();
         }
-	}
+        
+    }
 }

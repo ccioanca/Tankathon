@@ -1,9 +1,5 @@
-using System;
-using System.Linq;
 using Godot;
 using Godot.Collections;
-using Tankathon.API;
-using Tankathon.API;
 
 namespace Tankathon.API.Internal;
 
@@ -34,7 +30,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 	private Dictionary result;
 	private Entity entityInPath = new Entity();
 
-	TankTeam team;
+	public TankTeam team { get; set; }
 
     public override void _Ready()
 	{
@@ -115,7 +111,6 @@ public partial class TheTank : CharacterBody2D, IEntity
 
     internal void Hurt()
 	{
-        GD.Print("Tank Hurt: " + Name);
 		_scoreboard.ScoreChanged(team);
     }
 

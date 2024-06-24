@@ -1,10 +1,12 @@
-﻿using System.Threading;
+﻿using Godot;
+using System.Threading;
 
 namespace Tankathon.API
 {
     public interface IScoreboard
     {
-        public int timer { get; }
-        public Score score { get; }
+        public int timeLeft { get; }
+
+        public int GetScoreForTeam(TankTeam team);
     }
 }
