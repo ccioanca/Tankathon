@@ -4,7 +4,7 @@
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net7.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-    <RootNamespace>TestTankathon</RootNamespace>
+    <RootNamespace>Tankathon</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="OLD.godot\**" />

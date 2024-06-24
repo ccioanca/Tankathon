@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Tankathon.API;
 
-namespace TestTankathon.API
+namespace Tankathon.API
 {
     public class Entity
     {

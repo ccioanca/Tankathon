@@ -3,7 +3,7 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 using Tankathon.API;
-using TestTankathon.API;
+using Tankathon.API;
 
 namespace Tankathon.API.Internal;
 
@@ -103,7 +103,6 @@ public partial class TheTank : CharacterBody2D, IEntity
 			entityInPath.rotation = entity.Rotation;
 			entityInPath.distanceTo = ((Vector2)result["position"]).DistanceTo(_collisionShape.GlobalPosition) - (_collisionShape.Shape.GetRect().Size.Y / 2);
 
-            GD.Print(entityInPath.distanceTo);
             return entityInPath;
 		}
 		return new Entity();
