@@ -30,8 +30,8 @@ public class EvilTank : ITank
     //Logic to do every frame
     public void Do(IActions actions, IScoreboard scoreboard)
 	{
-
-		if (_s == State.MoveRight)
+        actions.Scan();
+        if (_s == State.MoveRight)
 		{
             if (!posSetup)
 			{
@@ -97,7 +97,7 @@ public class EvilTank : ITank
                 {
                     movingLeft = false;
                     //lets shoot again! but this time, in a random direction! (lets do it 3 times)
-                    if(actions.FireCooldown() != 0 && randoShoots < rand.Next(1, 4))
+                    if(actions.FireCooldown() != 0 && randoShoots < rand.Next(2, 4))
                     {
                         actions.Aim(Rotation.CCW);
                     }
@@ -106,15 +106,9 @@ public class EvilTank : ITank
                         actions.Fire();
                         randoShoots++;
                         //alright we're done, lets move more left. Lets rotate first
-                        if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), -90) && Math.Abs(actions.stats.rotation) > 90)
+                        if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), -90))
                         {
-                            //GD.Print("Rotate CW");
                             actions.Aim(Rotation.CW);
-                        }
-                        else if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), -90) && Math.Abs(actions.stats.rotation) < 90)
-                        {
-                            //GD.Print("Rotate CCW");
-                            actions.Aim(Rotation.CCW);
                         }
                         else
                         {
@@ -124,6 +118,7 @@ public class EvilTank : ITank
                             origPos.Y = actions.stats.yPos;
                             movingLeft = true;
                             midFromRight = false;
+                            randoShoots = 0;
                         }
                     }
 
@@ -141,12 +136,11 @@ public class EvilTank : ITank
             {
                 movingLeft = false;
 
-                if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 180) && actions.stats.rotation < 180)
+                if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 180) && !(actions.Scan().eType == EntityType.Tank))
                 {
-                    actions.Aim(Rotation.CCW);
-                }
-                else if (!Mathf.IsEqualApprox(Mathf.Round(actions.stats.rotation), 180) && actions.stats.rotation > 180)
-                {
+                    //if ((actions.Scan().eType == EntityType.Tank))
+                    //    GD.Print("Seeing Tank");
+                    //else GD.Print(actions.Scan().eType);
                     actions.Aim(Rotation.CW);
                 }
                 else

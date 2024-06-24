@@ -112,6 +112,9 @@ custom_minimum_size = Vector2(0, 800)
 position = Vector2(0, 360)
 shape = SubResource("RectangleShape2D_sdgab")
 
+[node name="Node2D3" parent="Obstacles" instance=ExtResource("5_a4yga")]
+position = Vector2(640, 360)
+
 [node name="Scoreboard" type="Control" parent="."]
 top_level = true
 layout_mode = 3
@@ -121,6 +124,7 @@ offset_bottom = 40.0
 script = ExtResource("2_tppn5")
 
 [node name="Panel" type="Panel" parent="Scoreboard"]
+layout_mode = 0
 offset_right = 255.0
 offset_bottom = 84.0
 

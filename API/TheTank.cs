@@ -90,8 +90,8 @@ public partial class TheTank : CharacterBody2D, IEntity
 	{
         spaceState = GetWorld2D().DirectSpaceState;
         // use global coordinates, not local to node
-        query = PhysicsRayQueryParameters2D.Create(GlobalPosition, GlobalPosition + new Vector2(0, -1500));
-        query.Exclude = new Godot.Collections.Array<Rid> { GetRid() };
+        query = PhysicsRayQueryParameters2D.Create(GlobalPosition, ToGlobal(new Vector2(0, -1500)));
+        query.Exclude = new Array<Rid> { GetRid() };
         result = spaceState.IntersectRay(query);
 
 		if(result.Count > 0)
@@ -101,16 +101,17 @@ public partial class TheTank : CharacterBody2D, IEntity
             entityInPath.eType = (entity as IEntity).eType;
 			entityInPath.globalPosition = entity.GlobalPosition;
 			entityInPath.rotation = entity.Rotation;
-			entityInPath.distanceTo = entity.GlobalPosition.DistanceTo(_collisionShape.GlobalPosition) - (_collisionShape.Shape.GetRect().Size.Y/2) - (entity.GetNode<CollisionShape2D>("CollisionShape2D").Shape.GetRect().Size.Y / 2);
+			entityInPath.distanceTo = ((Vector2)result["position"]).DistanceTo(_collisionShape.GlobalPosition) - (_collisionShape.Shape.GetRect().Size.Y / 2);
 
-			return entityInPath;
+            GD.Print(entityInPath.distanceTo);
+            return entityInPath;
 		}
 		return new Entity();
     }
 
     public override void _Draw()
     {
-        DrawLine(new Vector2(0, 0), new Vector2(0, -1500), Colors.White, 2);
+		DrawLine(new Vector2(0, 0), new Vector2(0, -1500), Colors.Green, 2);
     }
 
     internal void Hurt()
