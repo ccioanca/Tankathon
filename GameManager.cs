@@ -18,7 +18,7 @@ public partial class GameManager : Node2D
 		//Swap this initialization around to try from the other side! 
 		//Alternatively, try to pit your own tank against itself by initializing it for both tanks!
 		blueTank.thisTank = new Tankathon.MyTank.MyTank();
-		redTank.thisTank = new Tankathon.EvilTank.EvilTank();
+		redTank.thisTank = new Tankathon.EvilTank.DumTank(); //Swap DumTank to EvilTank for a tank with a little more logic
 
 		blueTank.Init(TankTeam.Blue);
 		redTank.Init(TankTeam.Red);
