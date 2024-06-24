@@ -12,8 +12,13 @@ public interface IActions
 {
     TankStats stats { get; }
 
+    /// <summary>
+    /// Scans directly in front of the tank via ray casting
+    /// </summary>
+    ///	<returns>An Entity object representing what the tank sees in front. 
+    ///	The Entity object has properties for it's type, global position, rotation, and a representation of the distance between the scanner and the object being seen.
+    /// </returns>
     public Entity Scan();
-
 
     /// <summary>
     /// Moves the tank forward by the base tank velocity

@@ -15,7 +15,7 @@ public class DumTank : ITank
     public void Do(IActions actions, IScoreboard scoreboard)
     {
         //Your Tank Brain logic starts here.
-        //actions.Aim(Rotation.CCW);
+        actions.Aim(Rotation.CCW);
         actions.Fire();
 
     }

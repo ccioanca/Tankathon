@@ -63,7 +63,6 @@ namespace Tankathon.API
 		public void ScoreChanged(TankTeam teamHurt)
 		{
 			//score changed
-			GD.Print("Score Changed for " + teamHurt);
 			switch (teamHurt)
 			{
 				case TankTeam.Red:
