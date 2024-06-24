@@ -7,6 +7,8 @@ public partial class Bullet : Area2D, IEntity
 {
     public EntityType eType => EntityType.Bullet;
 
+	public TheTank initializer;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -20,19 +22,10 @@ public partial class Bullet : Area2D, IEntity
 
 	public void _BodyEntered(Node body)
 	{
-		if (body is TheTank)
+		if (body is TheTank && body != initializer)
 		{
 			(body as TheTank).Hurt();
+            QueueFree();
         }
-        QueueFree();
 	}
 }
-
-/*func _physics_process(delta):
-	position += -transform.y * 250 * delta
-
-
-func _on_body_entered(body):
-	print("EXPLODE");
-	#area.explode()
-	queue_free() # delete the bullet*/

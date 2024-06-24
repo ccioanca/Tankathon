@@ -16,7 +16,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	public bool col = false;
     public Vector2 _velocity = Vector2.Zero;
-
+	
     public ITank thisTank;
 	Actions actions;
 	private IActions _passedActions;
@@ -78,9 +78,10 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	internal void Shoot()
 	{
-		Node2D bulletInstance = (Node2D)bullet.Instantiate();
+		Bullet bulletInstance = (Bullet)bullet.Instantiate();
 		bulletInstance.Position = turret.GlobalPosition;
 		bulletInstance.Rotation = this.Rotation;
+		bulletInstance.initializer = this;
 		GetParent().AddChild(bulletInstance);
     }
 
@@ -89,6 +90,7 @@ public partial class TheTank : CharacterBody2D, IEntity
         spaceState = GetWorld2D().DirectSpaceState;
         // use global coordinates, not local to node
         query = PhysicsRayQueryParameters2D.Create(GlobalPosition, ToGlobal(new Vector2(0, -1500)));
+		query.CollideWithAreas = true;
         query.Exclude = new Array<Rid> { GetRid() };
         result = spaceState.IntersectRay(query);
 
