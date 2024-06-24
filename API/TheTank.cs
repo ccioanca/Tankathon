@@ -43,8 +43,6 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 		//get the turret object
 		turret = GetNode<Marker2D>("Turret");
-		GD.Print("is turret: " + turret.Name);
-		GD.Print("TurretPath: " + turret.GetPath());
 
         //get the bullet preloaded
         bullet = GD.Load<PackedScene>("res://Scenes/Bullet.tscn");
