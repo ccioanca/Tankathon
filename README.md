@@ -99,3 +99,19 @@ An integer representing the match remaining time, in seconds. It might be benefi
 
 #### `GetScoreForTeam(TankTeam)`
 A method that allows you to see the current score for the game, when given a `TankTeam` enum. You can check your own team’s score by using the `actions.stats.team` prop. 
+
+## Fighting Bots
+
+The project comes with two very basic bots: `DumTank` and `EvilTank`. Both can be found in the `EvilTanks` directory. By default, the project is set up to use the `DumTank` bot. Though, as the name might imply, it’s not the smartest bot ever conceived. 
+
+You can, however, opt for a slightly (read: _slightly_) harder challenge, by changing the opponent to be `EvilTank` instead. 
+
+To do this, open the `GameManager.cs` file, and make the following change: 
+
+From: `redTank.thisTank = new Tankathon.EvilTank.DumTank();`
+
+To: &nbsp;&nbsp;&nbsp;&nbsp; `redTank.thisTank = new Tankathon.EvilTank.EvilTank();`
+
+You can also make further changes by instead instantiating your own tank for both the red and blue sides once it’s got some logic going. This will allow for better iteration of your tank logic and you can be sure to test starting on both the top or bottom sides of the arena! (Note: `EvilTank` is only designed to start on the red side)
+
+### **Happy tanking!**
