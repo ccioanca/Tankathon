@@ -31,19 +31,19 @@ public partial class GameManager : Node2D
 	{
 		musicPlayer = GetNode<AudioStreamPlayer>("%MusicPlayer");
 
-        _tankTypes = new List<TeamData>();
-        var teamsArray = battleInfo.Get("teams").As<Godot.Collections.Array>();
+		_tankTypes = new List<TeamData>();
+		var teamsArray = battleInfo.Get("teams").As<Godot.Collections.Array>();
 
-        for (int i = 0; i < teamsArray.Count && i < 4; i++)
-        {
-            var teamData = teamsArray[i].As<TeamData>();
-            if (teamData != null)
-            {
-                _tankTypes.Add(teamData);
-            }
-        }
+		for (int i = 0; i < teamsArray.Count && i < 4; i++)
+		{
+			var teamData = teamsArray[i].As<TeamData>();
+			if (teamData != null)
+			{
+				_tankTypes.Add(teamData);
+			}
+		}
 
-        tlTank = GetNode<TheTank>("TopLeftTank");
+		tlTank = GetNode<TheTank>("TopLeftTank");
 		brTank = GetNode<TheTank>("BottomRightTank");
 		trTank = GetNodeOrNull<TheTank>("TopRightTank");
 		blTank = GetNodeOrNull<TheTank>("BottomLeftTank");
@@ -74,10 +74,10 @@ public partial class GameManager : Node2D
 			blTank.Init(_tankTypes[3]);
 	}
 
-    public override void _Process(double delta)
-    {
-        if (Input.IsActionPressed("Fullscreen"))
-        {
+	public override void _Process(double delta)
+	{
+		if (Input.IsActionPressed("Fullscreen"))
+		{
 			if (DisplayServer.WindowGetMode() != DisplayServer.WindowMode.Fullscreen)
 			{
 				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
@@ -86,9 +86,9 @@ public partial class GameManager : Node2D
 			{
 				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 			}
-        }
-        base._Process(delta);
-    }
+		}
+		base._Process(delta);
+	}
 
 	public void StartGame()
 	{
@@ -97,15 +97,15 @@ public partial class GameManager : Node2D
 		GetNode<Scoreboard>("%Scoreboard").StartTimer((double)battleInfo.battleTime);
 	}
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
+	public override void _UnhandledInput(InputEvent @event)
+	{
 		if (@event is InputEventKey eventKey)
 			if (eventKey.Pressed && eventKey.Keycode == Key.Alt) //TODO: maybe use a different key? 
 				Engine.TimeScale = 3f;
-            else
+			else
 				Engine.TimeScale = 1f;
 
 			base._UnhandledInput(@event);
-    }
+	}
 	
 }

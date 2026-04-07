@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://csdeqbowgvt6y"]
+
+[ext_resource type="Script" uid="uid://cbbda3vot0svr" path="res://API/TheTank.cs" id="1_fpwlc"]
+[ext_resource type="Shader" uid="uid://bp52plcab8fj6" path="res://Shaders/Tank.gdshader" id="2_5k6t8"]
+[ext_resource type="Texture2D" uid="uid://dhknxynfjugol" path="res://Assets/Red Tank.png" id="3_q67y1"]
+[ext_resource type="Script" uid="uid://cewlmkf8acdda" path="res://API/Actions.cs" id="4_1568u"]
+[ext_resource type="Theme" uid="uid://bi2xlu10nuh8x" path="res://Assets/Progress_Base.tres" id="5_6juuu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_44y1t"]
+shader = ExtResource("2_5k6t8")
+shader_parameter/_oldcolor1 = Color(0, 1, 0, 1)
+shader_parameter/_oldcolor2 = Color(0, 0, 1, 1)
+shader_parameter/_newcolor1 = Color(0, 0, 0, 1)
+shader_parameter/_newcolor2 = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f3huc"]
+radius = 24.0
+height = 68.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1r4k5"]
+content_margin_left = 6.0
+content_margin_top = 3.0
+content_margin_right = 6.0
+content_margin_bottom = 3.0
+bg_color = Color(0, 0, 0, 0.509804)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="BaseTank" type="CharacterBody2D" unique_id=659871116]
+z_index = 11
+script = ExtResource("1_fpwlc")
+
+[node name="TankSprite" type="Sprite2D" parent="." unique_id=1720148775]
+material = SubResource("ShaderMaterial_44y1t")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_q67y1")
+
+[node name="Actions" type="Node2D" parent="." unique_id=1215133736]
+script = ExtResource("4_1568u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=621507364]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_f3huc")
+
+[node name="Turret" type="Marker2D" parent="." unique_id=915425740]
+position = Vector2(0, -40)
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1708015097]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = 30.0
+offset_right = 25.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_6juuu")
+max_value = 10.0
+step = 1.0
+value = 3.0
+show_percentage = false
+
+[node name="NameLabel" type="Label" parent="." unique_id=1237416405]
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -16.0
+offset_right = 27.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 0.513726)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_1r4k5")
+text = "*"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="resized" from="NameLabel" to="." method="OnLabelResized"]
