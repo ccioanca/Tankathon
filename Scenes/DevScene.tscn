@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://c5gvdx6q0b6gv"]
 
 [ext_resource type="Script" uid="uid://b4tgpx0u887fo" path="res://GameManager.cs" id="1_ud4g5"]
+[ext_resource type="Resource" uid="uid://5jr0j7l8csdw" path="res://BattleAssets/TestBattle/test_battle.tres" id="2_dyom7"]
 [ext_resource type="Script" uid="uid://cldikdy7y7gym" path="res://API/Scoreboard.cs" id="2_tppn5"]
-[ext_resource type="PackedScene" uid="uid://dojx2g71ojb0q" path="res://Scenes/Tank/BlueTank.tscn" id="3_hohl4"]
-[ext_resource type="PackedScene" uid="uid://cnb5p5wv4lsq4" path="res://Scenes/Tank/RedTank.tscn" id="4_nvxsl"]
+[ext_resource type="PackedScene" uid="uid://csdeqbowgvt6y" path="res://Scenes/Tank/BaseTank.tscn" id="3_dyom7"]
 [ext_resource type="PackedScene" uid="uid://b8bl3fg1j15cw" path="res://Scenes/Obstacle.tscn" id="5_a4yga"]
 [ext_resource type="StyleBox" uid="uid://ddubwu2xifgsa" path="res://Assets/ButtonStyle_Base.tres" id="6_i106u"]
 
@@ -63,14 +63,14 @@ shadow_offset = Vector2(0, 3)
 
 [node name="GameScene" type="Node2D" unique_id=1328381882]
 script = ExtResource("1_ud4g5")
+battleInfo = ExtResource("2_dyom7")
 
-[node name="BlueTank" parent="." unique_id=317057067 instance=ExtResource("3_hohl4")]
+[node name="BottomRightTank" parent="." unique_id=659871116 instance=ExtResource("3_dyom7")]
 position = Vector2(640, 620)
 
-[node name="RedTank" parent="." unique_id=2032289168 instance=ExtResource("4_nvxsl")]
+[node name="TopLeftTank" parent="." unique_id=216962352 instance=ExtResource("3_dyom7")]
 position = Vector2(640, 100)
-rotation = 3.14159
-motion_mode = 1
+rotation = 3.1415927
 
 [node name="Obstacles" type="Node" parent="." unique_id=1848542039]
 
