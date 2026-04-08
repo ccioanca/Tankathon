@@ -1,13 +1,12 @@
-[gd_resource type="Resource" script_class="BattleInfo" load_steps=6 format=3 uid="uid://dsh2l1q7exoxi"]
+[gd_resource type="Resource" script_class="BattleInfo" format=3 uid="uid://5jr0j7l8csdw"]
 
 [ext_resource type="Script" uid="uid://d4nywqktaoidk" path="res://Scripts/BattleInfo.cs" id="1_rb2cg"]
-[ext_resource type="Resource" uid="uid://74hq880xy7sq" path="res://BattleAssets/TeamAssets/Team1-O1/TD-O1.tres" id="2_3trm2"]
-[ext_resource type="Resource" uid="uid://bdatxsj2nmldv" path="res://BattleAssets/TeamAssets/Team2-So Long and Tanks for all the Fish/TD-SoLongAndTanksForAllTheFish.tres" id="3_62e55"]
-[ext_resource type="Resource" uid="uid://dnycsibsla3w7" path="res://BattleAssets/TeamAssets/Team3-Yoshi's Shellshockers/TD-YoushisShellshockers.tres" id="4_p7ni7"]
-[ext_resource type="Resource" uid="uid://cbso61or5tk2w" path="res://BattleAssets/TeamAssets/Team4-Explodinator 5000/TD-Explodinator5000.tres" id="5_3trm2"]
+[ext_resource type="Resource" uid="uid://box8ke1m7g4ms" path="res://BattleAssets/TestBattle/test_team_BR.tres" id="2_60y4p"]
+[ext_resource type="Resource" uid="uid://be820bgb457eb" path="res://BattleAssets/TestBattle/test_team_TL.tres" id="3_mjls7"]
 
 [resource]
 script = ExtResource("1_rb2cg")
-battleName = "Test Round"
-teams = Array[Object]([ExtResource("2_3trm2"), ExtResource("3_62e55"), ExtResource("4_p7ni7"), ExtResource("5_3trm2")])
+battleName = "Test Battle"
+battleTime = 180
+teams = Array[Object]([ExtResource("2_60y4p"), ExtResource("3_mjls7")])
 metadata/_custom_type_script = "uid://d4nywqktaoidk"
