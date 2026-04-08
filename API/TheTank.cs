@@ -81,8 +81,8 @@ public partial class TheTank : CharacterBody2D, IEntity
 		AddChild(deathPlayer);
 
 		//Treads
-		treadsL = GetNode<Node2D>("TreadsL")?.GetChild<CpuParticles2D>(0);
-		treadsR = GetNode<Node2D>("TreadsR")?.GetChild<CpuParticles2D>(0);
+		treadsL = GetNodeOrNull<Node2D>("TreadsL")?.GetChild<CpuParticles2D>(0);
+		treadsR = GetNodeOrNull<Node2D>("TreadsR")?.GetChild<CpuParticles2D>(0);
 
 		base._Ready();
 	}

@@ -29,7 +29,7 @@ public partial class GameManager : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		musicPlayer = GetNode<AudioStreamPlayer>("%MusicPlayer");
+		musicPlayer = GetNodeOrNull<AudioStreamPlayer>("%MusicPlayer");
 
 		_tankTypes = new List<TeamData>();
 		var teamsArray = battleInfo.Get("teams").As<Godot.Collections.Array>();
