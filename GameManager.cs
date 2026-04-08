@@ -48,17 +48,6 @@ public partial class GameManager : Node2D
 		trTank = GetNodeOrNull<TheTank>("TopRightTank");
 		blTank = GetNodeOrNull<TheTank>("BottomLeftTank");
 
-		if (teamsArray.Count < 3)
-		{
-			trTank.QueueFree();
-			trTank = null;
-		}
-		if (teamsArray.Count < 4)
-		{
-			blTank.QueueFree();
-			blTank = null;
-		}
-
 		tlTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
 		brTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[1].tankType)) as ITank;
 		if (trTank != null)
@@ -72,6 +61,9 @@ public partial class GameManager : Node2D
 			trTank.Init(_tankTypes[2]);
 		if (blTank != null)
 			blTank.Init(_tankTypes[3]);
+
+		//REMOVE THIS FOR FINAL DISPLAY BATTLE
+		StartGame();
 	}
 
 	public override void _Process(double delta)
@@ -93,7 +85,7 @@ public partial class GameManager : Node2D
 	public void StartGame()
 	{
 		GAMESTART = true;
-		musicPlayer.Play();
+		musicPlayer?.Play();
 		GetNode<Scoreboard>("%Scoreboard").StartTimer((double)battleInfo.battleTime);
 	}
 
