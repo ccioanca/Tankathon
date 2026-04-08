@@ -419,3 +419,4 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 /BattleAssets/TeamAssets
+Properties/launchSettings.json
