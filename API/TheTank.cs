@@ -81,8 +81,8 @@ public partial class TheTank : CharacterBody2D, IEntity
 		AddChild(deathPlayer);
 
 		//Treads
-		treadsL = GetNode<Node2D>("TreadsL").GetChild<CpuParticles2D>(0);
-		treadsR = GetNode<Node2D>("TreadsR").GetChild<CpuParticles2D>(0);
+		treadsL = GetNode<Node2D>("TreadsL")?.GetChild<CpuParticles2D>(0);
+		treadsR = GetNode<Node2D>("TreadsR")?.GetChild<CpuParticles2D>(0);
 
 		base._Ready();
 	}
@@ -148,7 +148,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 		bulletInstance.initializer = this;
 		GetParent().AddChild(bulletInstance);
 		bulletsFired.Add(bulletInstance);
-		shootPlayer.Play();
+		shootPlayer?.Play();
 	}
 
 	internal void PopBullet(Bullet bullet)
@@ -215,6 +215,8 @@ public partial class TheTank : CharacterBody2D, IEntity
 	
 	internal void Tread(API.Rotation rotation)
 	{
+		if(treadsL == null || treadsR == null) return;
+
 		treadsL.Emitting = false;
 		treadsR.Emitting = false;
 		if(rotation == API.Rotation.CW)
