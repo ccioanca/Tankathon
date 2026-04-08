@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cnb5p5wv4lsq4"]
 
 [ext_resource type="PackedScene" uid="uid://dojx2g71ojb0q" path="res://Scenes/Tank/BlueTank.tscn" id="1_5d0vt"]
-[ext_resource type="Texture2D" uid="uid://dhknxynfjugol" path="res://Assets/Red Tank.png" id="2_807b1"]
+[ext_resource type="Texture2D" uid="uid://dhknxynfjugol" path="res://Assets/Dev Tank.png" id="2_807b1"]
 
 [node name="BlueTank" unique_id=654232711 instance=ExtResource("1_5d0vt")]
 

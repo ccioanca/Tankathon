@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cbbda3vot0svr" path="res://API/TheTank.cs" id="1_fpwlc"]
 [ext_resource type="Shader" uid="uid://bp52plcab8fj6" path="res://Shaders/Tank.gdshader" id="2_5k6t8"]
-[ext_resource type="Texture2D" uid="uid://dhknxynfjugol" path="res://Assets/Red Tank.png" id="3_q67y1"]
+[ext_resource type="Texture2D" uid="uid://dhknxynfjugol" path="res://Assets/Dev Tank.png" id="3_q67y1"]
 [ext_resource type="Script" uid="uid://cewlmkf8acdda" path="res://API/Actions.cs" id="4_1568u"]
 [ext_resource type="Theme" uid="uid://bi2xlu10nuh8x" path="res://Assets/Progress_Base.tres" id="5_6juuu"]
 
