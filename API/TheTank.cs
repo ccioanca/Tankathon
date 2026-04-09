@@ -58,6 +58,8 @@ public partial class TheTank : CharacterBody2D, IEntity
 	private CpuParticles2D treadsL;
 	private CpuParticles2D treadsR;
 
+	public GameManager gm;
+
 	public override void _Ready()
 	{
 		_passedActions = GetNode<Actions>("Actions");
@@ -84,7 +86,10 @@ public partial class TheTank : CharacterBody2D, IEntity
 		treadsL = GetNodeOrNull<Node2D>("TreadsL")?.GetChild<CpuParticles2D>(0);
 		treadsR = GetNodeOrNull<Node2D>("TreadsR")?.GetChild<CpuParticles2D>(0);
 
-		base._Ready();
+		//get ref to GM
+		gm = GetTree().Root.GetNodeOrNull<GameManager>("GameScene");
+
+        base._Ready();
 	}
 
 	void OnLabelResized(){
@@ -101,7 +106,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if(!GetTree().Root.GetNode<GameManager>("GameScene").GAMESTART)
+		if(!gm.GAMESTART)
 			return;
 
 		thisTank.Do(_passedActions, _scoreboard);
@@ -225,12 +230,15 @@ public partial class TheTank : CharacterBody2D, IEntity
 			treadsR.Emitting = true;
 	}
 
-	// public override void _Draw()
-	// {
-	// 	DrawLine(new Vector2(0, 0), new Vector2(0, -1500), Colors.Green, 2); //Middle
-	// 	DrawLine(new Vector2(0, 0), new Vector2(150, -1500), Colors.Red, 2); //Right
-	// 	DrawLine(new Vector2(0, 0), new Vector2(-150, -1500), Colors.Blue, 2); //Left
-	// }
+	public override void _Draw()
+	{
+		if (gm.DEBUG)
+		{
+			DrawLine(new Vector2(0, 0), new Vector2(0, -1500), Colors.Green, 2); //Middle
+			DrawLine(new Vector2(0, 0), new Vector2(150, -1500), Colors.Red, 2); //Right
+			DrawLine(new Vector2(0, 0), new Vector2(-150, -1500), Colors.Blue, 2); //Left
+		}
+	}
 
 	internal void SetupScoreboard(TankSetup setup)
 	{

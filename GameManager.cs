@@ -23,8 +23,11 @@ public partial class GameManager : Node2D
 	//Game state
 	[Export]
 	public bool GAMESTART = false;
+    //Game state
+    [Export]
+    public bool DEBUG = false;
 
-	AudioStreamPlayer musicPlayer;
+    AudioStreamPlayer musicPlayer;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -78,6 +81,14 @@ public partial class GameManager : Node2D
 			{
 				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 			}
+		}
+		if(Input.IsActionJustPressed("toggle_debug"))
+		{
+			DEBUG = !DEBUG;
+			tlTank.QueueRedraw();
+			brTank.QueueRedraw();
+			trTank?.QueueRedraw();
+			blTank?.QueueRedraw();
 		}
 		base._Process(delta);
 	}

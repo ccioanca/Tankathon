@@ -64,6 +64,8 @@ shadow_offset = Vector2(0, 3)
 [node name="GameScene" type="Node2D" unique_id=1328381882]
 script = ExtResource("1_ud4g5")
 battleInfo = ExtResource("2_dyom7")
+GAMESTART = true
+DEBUG = true
 
 [node name="BottomRightTank" parent="." unique_id=659871116 instance=ExtResource("3_dyom7")]
 position = Vector2(640, 620)
