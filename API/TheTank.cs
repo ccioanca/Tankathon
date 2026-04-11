@@ -68,6 +68,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 		_scoreboard = GetNode<Scoreboard>("%Scoreboard");
 		_tankScoreContainer = GetNode<BoxContainer>("%TanksScoreContainer");
 		_tankSetup = new TankSetup();
+		_tankSetup.attributes = new TankAttributes();
 
 		//get the turret object
 		turret = GetNode<Marker2D>("Turret");
@@ -126,8 +127,13 @@ public partial class TheTank : CharacterBody2D, IEntity
 		_healthBar.Value = health;
 		thisTank.Setup(_tankSetup);
 
-		//setup Scoreboard object for this tank
-		SetupScoreboard(_tankSetup);
+		GD.Print("Move Speed:" + _tankSetup.attributes.moveSpeed);
+		GD.Print("Rotate Speed:" + _tankSetup.attributes.rotationSpeed);
+		GD.Print("Bullet Speed:" + _tankSetup.attributes.bulletSpeed);
+		GD.Print("Reload Speed:" + _tankSetup.attributes.reloadSpeed);
+
+        //setup Scoreboard object for this tank
+        SetupScoreboard(_tankSetup);
 
 		//setup name
 		_tankLabel.Text = _tankSetup.name;
