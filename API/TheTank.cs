@@ -14,17 +14,17 @@ public partial class TheTank : CharacterBody2D, IEntity
 	public EntityType eType => EntityType.Tank; 
 
 	public bool col = false;
-    public Vector2 _velocity = Vector2.Zero;
+	public Vector2 _velocity = Vector2.Zero;
 	public int health = 10;
 	public int points = 0;
 	
-    public ITank thisTank;
+	public ITank thisTank;
 	Actions actions;
 	private IActions _passedActions;
 	private TankSetup _tankSetup;
 	private Scoreboard _scoreboard;
 	private BoxContainer _tankScoreContainer;
-    private ProgressBar _healthBar;
+	private ProgressBar _healthBar;
 	private Label _tankLabel;
 
 	private Node scorePanel;
@@ -34,19 +34,19 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 
 
-    //Shooty things
+	//Shooty things
 	CollisionShape2D _collisionShape;
 	PackedScene bullet;
-    Marker2D turret;
-    private List<Bullet> bulletsFired = new List<Bullet>();
+	Marker2D turret;
+	private List<Bullet> bulletsFired = new List<Bullet>();
 
 
-    //For the raycasting
-    private PhysicsDirectSpaceState2D spaceState;
+	//For the raycasting
+	private PhysicsDirectSpaceState2D spaceState;
 	private PhysicsRayQueryParameters2D query_m;
 	private PhysicsRayQueryParameters2D query_l;
 	private PhysicsRayQueryParameters2D query_r;
-    private Dictionary rayQueryResult;
+	private Dictionary rayQueryResult;
 	private System.Collections.Generic.Dictionary<Side, Entity> hitResults = new System.Collections.Generic.Dictionary<Side, Entity>();
 
 
@@ -58,7 +58,9 @@ public partial class TheTank : CharacterBody2D, IEntity
 	private CpuParticles2D treadsL;
 	private CpuParticles2D treadsR;
 
-    public override void _Ready()
+	public GameManager gm;
+
+	public override void _Ready()
 	{
 		_passedActions = GetNode<Actions>("Actions");
 		_healthBar = GetNode<ProgressBar>("HealthBar");
@@ -81,10 +83,13 @@ public partial class TheTank : CharacterBody2D, IEntity
 		AddChild(deathPlayer);
 
 		//Treads
-		treadsL = GetNode<Node2D>("TreadsL").GetChild<CpuParticles2D>(0);
-		treadsR = GetNode<Node2D>("TreadsR").GetChild<CpuParticles2D>(0);
+		treadsL = GetNodeOrNull<Node2D>("TreadsL")?.GetChild<CpuParticles2D>(0);
+		treadsR = GetNodeOrNull<Node2D>("TreadsR")?.GetChild<CpuParticles2D>(0);
 
-		base._Ready();
+		//get ref to GM
+		gm = GetTree().Root.GetNodeOrNull<GameManager>("GameScene");
+
+        base._Ready();
 	}
 
 	void OnLabelResized(){
@@ -92,7 +97,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 		{
 			_tankLabel.PivotOffset = new Vector2(_tankLabel.Size.X / 2, -_tankLabel.Position.Y);
 		}
-    }
+	}
 
 	public override void _Process(double delta)
 	{
@@ -101,7 +106,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	public override void _PhysicsProcess(double delta)
 	{
-        if(!GetTree().Root.GetNode<GameManager>("GameScene").GAMESTART)
+		if(!gm.GAMESTART)
 			return;
 
 		thisTank.Do(_passedActions, _scoreboard);
@@ -111,7 +116,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 		else 
 			col = false;
 
-        _tankLabel.Rotation = -this.Rotation;
+		_tankLabel.Rotation = -this.Rotation;
 
 		base._PhysicsProcess(delta);
 	}
@@ -137,8 +142,8 @@ public partial class TheTank : CharacterBody2D, IEntity
 		//Need to duplicate the material or else sometimes it is treated as shared
 		GetNode<Sprite2D>("TankSprite").Material = ((ShaderMaterial)GetNode<Sprite2D>("TankSprite").Material).Duplicate() as ShaderMaterial;
 		((ShaderMaterial)GetNode<Sprite2D>("TankSprite").Material).SetShaderParameter("_newcolor1", Color.FromHtml(_tankSetup.primaryColor));
-        ((ShaderMaterial)GetNode<Sprite2D>("TankSprite").Material).SetShaderParameter("_newcolor2", Color.FromHtml(_tankSetup.secondaryColor));	
-    }
+		((ShaderMaterial)GetNode<Sprite2D>("TankSprite").Material).SetShaderParameter("_newcolor2", Color.FromHtml(_tankSetup.secondaryColor));	
+	}
 
 	internal void Shoot()
 	{
@@ -148,8 +153,8 @@ public partial class TheTank : CharacterBody2D, IEntity
 		bulletInstance.initializer = this;
 		GetParent().AddChild(bulletInstance);
 		bulletsFired.Add(bulletInstance);
-		shootPlayer.Play();
-    }
+		shootPlayer?.Play();
+	}
 
 	internal void PopBullet(Bullet bullet)
 	{
@@ -160,75 +165,80 @@ public partial class TheTank : CharacterBody2D, IEntity
 	{
 		hitResults.Clear();
 
-        spaceState = GetWorld2D().DirectSpaceState;
+		spaceState = GetWorld2D().DirectSpaceState;
 		//Middle Raycast
-        // use global coordinates, not local to node
-        query_m = PhysicsRayQueryParameters2D.Create(GlobalPosition, ToGlobal(new Vector2(0, -1500)));
+		// use global coordinates, not local to node
+		query_m = PhysicsRayQueryParameters2D.Create(GlobalPosition, ToGlobal(new Vector2(0, -1500)));
 		query_m.CollideWithAreas = true;
-        query_m.Exclude = [GetRid(), .. bulletsFired.Select(b => b.GetRid()).ToArray()];
-        rayQueryResult = spaceState.IntersectRay(query_m);
+		query_m.Exclude = [GetRid(), .. bulletsFired.Select(b => b.GetRid()).ToArray()];
+		rayQueryResult = spaceState.IntersectRay(query_m);
 
 		if(rayQueryResult.Count > 0)
 		{
 			var entity = rayQueryResult["collider"].As<CollisionObject2D>();
-            hitResults.Add(Side.Middle, GetEntityInPath(entity));
+			hitResults.Add(Side.Middle, GetEntityInPath(entity));
 		}
 
-        //Left Raycast
-        query_l = PhysicsRayQueryParameters2D.Create(GlobalPosition, ToGlobal(new Vector2(-150, -1500)));
-        query_l.CollideWithAreas = true;
-        query_l.Exclude = [GetRid(), .. bulletsFired.Select(b => b.GetRid()).ToArray()];
-        rayQueryResult = spaceState.IntersectRay(query_l);
+		//Left Raycast
+		query_l = PhysicsRayQueryParameters2D.Create(GlobalPosition, ToGlobal(new Vector2(-150, -1500)));
+		query_l.CollideWithAreas = true;
+		query_l.Exclude = [GetRid(), .. bulletsFired.Select(b => b.GetRid()).ToArray()];
+		rayQueryResult = spaceState.IntersectRay(query_l);
 
-        if (rayQueryResult.Count > 0)
-        {
-            var entity = rayQueryResult["collider"].As<CollisionObject2D>();
-            hitResults.Add(Side.Left, GetEntityInPath(entity));
-        }
+		if (rayQueryResult.Count > 0)
+		{
+			var entity = rayQueryResult["collider"].As<CollisionObject2D>();
+			hitResults.Add(Side.Left, GetEntityInPath(entity));
+		}
 
-        //Right Raycast
-        query_r = PhysicsRayQueryParameters2D.Create(GlobalPosition, ToGlobal(new Vector2(150, -1500)));
-        query_r.CollideWithAreas = true;
-        query_r.Exclude = [GetRid(), .. bulletsFired.Select(b => b.GetRid()).ToArray()];
-        rayQueryResult = spaceState.IntersectRay(query_r);
+		//Right Raycast
+		query_r = PhysicsRayQueryParameters2D.Create(GlobalPosition, ToGlobal(new Vector2(150, -1500)));
+		query_r.CollideWithAreas = true;
+		query_r.Exclude = [GetRid(), .. bulletsFired.Select(b => b.GetRid()).ToArray()];
+		rayQueryResult = spaceState.IntersectRay(query_r);
 
-        if (rayQueryResult.Count > 0)
-        {
-            var entity = rayQueryResult["collider"].As<CollisionObject2D>();
-            hitResults.Add(Side.Right, GetEntityInPath(entity));
-        }
+		if (rayQueryResult.Count > 0)
+		{
+			var entity = rayQueryResult["collider"].As<CollisionObject2D>();
+			hitResults.Add(Side.Right, GetEntityInPath(entity));
+		}
 
-        return hitResults;
-    }
+		return hitResults;
+	}
 
 	internal Entity GetEntityInPath(CollisionObject2D entity)
 	{
-        Entity entityInPath = new Entity(
-            (entity as IEntity).eType,
-            entity.GlobalPosition,
-            entity.Rotation,
-            ((Vector2)rayQueryResult["position"]).DistanceTo(_collisionShape.GlobalPosition) - (_collisionShape.Shape.GetRect().Size.Y / 2)
-            );
+		Entity entityInPath = new Entity(
+			(entity as IEntity).eType,
+			entity.GlobalPosition,
+			entity.Rotation,
+			((Vector2)rayQueryResult["position"]).DistanceTo(_collisionShape.GlobalPosition) - (_collisionShape.Shape.GetRect().Size.Y / 2)
+			);
 
 		return entityInPath;
-    }
+	}
 	
 	internal void Tread(API.Rotation rotation)
 	{
-        treadsL.Emitting = false;
-        treadsR.Emitting = false;
-        if(rotation == API.Rotation.CW)
+		if(treadsL == null || treadsR == null) return;
+
+		treadsL.Emitting = false;
+		treadsR.Emitting = false;
+		if(rotation == API.Rotation.CW)
 			treadsL.Emitting = true;
 		if(rotation == API.Rotation.CCW)
 			treadsR.Emitting = true;
 	}
 
-    // public override void _Draw()
-	// {
-	// 	DrawLine(new Vector2(0, 0), new Vector2(0, -1500), Colors.Green, 2); //Middle
-	// 	DrawLine(new Vector2(0, 0), new Vector2(150, -1500), Colors.Red, 2); //Right
-	// 	DrawLine(new Vector2(0, 0), new Vector2(-150, -1500), Colors.Blue, 2); //Left
-	// }
+	public override void _Draw()
+	{
+		if (gm.DEBUG)
+		{
+			DrawLine(new Vector2(0, 0), new Vector2(0, -1500), Colors.Green, 2); //Middle
+			DrawLine(new Vector2(0, 0), new Vector2(150, -1500), Colors.Red, 2); //Right
+			DrawLine(new Vector2(0, 0), new Vector2(-150, -1500), Colors.Blue, 2); //Left
+		}
+	}
 
 	internal void SetupScoreboard(TankSetup setup)
 	{
@@ -242,27 +252,26 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	}
 
-    internal void Hurt()
+	internal void Hurt()
 	{
 		health--;
-        //_scoreboard.ScoreChanged(team);
+		//_scoreboard.ScoreChanged(team);
 
-        _healthBar.Value = health;
-        scorePanel.Call("change_health", health);
+		_healthBar.Value = health;
+		scorePanel.Call("change_health", health);
 
 		if (health <= 0)
 		{
 			deathPlayer.Reparent(GetTree().Root);
-            deathPlayer.Play();
+			deathPlayer.Play();
 
-            this.QueueFree();
+			this.QueueFree();
 		}
-    }
+	}
 
 	internal void Score()
 	{
 		points++;
 		scorePanel.Call("change_points", points);
-    }
+	}
 }
-

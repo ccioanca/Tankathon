@@ -1,8 +1,8 @@
-[gd_scene load_steps=51 format=4 uid="uid://oaqnkya2frwb"]
+[gd_scene format=4 uid="uid://oaqnkya2frwb"]
 
 [ext_resource type="Script" uid="uid://b4tgpx0u887fo" path="res://GameManager.cs" id="1_u810s"]
-[ext_resource type="Resource" uid="uid://48ue1r6wcln3" path="res://BattleAssets/Round1.tres" id="2_2trbe"]
-[ext_resource type="PackedScene" uid="uid://dojx2g71ojb0q" path="res://Scenes/GenericTank.tscn" id="2_8uoga"]
+[ext_resource type="Resource" uid="uid://5jr0j7l8csdw" path="res://BattleAssets/TestBattle/test_battle.tres" id="2_2trbe"]
+[ext_resource type="PackedScene" uid="uid://dojx2g71ojb0q" path="res://Scenes/Tank/BlueTank.tscn" id="2_8uoga"]
 [ext_resource type="TileSet" uid="uid://db08e7muwuxi5" path="res://Assets/tileset.tres" id="3_i7srl"]
 [ext_resource type="PackedScene" uid="uid://b8bl3fg1j15cw" path="res://Scenes/Obstacle.tscn" id="4_2tp6q"]
 [ext_resource type="Script" uid="uid://cldikdy7y7gym" path="res://API/Scoreboard.cs" id="5_kwfy1"]
@@ -50,8 +50,8 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8n5pp"]
-bg_color = Color(0.599233, 0.082279, 0.0834944, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vo8fx"]
+bg_color = Color(0.497208, 0.060611, 0.0617372, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -66,8 +66,8 @@ shadow_color = Color(0.165656, 0.165656, 0.165656, 0.6)
 shadow_size = 3
 shadow_offset = Vector2(0, 3)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vo8fx"]
-bg_color = Color(0.497208, 0.060611, 0.0617372, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8n5pp"]
+bg_color = Color(0.599233, 0.082279, 0.0834944, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -580,148 +580,148 @@ glow_intensity = 0.71
 glow_blend_mode = 0
 glow_hdr_threshold = 0.9
 
-[node name="GameScene" type="Node2D"]
+[node name="GameScene" type="Node2D" unique_id=564896941]
 script = ExtResource("1_u810s")
 battleInfo = ExtResource("2_2trbe")
 
-[node name="G1" type="TileMapLayer" parent="."]
+[node name="G1" type="TileMapLayer" parent="." unique_id=39200976]
 self_modulate = Color(0.6808, 0.74, 0.72224, 1)
 z_index = -10
 tile_map_data = PackedByteArray("AAAAAAAAAAAFAAAAAAAAAAEAAAAFAAEAAAAAAAIAAAAFAAEAAAAAAAkAAAAFAAEAAAAAAAgAAAAFAAEAAAAAAAcAAAAFAAEAAAAAAAYAAAAFAAEAAAAAAAUAAAAFAAEAAAAAAAQAAAAFAAEAAAAAAAMAAAAFAAEAAAAAAAoAAAAFAAIAAAABAAoAAAAGAAIAAAACAAoAAAAGAAIAAAADAAoAAAAGAAIAAAAEAAoAAAAGAAIAAAAFAAoAAAAGAAIAAAAGAAoAAAAGAAIAAAAHAAoAAAAGAAIAAAAIAAoAAAAGAAIAAAAJAAoAAAAGAAIAAAAKAAoAAAAGAAIAAAALAAoAAAAGAAIAAAAMAAoAAAAGAAIAAAANAAoAAAAGAAIAAAAOAAoAAAAGAAIAAAAPAAoAAAAGAAIAAAAQAAoAAAAGAAIAAAARAAoAAAAGAAIAAAASAAoAAAAGAAIAAAATAAoAAAAHAAIAAAATAAkAAAAHAAEAAAATAAgAAAAHAAEAAAATAAcAAAAHAAEAAAATAAYAAAAHAAEAAAATAAUAAAAHAAEAAAATAAQAAAAHAAEAAAATAAMAAAAHAAEAAAATAAIAAAAHAAEAAAATAAEAAAAHAAEAAAATAAAAAAAHAAAAAAASAAAAAAAGAAAAAAARAAAAAAAGAAAAAAAQAAAAAAAGAAAAAAAPAAAAAAAGAAAAAAAOAAAAAAAGAAAAAAANAAAAAAAGAAAAAAAMAAAAAAAGAAAAAAALAAAAAAAGAAAAAAAKAAAAAAAGAAAAAAAJAAAAAAAGAAAAAAAIAAAAAAAGAAAAAAAHAAAAAAAGAAAAAAAGAAAAAAAGAAAAAAAFAAAAAAAGAAAAAAAEAAAAAAAGAAAAAAADAAAAAAAGAAAAAAACAAAAAAAGAAAAAAABAAAAAAAGAAAAAAABAAEAAAAGAAEAAAABAAIAAAAGAAEAAAABAAMAAAAGAAEAAAABAAQAAAAGAAEAAAABAAUAAAAGAAEAAAABAAYAAAAGAAEAAAABAAcAAAAGAAEAAAABAAgAAAAGAAEAAAABAAkAAAAGAAEAAAACAAEAAAAGAAEAAAACAAIAAAAGAAEAAAACAAMAAAAGAAEAAAACAAQAAAAGAAEAAAACAAUAAAAGAAEAAAACAAYAAAAGAAEAAAACAAcAAAAGAAEAAAACAAgAAAAGAAEAAAACAAkAAAAGAAEAAAADAAEAAAAGAAEAAAADAAIAAAAGAAEAAAADAAMAAAAGAAEAAAADAAQAAAAGAAEAAAADAAUAAAAGAAEAAAADAAYAAAAGAAEAAAADAAcAAAAGAAEAAAADAAgAAAAGAAEAAAADAAkAAAAGAAEAAAAEAAEAAAAGAAEAAAAEAAIAAAAGAAEAAAAEAAMAAAAGAAEAAAAEAAQAAAAGAAEAAAAEAAUAAAAGAAEAAAAEAAYAAAAGAAEAAAAEAAcAAAAGAAEAAAAEAAgAAAAGAAEAAAAEAAkAAAAGAAEAAAAFAAEAAAAGAAEAAAAFAAIAAAAGAAEAAAAFAAMAAAAGAAEAAAAFAAQAAAAGAAEAAAAFAAUAAAAGAAEAAAAFAAYAAAAGAAEAAAAFAAcAAAAGAAEAAAAFAAgAAAAGAAEAAAAFAAkAAAAGAAEAAAAGAAEAAAAGAAEAAAAGAAIAAAAGAAEAAAAGAAMAAAAGAAEAAAAGAAQAAAAGAAEAAAAGAAUAAAAGAAEAAAAGAAYAAAAGAAEAAAAGAAcAAAAGAAEAAAAGAAgAAAAGAAEAAAAGAAkAAAAGAAEAAAAHAAEAAAAGAAEAAAAHAAIAAAAGAAEAAAAHAAMAAAAGAAEAAAAHAAQAAAAGAAEAAAAHAAUAAAAGAAEAAAAHAAYAAAAGAAEAAAAHAAcAAAAGAAEAAAAHAAgAAAAGAAEAAAAHAAkAAAAGAAEAAAAIAAEAAAAGAAEAAAAIAAIAAAAGAAEAAAAIAAMAAAAGAAEAAAAIAAQAAAAGAAEAAAAIAAUAAAAGAAEAAAAIAAYAAAAGAAEAAAAIAAcAAAAGAAEAAAAIAAgAAAAGAAEAAAAIAAkAAAAGAAEAAAAJAAEAAAAGAAEAAAAJAAIAAAAGAAEAAAAJAAMAAAAGAAEAAAAJAAQAAAAGAAEAAAAJAAUAAAAGAAEAAAAJAAYAAAAGAAEAAAAJAAcAAAAGAAEAAAAJAAgAAAAGAAEAAAAJAAkAAAAGAAEAAAAKAAEAAAAGAAEAAAAKAAIAAAAGAAEAAAAKAAMAAAAGAAEAAAAKAAQAAAAGAAEAAAAKAAUAAAAGAAEAAAAKAAYAAAAGAAEAAAAKAAcAAAAGAAEAAAAKAAgAAAAGAAEAAAAKAAkAAAAGAAEAAAALAAEAAAAGAAEAAAALAAIAAAAGAAEAAAALAAMAAAAGAAEAAAALAAQAAAAGAAEAAAALAAUAAAAGAAEAAAALAAYAAAAGAAEAAAALAAcAAAAGAAEAAAALAAgAAAAGAAEAAAALAAkAAAAGAAEAAAAMAAEAAAAGAAEAAAAMAAIAAAAGAAEAAAAMAAMAAAAGAAEAAAAMAAQAAAAGAAEAAAAMAAUAAAAGAAEAAAAMAAYAAAAGAAEAAAAMAAcAAAAGAAEAAAAMAAgAAAAGAAEAAAAMAAkAAAAGAAEAAAANAAEAAAAGAAEAAAANAAIAAAAGAAEAAAANAAMAAAAGAAEAAAANAAQAAAAGAAEAAAANAAUAAAAGAAEAAAANAAYAAAAGAAEAAAANAAcAAAAGAAEAAAANAAgAAAAGAAEAAAANAAkAAAAGAAEAAAAOAAEAAAAGAAEAAAAOAAIAAAAGAAEAAAAOAAMAAAAGAAEAAAAOAAQAAAAGAAEAAAAOAAUAAAAGAAEAAAAOAAYAAAAGAAEAAAAOAAcAAAAGAAEAAAAOAAgAAAAGAAEAAAAOAAkAAAAGAAEAAAAPAAEAAAAGAAEAAAAPAAIAAAAGAAEAAAAPAAMAAAAGAAEAAAAPAAQAAAAGAAEAAAAPAAUAAAAGAAEAAAAPAAYAAAAGAAEAAAAPAAcAAAAGAAEAAAAPAAgAAAAGAAEAAAAPAAkAAAAGAAEAAAAQAAEAAAAGAAEAAAAQAAIAAAAGAAEAAAAQAAMAAAAGAAEAAAAQAAQAAAAGAAEAAAAQAAUAAAAGAAEAAAAQAAYAAAAGAAEAAAAQAAcAAAAGAAEAAAAQAAgAAAAGAAEAAAAQAAkAAAAGAAEAAAARAAEAAAAGAAEAAAARAAIAAAAGAAEAAAARAAMAAAAGAAEAAAARAAQAAAAGAAEAAAARAAUAAAAGAAEAAAARAAYAAAAGAAEAAAARAAcAAAAGAAEAAAARAAgAAAAGAAEAAAARAAkAAAAGAAEAAAASAAEAAAAGAAEAAAASAAIAAAAGAAEAAAASAAMAAAAGAAEAAAASAAQAAAAGAAEAAAASAAUAAAAGAAEAAAASAAYAAAAGAAEAAAASAAcAAAAGAAEAAAASAAgAAAAGAAEAAAASAAkAAAAGAAEAAAA=")
 tile_set = ExtResource("3_i7srl")
 
-[node name="TileMapLayer4" type="TileMapLayer" parent="."]
+[node name="TileMapLayer4" type="TileMapLayer" parent="." unique_id=1096421491]
 self_modulate = Color(1, 1, 1, 0.552941)
 z_index = -10
 tile_map_data = PackedByteArray("AAABAAUAAgAAAAIAAAACAAUAAgAAAAMAAAADAAUAAgAAAAIAAAAEAAUAAgAAAAIAAAAFAAUAAgAAAAIAAAAGAAUAAgAAAAIAAAAHAAUAAgAAAAMAAAAIAAUAAgAAAAMAAAAJAAUAAgAAAAIAAAAKAAUAAgAAAAIAAAAEAAgAAgAAAAIAAAAEAAcAAgAAAAIAAAAFAAcAAgAAAAIAAAAFAAYAAgAAAAMAAAAGAAYAAgAAAAIAAAAHAAQAAgAAAAIAAAAIAAQAAgAAAAIAAAAJAAQAAgAAAAMAAAAJAAYAAgAAAAIAAAAIAAYAAgAAAAMAAAAIAAcAAgAAAAIAAAAHAAcAAgAAAAIAAAAGAAgAAgAAAAMAAAAFAAgAAgAAAAMAAAAEAAkAAgAAAAMAAAADAAkAAgAAAAIAAAADAAgAAgAAAAIAAAAJAAcAAgAAAAMAAAAGAAcAAgAAAAMAAAAHAAYAAgAAAAIAAAAFAAkAAgAAAAIAAAAGAAkAAgAAAAIAAAAHAAgAAgAAAAIAAAAIAAgAAgAAAAMAAAAJAAgAAgAAAAIAAAAKAAcAAgAAAAIAAAAKAAYAAgAAAAIAAAAKAAgAAgAAAAIAAAAHAAkAAgAAAAIAAAAFAAoAAgAAAAIAAAAEAAoAAgAAAAMAAAADAAoAAgAAAAMAAAACAAoAAgAAAAIAAAABAAoAAgAAAAMAAAAGAAoAAgAAAAIAAAAHAAoAAgAAAAMAAAAIAAoAAgAAAAMAAAAJAAoAAgAAAAIAAAACAAkAAgAAAAIAAAACAAgAAgAAAAMAAAABAAgAAgAAAAIAAAABAAcAAgAAAAIAAAACAAYAAgAAAAMAAAACAAcAAgAAAAIAAAADAAYAAgAAAAIAAAADAAcAAgAAAAIAAAAEAAYAAgAAAAMAAAABAAkAAgAAAAIAAAAAAAoAAgAAAAMAAAAAAAkAAgAAAAMAAAAAAAgAAgAAAAIAAAAAAAcAAgAAAAIAAAAAAAYAAgAAAAIAAAABAAYAAgAAAAMAAAABAAQAAgAAAAIAAAAAAAUAAgAAAAIAAAAAAAQAAgAAAAMAAAAAAAMAAgAAAAMAAAAAAAIAAgAAAAMAAAAAAAEAAgAAAAMAAAAAAAAAAgAIAAEAAAABAAAAAgAIAAEAAAABAAEAAgAAAAIAAAABAAIAAgAAAAIAAAABAAMAAgAAAAMAAAACAAQAAgAAAAIAAAACAAMAAgAAAAMAAAACAAIAAgAAAAMAAAACAAEAAgAAAAIAAAACAAAAAgAIAAEAAAADAAAAAgAIAAEAAAAEAAAAAgAIAAEAAAAFAAAAAgAIAAEAAAAGAAAAAgAIAAEAAAAHAAAAAgAIAAEAAAAIAAAAAgAIAAEAAAAJAAAAAgAIAAEAAAAKAAAAAgAIAAEAAAALAAAAAgAIAAEAAAAMAAAAAgAIAAEAAAANAAAAAgAIAAEAAAAOAAAAAgAIAAEAAAAPAAAAAgAIAAEAAAAQAAAAAgAIAAEAAAARAAAAAgAIAAEAAAASAAAAAgAIAAEAAAATAAAAAgAIAAEAAAATAAEAAgAAAAIAAAATAAIAAgAAAAIAAAATAAMAAgAAAAIAAAATAAQAAgAAAAMAAAATAAUAAgAAAAMAAAATAAYAAgAAAAIAAAATAAcAAgAAAAMAAAATAAgAAgAAAAMAAAATAAkAAgAAAAIAAAATAAoAAgAAAAMAAAASAAoAAgAAAAMAAAARAAoAAgAAAAIAAAAQAAoAAgAAAAMAAAAPAAoAAgAAAAIAAAAOAAoAAgAAAAIAAAANAAoAAgAAAAMAAAAMAAoAAgAAAAIAAAALAAoAAgAAAAMAAAAKAAoAAgAAAAIAAAAIAAkAAgAAAAIAAAAJAAkAAgAAAAMAAAAKAAkAAgAAAAIAAAALAAkAAgAAAAMAAAAMAAkAAgAAAAIAAAANAAkAAgAAAAMAAAAOAAkAAgAAAAIAAAAPAAkAAgAAAAIAAAAPAAgAAgAAAAIAAAAQAAgAAgAAAAMAAAARAAgAAgAAAAMAAAASAAgAAgAAAAIAAAASAAkAAgAAAAIAAAARAAkAAgAAAAIAAAAQAAkAAgAAAAIAAAANAAUAAgAAAAMAAAANAAQAAgAAAAIAAAANAAMAAgAAAAIAAAANAAIAAgAAAAIAAAANAAEAAgAAAAIAAAAMAAEAAgAAAAMAAAALAAEAAgAAAAIAAAAKAAEAAgAAAAMAAAAJAAEAAgAAAAIAAAAIAAEAAgAAAAMAAAAHAAEAAgAAAAIAAAAGAAEAAgAAAAMAAAAFAAEAAgAAAAIAAAAEAAEAAgAAAAIAAAADAAEAAgAAAAIAAAADAAIAAgAAAAMAAAADAAMAAgAAAAMAAAADAAQAAgAAAAIAAAAEAAQAAgAAAAMAAAAEAAMAAgAAAAMAAAAEAAIAAgAAAAIAAAAFAAIAAgAAAAMAAAAFAAMAAgAAAAIAAAAFAAQAAgAAAAIAAAAGAAQAAgAAAAIAAAAGAAMAAgAAAAIAAAAGAAIAAgAAAAIAAAAHAAIAAgAAAAMAAAAHAAMAAgAAAAMAAAAIAAMAAgAAAAMAAAAIAAIAAgAAAAIAAAAJAAIAAgAAAAIAAAAJAAMAAgAAAAIAAAAKAAMAAgAAAAIAAAAKAAIAAgAAAAIAAAALAAIAAgAAAAIAAAALAAMAAgAAAAMAAAALAAQAAgAAAAMAAAAKAAQAAgAAAAMAAAALAAUAAgAAAAIAAAALAAYAAgAAAAIAAAALAAcAAgAAAAMAAAALAAgAAgAAAAIAAAAMAAgAAgAAAAIAAAAMAAcAAgAAAAIAAAAMAAYAAgAAAAMAAAAMAAUAAgAAAAMAAAAMAAQAAgAAAAIAAAAMAAMAAgAAAAMAAAAMAAIAAgAAAAIAAAANAAYAAgAAAAIAAAANAAcAAgAAAAMAAAANAAgAAgAAAAMAAAAOAAgAAgAAAAMAAAAOAAcAAgAAAAIAAAAOAAYAAgAAAAMAAAAOAAUAAgAAAAIAAAAOAAQAAgAAAAIAAAAOAAMAAgAAAAIAAAAOAAIAAgAAAAIAAAAOAAEAAgAAAAMAAAAPAAEAAgAAAAIAAAAPAAIAAgAAAAIAAAAPAAMAAgAAAAMAAAAPAAQAAgAAAAIAAAAPAAUAAgAAAAIAAAAPAAYAAgAAAAIAAAAPAAcAAgAAAAIAAAAQAAcAAgAAAAIAAAAQAAYAAgAAAAMAAAAQAAUAAgAAAAIAAAAQAAQAAgAAAAIAAAAQAAMAAgAAAAMAAAAQAAIAAgAAAAIAAAAQAAEAAgAAAAIAAAARAAEAAgAAAAMAAAARAAIAAgAAAAIAAAARAAMAAgAAAAMAAAARAAQAAgAAAAMAAAARAAUAAgAAAAIAAAARAAYAAgAAAAMAAAARAAcAAgAAAAIAAAASAAcAAgAAAAIAAAASAAYAAgAAAAMAAAASAAUAAgAAAAMAAAASAAQAAgAAAAIAAAASAAMAAgAAAAMAAAASAAIAAgAAAAMAAAASAAEAAgAAAAMAAAA=")
 tile_set = ExtResource("3_i7srl")
 
-[node name="Obstacles2" type="TileMapLayer" parent="."]
+[node name="Obstacles2" type="TileMapLayer" parent="." unique_id=553999230]
 z_index = 10
 position = Vector2(-24, -24)
 tile_map_data = PackedByteArray("AAABAAAAAQAAAAMAAAABAP//AQAAAAIAAAABAP7/AQAAAAQAAAACAP7/AQABAAQAAAACAP//AQABAAIAAAACAAAAAQABAAMAAAADAP7/AQABAAQAAAADAP//AQABAAIAAAADAAAAAQABAAMAAAAEAP7/AQABAAQAAAAEAP//AQABAAIAAAAEAAAAAQABAAMAAAAFAP7/AQABAAQAAAAFAP//AQABAAIAAAAFAAAAAQABAAMAAAAGAP7/AQABAAQAAAAGAP//AQABAAIAAAAGAAAAAQABAAMAAAAHAP7/AQABAAQAAAAHAP//AQABAAIAAAAHAAAAAQABAAMAAAAIAP7/AQABAAQAAAAIAP//AQABAAIAAAAIAAAAAQABAAMAAAAJAP7/AQABAAQAAAAJAP//AQABAAIAAAAJAAAAAQABAAMAAAAKAP7/AQABAAQAAAAKAP//AQABAAIAAAAKAAAAAQABAAMAAAALAP7/AQABAAQAAAALAP//AQABAAIAAAALAAAAAQABAAMAAAAMAP7/AQABAAQAAAAMAP//AQABAAIAAAAMAAAAAQABAAMAAAANAP7/AQABAAQAAAANAP//AQABAAIAAAANAAAAAQABAAMAAAAOAP7/AQABAAQAAAAOAP//AQABAAIAAAAOAAAAAQABAAMAAAAPAP7/AQABAAQAAAAPAP//AQABAAIAAAAPAAAAAQABAAMAAAAQAP7/AQABAAQAAAAQAP//AQABAAIAAAAQAAAAAQABAAMAAAARAP7/AQABAAQAAAARAP//AQABAAIAAAARAAAAAQABAAMAAAASAP7/AQABAAQAAAASAP//AQABAAIAAAASAAAAAQABAAMAAAATAP//AQACAAIAAAATAAAAAQACAAMAAAATAP7/AQACAAQAAAAUAP//AQAAAAQAAAAUAAsAAQAAAAIAAAAUAAwAAQAAAAMAAAAUAAoAAQAAAAIAAAAUAAkAAQAAAAIAAAAUAAgAAQAAAAIAAAAUAAcAAQAAAAIAAAAUAAYAAQAAAAIAAAAUAAUAAQAAAAIAAAAUAAQAAQAAAAIAAAAUAAMAAQAAAAIAAAAUAAIAAQAAAAIAAAAUAAEAAQAAAAIAAAAUAAAAAQAAAAIAAAD+////AQAAAAQAAAD+/wAAAQAAAAIAAAD+/wEAAQAAAAIAAAD+/wIAAQAAAAIAAAD+/wMAAQAAAAIAAAD+/wQAAQAAAAIAAAD+/wUAAQAAAAIAAAD+/wYAAQAAAAIAAAD+/wcAAQAAAAIAAAD+/wgAAQAAAAIAAAD+/wkAAQAAAAIAAAD+/woAAQAAAAIAAAD+/wsAAQAAAAIAAAD+/wwAAQAAAAMAAAD/////AQABAAQAAAD//wAAAQABAAIAAAD//wEAAQABAAIAAAD//wIAAQABAAIAAAD//wMAAQABAAIAAAD//wQAAQABAAIAAAD//wUAAQABAAIAAAD//wYAAQABAAIAAAD//wcAAQABAAIAAAD//wgAAQABAAIAAAD//wkAAQABAAIAAAD//woAAQABAAIAAAD//wsAAQABAAIAAAD//wwAAQABAAMAAAAAAP//AQACAAQAAAAAAAAAAQACAAIAAAAAAAEAAQACAAIAAAAAAAIAAQACAAIAAAAAAAMAAQACAAIAAAAAAAQAAQACAAIAAAAAAAUAAQACAAIAAAAAAAYAAQACAAIAAAAAAAcAAQACAAIAAAAAAAgAAQACAAIAAAAAAAkAAQACAAIAAAAAAAoAAQACAAIAAAAAAAsAAQACAAIAAAAAAAwAAQACAAMAAAABAAsAAQAAAAQAAAABAAwAAQAAAAIAAAABAA0AAQAAAAMAAAACAAsAAQABAAQAAAACAAwAAQABAAIAAAACAA0AAQABAAMAAAADAAsAAQABAAQAAAADAAwAAQABAAIAAAADAA0AAQABAAMAAAAEAAsAAQABAAQAAAAEAAwAAQABAAIAAAAEAA0AAQABAAMAAAAFAAsAAQABAAQAAAAFAAwAAQABAAIAAAAFAA0AAQABAAMAAAAGAAsAAQABAAQAAAAGAAwAAQABAAIAAAAGAA0AAQABAAMAAAAHAAsAAQABAAQAAAAHAAwAAQABAAIAAAAHAA0AAQABAAMAAAAIAAsAAQABAAQAAAAIAAwAAQABAAIAAAAIAA0AAQABAAMAAAAJAAsAAQABAAQAAAAJAAwAAQABAAIAAAAJAA0AAQABAAMAAAAKAAsAAQABAAQAAAAKAAwAAQABAAIAAAAKAA0AAQABAAMAAAALAAsAAQABAAQAAAALAAwAAQABAAIAAAALAA0AAQABAAMAAAAMAAsAAQABAAQAAAAMAAwAAQABAAIAAAAMAA0AAQABAAMAAAANAAsAAQABAAQAAAANAAwAAQABAAIAAAANAA0AAQABAAMAAAAOAAsAAQABAAQAAAAOAAwAAQABAAIAAAAOAA0AAQABAAMAAAAPAAsAAQABAAQAAAAPAAwAAQABAAIAAAAPAA0AAQABAAMAAAAQAAsAAQABAAQAAAAQAAwAAQABAAIAAAAQAA0AAQABAAMAAAARAAsAAQABAAQAAAARAAwAAQABAAIAAAARAA0AAQABAAMAAAASAAsAAQABAAQAAAASAAwAAQABAAIAAAASAA0AAQABAAMAAAATAAsAAQACAAQAAAATAAwAAQACAAIAAAATAA0AAQACAAMAAAAKAAYAAQADAAQAAAAWAP//AQABAAQAAAAWAAAAAQABAAIAAAAWAAEAAQABAAIAAAAWAAIAAQABAAIAAAAWAAMAAQABAAIAAAAWAAQAAQABAAIAAAAWAAUAAQABAAIAAAAWAAYAAQABAAIAAAAWAAcAAQABAAIAAAAWAAgAAQABAAIAAAAWAAkAAQABAAIAAAAWAAoAAQABAAIAAAAWAAsAAQABAAIAAAAWAAwAAQABAAMAAAAXAP//AQACAAQAAAAXAAAAAQACAAIAAAAXAAEAAQACAAIAAAAXAAIAAQACAAIAAAAXAAMAAQACAAIAAAAXAAQAAQACAAIAAAAXAAUAAQACAAIAAAAXAAYAAQACAAIAAAAXAAcAAQACAAIAAAAXAAgAAQACAAIAAAAXAAkAAQACAAIAAAAXAAoAAQACAAIAAAAXAAsAAQACAAIAAAAXAAwAAQACAAMAAAAVAP//AQABAAQAAAAVAAAAAQABAAIAAAAVAAEAAQABAAIAAAAVAAIAAQABAAIAAAAVAAMAAQABAAIAAAAVAAQAAQABAAIAAAAVAAUAAQABAAIAAAAVAAYAAQABAAIAAAAVAAcAAQABAAIAAAAVAAgAAQABAAIAAAAVAAkAAQABAAIAAAAVAAoAAQABAAIAAAAVAAsAAQABAAIAAAAVAAwAAQABAAMAAAA=")
 tile_set = ExtResource("3_i7srl")
 
-[node name="GUp" type="TileMapLayer" parent="."]
+[node name="GUp" type="TileMapLayer" parent="." unique_id=570756289]
 z_index = 10
 position = Vector2(-24, -24)
 tile_map_data = PackedByteArray("AAAKAAYAAAAJAAAAAAAIAAAAAAAJAAAAAAAJAAAAAAAJAAAAAAAKAAAAAAAJAAAAAAALAAAAAAAJAAAAAAAMAAAAAAAJAAAAAAANAAAAAAAJAAAAAAAOAAAAAAAJAAAAAAAPAAAAAAAJAAAAAAAQAAAAAAAJAAAAAAARAAAAAAAJAAAAAAASAAAAAAAJAAAAAAATAAAAAAAJAAAAAAAGAAAAAAAJAAAAAAAFAAAAAAAJAAAAAAAEAAAAAAAJAAAAAAADAAAAAAAJAAAAAAACAAAAAAAJAAAAAAABAAAAAAAJAAAAAAAHAAAAAAAJAAAAAAA=")
 tile_set = ExtResource("3_i7srl")
 
-[node name="Deco" type="Node2D" parent="."]
+[node name="Deco" type="Node2D" parent="." unique_id=1482227899]
 
-[node name="11" type="Sprite2D" parent="Deco"]
+[node name="11" type="Sprite2D" parent="Deco" unique_id=2109835167]
 position = Vector2(273, 646)
 texture = ExtResource("5_qvetm")
 
-[node name="10" type="Sprite2D" parent="Deco"]
+[node name="10" type="Sprite2D" parent="Deco" unique_id=949507519]
 position = Vector2(82, 373)
 texture = ExtResource("6_2trbe")
 
-[node name="09" type="Sprite2D" parent="Deco"]
+[node name="09" type="Sprite2D" parent="Deco" unique_id=1248015061]
 position = Vector2(112, 402)
 texture = ExtResource("7_fkk8v")
 
-[node name="07" type="Sprite2D" parent="Deco"]
+[node name="07" type="Sprite2D" parent="Deco" unique_id=1881339850]
 position = Vector2(121, 366)
 texture = ExtResource("8_f2rmj")
 
-[node name="12" type="Sprite2D" parent="Deco"]
+[node name="12" type="Sprite2D" parent="Deco" unique_id=521127685]
 position = Vector2(315, 668)
 texture = ExtResource("7_fkk8v")
 
-[node name="06" type="Sprite2D" parent="Deco"]
+[node name="06" type="Sprite2D" parent="Deco" unique_id=1702146364]
 position = Vector2(704, 74)
 texture = ExtResource("9_eqbi2")
 
-[node name="05" type="Sprite2D" parent="Deco"]
+[node name="05" type="Sprite2D" parent="Deco" unique_id=212218275]
 position = Vector2(734, 99)
 texture = ExtResource("10_xy0dg")
 
-[node name="13" type="Sprite2D" parent="Deco"]
+[node name="13" type="Sprite2D" parent="Deco" unique_id=1091877697]
 position = Vector2(60, 213)
 texture = ExtResource("11_oskno")
 
-[node name="14" type="Sprite2D" parent="Deco"]
+[node name="14" type="Sprite2D" parent="Deco" unique_id=1272397015]
 position = Vector2(77, 229)
 texture = ExtResource("11_oskno")
 
-[node name="15" type="Sprite2D" parent="Deco"]
+[node name="15" type="Sprite2D" parent="Deco" unique_id=1108855710]
 position = Vector2(46, 233)
 texture = ExtResource("9_eqbi2")
 
-[node name="16" type="Sprite2D" parent="Deco"]
+[node name="16" type="Sprite2D" parent="Deco" unique_id=503655947]
 position = Vector2(720, 473)
 texture = ExtResource("10_xy0dg")
 
-[node name="17" type="Sprite2D" parent="Deco"]
+[node name="17" type="Sprite2D" parent="Deco" unique_id=1611402092]
 position = Vector2(738, 482)
 texture = ExtResource("8_f2rmj")
 
-[node name="18" type="Sprite2D" parent="Deco"]
+[node name="18" type="Sprite2D" parent="Deco" unique_id=41150067]
 position = Vector2(745, 457)
 texture = ExtResource("6_2trbe")
 
-[node name="19" type="Sprite2D" parent="Deco"]
+[node name="19" type="Sprite2D" parent="Deco" unique_id=637902148]
 position = Vector2(399, 624)
 texture = ExtResource("5_qvetm")
 
-[node name="20" type="Sprite2D" parent="Deco"]
+[node name="20" type="Sprite2D" parent="Deco" unique_id=980263146]
 position = Vector2(1207, 670)
 texture = ExtResource("7_fkk8v")
 
-[node name="21" type="Sprite2D" parent="Deco"]
+[node name="21" type="Sprite2D" parent="Deco" unique_id=1758176273]
 position = Vector2(1164, 661)
 texture = ExtResource("8_f2rmj")
 
-[node name="22" type="Sprite2D" parent="Deco"]
+[node name="22" type="Sprite2D" parent="Deco" unique_id=1411477599]
 position = Vector2(1183, 648)
 texture = ExtResource("11_oskno")
 
-[node name="23" type="Sprite2D" parent="Deco"]
+[node name="23" type="Sprite2D" parent="Deco" unique_id=1512525632]
 position = Vector2(1224, 61)
 texture = ExtResource("12_nd4jk")
 
-[node name="24" type="Sprite2D" parent="Deco"]
+[node name="24" type="Sprite2D" parent="Deco" unique_id=1341138185]
 position = Vector2(1197, 59)
 texture = ExtResource("11_oskno")
 
-[node name="25" type="Sprite2D" parent="Deco"]
+[node name="25" type="Sprite2D" parent="Deco" unique_id=1574422864]
 position = Vector2(461, 286)
 texture = ExtResource("11_oskno")
 
-[node name="26" type="Sprite2D" parent="Deco"]
+[node name="26" type="Sprite2D" parent="Deco" unique_id=1158464857]
 position = Vector2(477, 298)
 texture = ExtResource("10_xy0dg")
 
-[node name="27" type="Sprite2D" parent="Deco"]
+[node name="27" type="Sprite2D" parent="Deco" unique_id=1301332624]
 position = Vector2(347, 115)
 texture = ExtResource("9_eqbi2")
 
-[node name="28" type="Sprite2D" parent="Deco"]
+[node name="28" type="Sprite2D" parent="Deco" unique_id=1830662828]
 position = Vector2(994, 631)
 texture = ExtResource("11_oskno")
 
-[node name="29" type="Sprite2D" parent="Deco"]
+[node name="29" type="Sprite2D" parent="Deco" unique_id=1331737306]
 position = Vector2(974, 643)
 texture = ExtResource("10_xy0dg")
 
-[node name="30" type="Sprite2D" parent="Deco"]
+[node name="30" type="Sprite2D" parent="Deco" unique_id=413201262]
 position = Vector2(930, 241)
 texture = ExtResource("6_2trbe")
 
-[node name="31" type="Sprite2D" parent="Deco"]
+[node name="31" type="Sprite2D" parent="Deco" unique_id=1783964980]
 position = Vector2(962, 218)
 texture = ExtResource("7_fkk8v")
 
-[node name="GoldMineDestroyed" type="Sprite2D" parent="Deco"]
+[node name="GoldMineDestroyed" type="Sprite2D" parent="Deco" unique_id=328132532]
 position = Vector2(639.5, 385)
 scale = Vector2(0.526042, 0.921875)
 texture = ExtResource("12_qvetm")
 
-[node name="Obstacles" type="Node" parent="."]
+[node name="Obstacles" type="Node" parent="." unique_id=68367298]
 
-[node name="Node2D" parent="Obstacles" instance=ExtResource("4_2tp6q")]
+[node name="Node2D" parent="Obstacles" unique_id=1299519255 instance=ExtResource("4_2tp6q")]
 
 [node name="Rectangle1" parent="Obstacles/Node2D" index="0"]
 visible = false
@@ -731,7 +731,7 @@ offset_right = 1320.0
 position = Vector2(640, 0)
 shape = SubResource("RectangleShape2D_el57v")
 
-[node name="Node2D2" parent="Obstacles" instance=ExtResource("4_2tp6q")]
+[node name="Node2D2" parent="Obstacles" unique_id=2002000852 instance=ExtResource("4_2tp6q")]
 position = Vector2(0, 720)
 
 [node name="Rectangle1" parent="Obstacles/Node2D2" index="0"]
@@ -742,7 +742,7 @@ offset_right = 1320.0
 position = Vector2(640, 0)
 shape = SubResource("RectangleShape2D_el57v")
 
-[node name="Node2D4" parent="Obstacles" instance=ExtResource("4_2tp6q")]
+[node name="Node2D4" parent="Obstacles" unique_id=1906433865 instance=ExtResource("4_2tp6q")]
 
 [node name="Rectangle1" parent="Obstacles/Node2D4" index="0"]
 visible = false
@@ -752,7 +752,7 @@ custom_minimum_size = Vector2(0, 800)
 position = Vector2(0, 360)
 shape = SubResource("RectangleShape2D_sdgab")
 
-[node name="Node2D5" parent="Obstacles" instance=ExtResource("4_2tp6q")]
+[node name="Node2D5" parent="Obstacles" unique_id=766366636 instance=ExtResource("4_2tp6q")]
 position = Vector2(1293, 0)
 
 [node name="Rectangle1" parent="Obstacles/Node2D5" index="0"]
@@ -763,13 +763,13 @@ custom_minimum_size = Vector2(0, 800)
 position = Vector2(0, 360)
 shape = SubResource("RectangleShape2D_sdgab")
 
-[node name="Node2D3" parent="Obstacles" instance=ExtResource("4_2tp6q")]
+[node name="Node2D3" parent="Obstacles" unique_id=1984716946 instance=ExtResource("4_2tp6q")]
 position = Vector2(640, 385)
 
 [node name="Rectangle1" parent="Obstacles/Node2D3" index="0"]
 visible = false
 
-[node name="ScoreboardContainer" type="PanelContainer" parent="."]
+[node name="ScoreboardContainer" type="PanelContainer" parent="." unique_id=283534584]
 top_level = true
 z_index = 100
 anchors_preset = 1
@@ -781,56 +781,57 @@ grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_x6js8")
 script = ExtResource("14_2trbe")
 
-[node name="Scoreboard" type="VBoxContainer" parent="ScoreboardContainer"]
+[node name="Scoreboard" type="VBoxContainer" parent="ScoreboardContainer" unique_id=1918123067]
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 2
 script = ExtResource("5_kwfy1")
 
-[node name="Label" type="Label" parent="ScoreboardContainer/Scoreboard"]
+[node name="Label" type="Label" parent="ScoreboardContainer/Scoreboard" unique_id=40892171]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Scoreboard"
 
-[node name="TimeLeft" type="Label" parent="ScoreboardContainer/Scoreboard"]
+[node name="TimeLeft" type="Label" parent="ScoreboardContainer/Scoreboard" unique_id=929639414]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0:00"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="ScoreboardContainer/Scoreboard"]
+[node name="Button" type="Button" parent="ScoreboardContainer/Scoreboard" unique_id=1205749344]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
-theme_override_styles/hover = SubResource("StyleBoxFlat_8n5pp")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_vo8fx")
 theme_override_styles/normal = ExtResource("6_ixjr5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vo8fx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8n5pp")
 text = "Restart"
 
-[node name="TanksScoreContainer" type="VBoxContainer" parent="ScoreboardContainer/Scoreboard"]
+[node name="TanksScoreContainer" type="VBoxContainer" parent="ScoreboardContainer/Scoreboard" unique_id=1088882699]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TopLeftTank" parent="." instance=ExtResource("2_8uoga")]
+[node name="TopLeftTank" parent="." unique_id=1396699880 instance=ExtResource("2_8uoga")]
 position = Vector2(150, 150)
 rotation = 2.35619
 
-[node name="BottomRightTank" parent="." instance=ExtResource("2_8uoga")]
+[node name="BottomRightTank" parent="." unique_id=269096990 instance=ExtResource("2_8uoga")]
 position = Vector2(1130, 570)
 rotation = -0.785398
 
-[node name="BottomLeftTank" parent="." instance=ExtResource("2_8uoga")]
+[node name="BottomLeftTank" parent="." unique_id=1246975165 instance=ExtResource("2_8uoga")]
 position = Vector2(150, 570)
 rotation = 0.785398
 
-[node name="TopRightTank" parent="." instance=ExtResource("2_8uoga")]
+[node name="TopRightTank" parent="." unique_id=825697291 instance=ExtResource("2_8uoga")]
 position = Vector2(1130, 150)
 rotation = -2.35619
 
-[node name="IntroLayer" type="CanvasLayer" parent="."]
+[node name="IntroLayer" type="CanvasLayer" parent="." unique_id=815539315]
+visible = false
 script = ExtResource("7_8uoga")
 
-[node name="BattlePanel" type="Panel" parent="IntroLayer"]
+[node name="BattlePanel" type="Panel" parent="IntroLayer" unique_id=1336655401]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -839,7 +840,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_1yevk")
 
-[node name="TextureRect5" type="TextureRect" parent="IntroLayer/BattlePanel"]
+[node name="TextureRect5" type="TextureRect" parent="IntroLayer/BattlePanel" unique_id=1627245832]
 self_modulate = Color(1, 1, 1, 0.74)
 layout_mode = 1
 anchors_preset = 15
@@ -850,7 +851,7 @@ grow_vertical = 2
 texture = ExtResource("8_aip7a")
 stretch_mode = 1
 
-[node name="TextureRect" type="ColorRect" parent="IntroLayer/BattlePanel"]
+[node name="TextureRect" type="ColorRect" parent="IntroLayer/BattlePanel" unique_id=1900481465]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -858,14 +859,14 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -457.127
 offset_top = -496.0
-offset_right = 262.873
+offset_right = 262.87305
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.237188
 color = Color(0, 0, 0, 0.5)
 
-[node name="TextureRect2" type="ColorRect" parent="IntroLayer/BattlePanel"]
+[node name="TextureRect2" type="ColorRect" parent="IntroLayer/BattlePanel" unique_id=1441609157]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -880,7 +881,7 @@ grow_vertical = 2
 rotation = -0.0678253
 color = Color(0, 0, 0, 0.5)
 
-[node name="TextureRect3" type="ColorRect" parent="IntroLayer/BattlePanel"]
+[node name="TextureRect3" type="ColorRect" parent="IntroLayer/BattlePanel" unique_id=245862335]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -895,7 +896,7 @@ grow_vertical = 2
 rotation = 0.208645
 color = Color(0.259294, 0.259294, 0.259294, 0.5)
 
-[node name="TextureRect4" type="ColorRect" parent="IntroLayer/BattlePanel"]
+[node name="TextureRect4" type="ColorRect" parent="IntroLayer/BattlePanel" unique_id=1955774562]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -910,7 +911,7 @@ grow_vertical = 2
 rotation = 0.374323
 color = Color(0.288518, 0.288518, 0.288518, 0.5)
 
-[node name="VS Container" type="Control" parent="IntroLayer/BattlePanel"]
+[node name="VS Container" type="Control" parent="IntroLayer/BattlePanel" unique_id=1587184504]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -924,7 +925,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="V" type="Label" parent="IntroLayer/BattlePanel/VS Container"]
+[node name="V" type="Label" parent="IntroLayer/BattlePanel/VS Container" unique_id=2004302760]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -945,7 +946,7 @@ label_settings = SubResource("LabelSettings_kwfy1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="S" type="Label" parent="IntroLayer/BattlePanel/VS Container"]
+[node name="S" type="Label" parent="IntroLayer/BattlePanel/VS Container" unique_id=306541695]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -966,7 +967,7 @@ label_settings = SubResource("LabelSettings_kwfy1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BattleName" type="Label" parent="IntroLayer/BattlePanel"]
+[node name="BattleName" type="Label" parent="IntroLayer/BattlePanel" unique_id=1496758168]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 5
@@ -986,7 +987,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="LogoContainer" type="GridContainer" parent="IntroLayer/BattlePanel"]
+[node name="LogoContainer" type="GridContainer" parent="IntroLayer/BattlePanel" unique_id=903423455]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -997,22 +998,22 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 100
 columns = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="IntroLayer/BattlePanel/LogoContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="IntroLayer/BattlePanel/LogoContainer" unique_id=1804609212]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 150
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer" unique_id=1512877238]
 layout_mode = 2
 alignment = 2
 
-[node name="TLContainer" type="VBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer/HBoxContainer"]
+[node name="TLContainer" type="VBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer/HBoxContainer" unique_id=1985924225]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Logo" type="TextureRect" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer/HBoxContainer/TLContainer"]
+[node name="Logo" type="TextureRect" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer/HBoxContainer/TLContainer" unique_id=1377102125]
 modulate = Color(1.2, 1, 1, 1)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1021,7 +1022,7 @@ texture = SubResource("PlaceholderTexture2D_kwfy1")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer/HBoxContainer/TLContainer"]
+[node name="Label" type="Label" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer/HBoxContainer/TLContainer" unique_id=1337917681]
 modulate = Color(1.5, 1.5, 1.5, 1)
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
@@ -1031,7 +1032,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="IntroLayer/BattlePanel/LogoContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="IntroLayer/BattlePanel/LogoContainer" unique_id=335336558]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1040,14 +1041,14 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer2" unique_id=1271329350]
 layout_mode = 2
 
-[node name="TRContainer" type="VBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer2/HBoxContainer"]
+[node name="TRContainer" type="VBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer2/HBoxContainer" unique_id=1818389733]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Logo" type="TextureRect" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer2/HBoxContainer/TRContainer"]
+[node name="Logo" type="TextureRect" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer2/HBoxContainer/TRContainer" unique_id=547961592]
 modulate = Color(1.2, 1, 1, 1)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1056,7 +1057,7 @@ texture = SubResource("PlaceholderTexture2D_ixjr5")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer2/HBoxContainer/TRContainer"]
+[node name="Label" type="Label" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer2/HBoxContainer/TRContainer" unique_id=669968756]
 modulate = Color(1.5, 1.5, 1.5, 1)
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
@@ -1066,7 +1067,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="IntroLayer/BattlePanel/LogoContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="IntroLayer/BattlePanel/LogoContainer" unique_id=446015221]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1075,15 +1076,15 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 150
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer3" unique_id=929579338]
 layout_mode = 2
 alignment = 2
 
-[node name="BLContainer" type="VBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer3/HBoxContainer"]
+[node name="BLContainer" type="VBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer3/HBoxContainer" unique_id=2484443]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Logo" type="TextureRect" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer3/HBoxContainer/BLContainer"]
+[node name="Logo" type="TextureRect" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer3/HBoxContainer/BLContainer" unique_id=588074922]
 modulate = Color(1.2, 1, 1, 1)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1092,7 +1093,7 @@ texture = SubResource("PlaceholderTexture2D_ixjr5")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer3/HBoxContainer/BLContainer"]
+[node name="Label" type="Label" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer3/HBoxContainer/BLContainer" unique_id=1328783329]
 modulate = Color(1.5, 1.5, 1.5, 1)
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
@@ -1102,7 +1103,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="MarginContainer4" type="MarginContainer" parent="IntroLayer/BattlePanel/LogoContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="IntroLayer/BattlePanel/LogoContainer" unique_id=6731550]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1111,14 +1112,14 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer4" unique_id=915121359]
 layout_mode = 2
 
-[node name="BRContainer" type="VBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer4/HBoxContainer"]
+[node name="BRContainer" type="VBoxContainer" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer4/HBoxContainer" unique_id=826529684]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Logo" type="TextureRect" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer4/HBoxContainer/BRContainer"]
+[node name="Logo" type="TextureRect" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer4/HBoxContainer/BRContainer" unique_id=209521670]
 modulate = Color(1.2, 1, 1, 1)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1127,7 +1128,7 @@ texture = SubResource("PlaceholderTexture2D_ixjr5")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer4/HBoxContainer/BRContainer"]
+[node name="Label" type="Label" parent="IntroLayer/BattlePanel/LogoContainer/MarginContainer4/HBoxContainer/BRContainer" unique_id=1910817135]
 modulate = Color(1.5, 1.5, 1.5, 1)
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
@@ -1137,7 +1138,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="IntroPanel" type="Panel" parent="IntroLayer"]
+[node name="IntroPanel" type="Panel" parent="IntroLayer" unique_id=1668401768]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1145,28 +1146,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2tp6q")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="IntroLayer"]
+[node name="CanvasModulate" type="CanvasModulate" parent="IntroLayer" unique_id=614336908]
 color = Color(0.942823, 0.942823, 0.942823, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="IntroLayer"]
-libraries = {
-&"": SubResource("AnimationLibrary_1yevk")
-}
-autoplay = "intro"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="IntroLayer" unique_id=1762145880]
+libraries/ = SubResource("AnimationLibrary_1yevk")
+autoplay = &"intro"
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="IntroLayer"]
-libraries = {
-&"": SubResource("AnimationLibrary_aip7a")
-}
-autoplay = "BG"
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="IntroLayer" unique_id=585560309]
+libraries/ = SubResource("AnimationLibrary_aip7a")
+autoplay = &"BG"
 
-[node name="IntroPlayer" type="AudioStreamPlayer" parent="IntroLayer"]
+[node name="IntroPlayer" type="AudioStreamPlayer" parent="IntroLayer" unique_id=419185530]
 stream = ExtResource("13_0avxp")
 script = ExtResource("11_x5p3t")
 
-[node name="CountdownLayer" type="CanvasLayer" parent="."]
+[node name="CountdownLayer" type="CanvasLayer" parent="." unique_id=1300721060]
 
-[node name="Container" type="Control" parent="CountdownLayer"]
+[node name="Container" type="Control" parent="CountdownLayer" unique_id=1817529483]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
@@ -1175,7 +1172,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CountdownLayer/Container"]
+[node name="Label" type="Label" parent="CountdownLayer/Container" unique_id=462228276]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1198,18 +1195,16 @@ text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CountdownLayer"]
-libraries = {
-&"": SubResource("AnimationLibrary_x5p3t")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CountdownLayer" unique_id=1190826272]
+libraries/ = SubResource("AnimationLibrary_x5p3t")
 
-[node name="Countdown" type="AudioStreamPlayer" parent="CountdownLayer"]
+[node name="Countdown" type="AudioStreamPlayer" parent="CountdownLayer" unique_id=818257689]
 bus = &"Countdown"
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2020325915]
 environment = SubResource("Environment_kwfy1")
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1154219069]
 unique_name_in_owner = true
 stream = ExtResource("14_x5p3t")
 bus = &"Music"

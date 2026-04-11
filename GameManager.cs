@@ -23,43 +23,46 @@ public partial class GameManager : Node2D
 	//Game state
 	[Export]
 	public bool GAMESTART = false;
+    //Game state
+    [Export]
+    public bool DEBUG = false;
 
-	AudioStreamPlayer musicPlayer;
+    AudioStreamPlayer musicPlayer;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		musicPlayer = GetNode<AudioStreamPlayer>("%MusicPlayer");
+		musicPlayer = GetNodeOrNull<AudioStreamPlayer>("%MusicPlayer");
 
-        _tankTypes = new List<TeamData>();
-        var teamsArray = battleInfo.Get("teams").As<Godot.Collections.Array>();
+		_tankTypes = new List<TeamData>();
+		var teamsArray = battleInfo.Get("teams").As<Godot.Collections.Array>();
 
-        for (int i = 0; i < teamsArray.Count && i < 4; i++)
-        {
-            var teamData = teamsArray[i].As<TeamData>();
-            if (teamData != null)
-            {
-                _tankTypes.Add(teamData);
-            }
-        }
+		for (int i = 0; i < teamsArray.Count && i < 4; i++)
+		{
+			var teamData = teamsArray[i].As<TeamData>();
+			if (teamData != null)
+				_tankTypes.Add(teamData);
+		}
 
-        tlTank = GetNode<TheTank>("TopLeftTank");
+		//getting all the tanks if they exist & depedent on the setup array
+		tlTank = GetNode<TheTank>("TopLeftTank");
 		brTank = GetNode<TheTank>("BottomRightTank");
 		trTank = GetNodeOrNull<TheTank>("TopRightTank");
-		blTank = GetNodeOrNull<TheTank>("BottomLeftTank");
+        blTank = GetNodeOrNull<TheTank>("BottomLeftTank");
 
-		if (teamsArray.Count < 3)
+		//gotta remove display tanks if the array isnt long enough to host them or else we're going to throw errors.
+		if (teamsArray.Count < 4 && trTank != null)
 		{
 			trTank.QueueFree();
 			trTank = null;
 		}
-		if (teamsArray.Count < 4)
+		if (teamsArray.Count < 3 && blTank != null)
 		{
 			blTank.QueueFree();
 			blTank = null;
 		}
 
-		tlTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
+        tlTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
 		brTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[1].tankType)) as ITank;
 		if (trTank != null)
 			trTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[2].tankType)) as ITank;
@@ -72,12 +75,15 @@ public partial class GameManager : Node2D
 			trTank.Init(_tankTypes[2]);
 		if (blTank != null)
 			blTank.Init(_tankTypes[3]);
+
+		//REMOVE THIS FOR FINAL DISPLAY BATTLE
+		StartGame();
 	}
 
-    public override void _Process(double delta)
-    {
-        if (Input.IsActionPressed("Fullscreen"))
-        {
+	public override void _Process(double delta)
+	{
+		if (Input.IsActionPressed("Fullscreen"))
+		{
 			if (DisplayServer.WindowGetMode() != DisplayServer.WindowMode.Fullscreen)
 			{
 				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
@@ -86,26 +92,34 @@ public partial class GameManager : Node2D
 			{
 				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 			}
-        }
-        base._Process(delta);
-    }
+		}
+		if(Input.IsActionJustPressed("toggle_debug"))
+		{
+			DEBUG = !DEBUG;
+			tlTank.QueueRedraw();
+			brTank.QueueRedraw();
+			trTank?.QueueRedraw();
+			blTank?.QueueRedraw();
+		}
+		base._Process(delta);
+	}
 
 	public void StartGame()
 	{
 		GAMESTART = true;
-		musicPlayer.Play();
+		musicPlayer?.Play();
 		GetNode<Scoreboard>("%Scoreboard").StartTimer((double)battleInfo.battleTime);
 	}
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
+	public override void _UnhandledInput(InputEvent @event)
+	{
 		if (@event is InputEventKey eventKey)
 			if (eventKey.Pressed && eventKey.Keycode == Key.Alt) //TODO: maybe use a different key? 
 				Engine.TimeScale = 3f;
-            else
+			else
 				Engine.TimeScale = 1f;
 
 			base._UnhandledInput(@event);
-    }
+	}
 	
 }
