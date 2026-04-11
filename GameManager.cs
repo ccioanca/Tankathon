@@ -41,17 +41,28 @@ public partial class GameManager : Node2D
 		{
 			var teamData = teamsArray[i].As<TeamData>();
 			if (teamData != null)
-			{
 				_tankTypes.Add(teamData);
-			}
 		}
 
+		//getting all the tanks if they exist & depedent on the setup array
 		tlTank = GetNode<TheTank>("TopLeftTank");
 		brTank = GetNode<TheTank>("BottomRightTank");
 		trTank = GetNodeOrNull<TheTank>("TopRightTank");
-		blTank = GetNodeOrNull<TheTank>("BottomLeftTank");
+        blTank = GetNodeOrNull<TheTank>("BottomLeftTank");
 
-		tlTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
+		//gotta remove display tanks if the array isnt long enough to host them or else we're going to throw errors.
+		if (teamsArray.Count < 4 && trTank != null)
+		{
+			trTank.QueueFree();
+			trTank = null;
+		}
+		if (teamsArray.Count < 3 && blTank != null)
+		{
+			blTank.QueueFree();
+			blTank = null;
+		}
+
+        tlTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
 		brTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[1].tankType)) as ITank;
 		if (trTank != null)
 			trTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[2].tankType)) as ITank;
