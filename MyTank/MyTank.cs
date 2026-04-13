@@ -13,6 +13,13 @@ public class MyTank : ITank
 		setup.name = "My Tank";
 		setup.primaryColor = "#000000";
 		setup.secondaryColor = "#ffffff";
+
+		//You have 10 attribute points you can assign to the tank stats
+		//Note: adding more than the allowable 10 points will throw an error. 
+		setup.attributes.moveSpeed = 1;
+		setup.attributes.rotationSpeed = 1;
+		setup.attributes.bulletSpeed = 1;
+		setup.attributes.reloadSpeed = 1;
 	}
 
 	//Logic to do every frame
