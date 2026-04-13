@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tankathon.Scripts;
@@ -127,10 +128,15 @@ public partial class TheTank : CharacterBody2D, IEntity
 		_healthBar.Value = health;
 		thisTank.Setup(_tankSetup);
 
-		GD.Print("Move Speed:" + _tankSetup.attributes.moveSpeed);
-		GD.Print("Rotate Speed:" + _tankSetup.attributes.rotationSpeed);
-		GD.Print("Bullet Speed:" + _tankSetup.attributes.bulletSpeed);
-		GD.Print("Reload Speed:" + _tankSetup.attributes.reloadSpeed);
+		//Validate tank attributes
+		//only tanke the first 10
+		int attrMax = 10;
+
+		if (_tankSetup.attributes.moveSpeed + _tankSetup.attributes.rotationSpeed + _tankSetup.attributes.bulletSpeed + _tankSetup.attributes.reloadSpeed > attrMax)
+		{
+            GetTree().Paused = true;
+            throw new ArgumentOutOfRangeException("Tank attributes (move speed, rotation speed, bullet speed, and reload speed) exceed the cumulative max of "+ attrMax);
+		}
 
         //setup Scoreboard object for this tank
         SetupScoreboard(_tankSetup);
