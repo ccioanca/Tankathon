@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "Tankathon": {
-      "commandName": "Project"
-    },
-    "Debug Godot": {
-      "commandName": "Executable",
-      "executablePath": "YOUR_GODOT_EXE_PATH_HERE",
-      "workingDirectory": "."
-    }
+	"Tankathon": {
+	  "commandName": "Project"
+	},
+	"Debug Godot": {
+	  "commandName": "Executable",
+	  "executablePath": "YOUR_GODOT_EXE_PATH_HERE",
+	  "workingDirectory": "."
+	}
   }
 }
