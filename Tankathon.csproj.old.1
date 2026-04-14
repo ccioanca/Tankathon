@@ -1,0 +1,13 @@
+<Project Sdk="Godot.NET.Sdk/4.4.0">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>Tankathon</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Helpers\**" />
+    <Compile Remove="OLD.godot\**" />
+    <EmbeddedResource Remove="Helpers\**" />
+    <EmbeddedResource Remove="OLD.godot\**" />
+  </ItemGroup>
+</Project>
