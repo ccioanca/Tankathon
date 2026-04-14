@@ -17,10 +17,11 @@ internal partial class Actions : Node2D, IActions
 
     Timer _timer = new Timer();
     bool canShoot = true;
-	float cooldownT = 5f; //cooldown timeLeft
 
-	public int tankSpeed => 200; //~100 orig
-	public int rotateSpeed => 2; //~2 orig
+	public float reloadCooldown = 5f;
+	public float tankSpeed = 200;
+	public float rotateSpeed = 2;
+	public float bulletSpeed = 1;
 
     private bool canRotate = false;
 
@@ -106,9 +107,9 @@ internal partial class Actions : Node2D, IActions
 		if (canShoot)
 		{
 			tank.Shoot();
-			_timer.Start(cooldownT);
+			_timer.Start(reloadCooldown);
 			canShoot = false;
-			return cooldownT;
+			return reloadCooldown;
 
 		}
 		else return (float)_timer.TimeLeft;
