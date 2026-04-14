@@ -11,6 +11,8 @@ public partial class Bullet : Area2D, IEntity
 	
 	private CpuParticles2D particles;
     private PackedScene explosion;
+
+	public float bulletSpeedMultiplier = 1;
 	
 	public override void _Ready()
 	{
@@ -22,7 +24,7 @@ public partial class Bullet : Area2D, IEntity
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		Position += -Transform.Y * 250 * (float)delta;
+		Position += -Transform.Y * 250 * (float)delta * bulletSpeedMultiplier;
 	}
 
 	public void _BodyEntered(Node body)

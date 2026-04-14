@@ -12,6 +12,12 @@ public class DumTank : ITank
         setup.name = "DumTank";
         setup.primaryColor = "#79c7b5";
         setup.secondaryColor = "#3283a8";
+
+        setup.attributes.moveSpeed = 0;
+        setup.attributes.bulletSpeed = 3;
+        setup.attributes.reloadSpeed = 2;
+        setup.attributes.rotationSpeed = 5;
+
     }
 
     //Logic to do every frame

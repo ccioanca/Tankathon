@@ -11,5 +11,14 @@ namespace Tankathon.API
         public string name { set; }
         public string primaryColor { set; }
         public string secondaryColor { set; }
+        public ITankAttributes attributes { get; set; }
+    }
+
+    public interface ITankAttributes
+    {
+        public int moveSpeed { get; set; }
+        public int rotationSpeed { get; set; }
+        public int bulletSpeed { get; set; }
+        public int reloadSpeed { get; set; }
     }
 }

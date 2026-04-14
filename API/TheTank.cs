@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tankathon.Scripts;
@@ -20,7 +21,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 	
 	public ITank thisTank;
 	Actions actions;
-	private IActions _passedActions;
+	private Actions _passedActions;
 	private TankSetup _tankSetup;
 	private Scoreboard _scoreboard;
 	private BoxContainer _tankScoreContainer;
@@ -68,6 +69,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 		_scoreboard = GetNode<Scoreboard>("%Scoreboard");
 		_tankScoreContainer = GetNode<BoxContainer>("%TanksScoreContainer");
 		_tankSetup = new TankSetup();
+		_tankSetup.attributes = new TankAttributes();
 
 		//get the turret object
 		turret = GetNode<Marker2D>("Turret");
@@ -126,8 +128,24 @@ public partial class TheTank : CharacterBody2D, IEntity
 		_healthBar.Value = health;
 		thisTank.Setup(_tankSetup);
 
-		//setup Scoreboard object for this tank
-		SetupScoreboard(_tankSetup);
+		//Validate tank attributes
+		//only tanke the first 10
+		int attrMax = 10;
+
+		if (_tankSetup.attributes.moveSpeed + _tankSetup.attributes.rotationSpeed + _tankSetup.attributes.bulletSpeed + _tankSetup.attributes.reloadSpeed > attrMax)
+		{
+            GetTree().Paused = true;
+            throw new ArgumentOutOfRangeException("Tank attributes (move speed, rotation speed, bullet speed, and reload speed) exceed the cumulative max of "+ attrMax);
+		}
+
+		//set up actions
+		_passedActions.tankSpeed = _passedActions.tankSpeed * _tankSetup.attributes.moveSpeed.Remap(0, 10, 1, 2);
+		_passedActions.rotateSpeed = _passedActions.rotateSpeed * _tankSetup.attributes.rotationSpeed.Remap(0, 10, 1, 2);
+		_passedActions.reloadCooldown = _passedActions.reloadCooldown / _tankSetup.attributes.reloadSpeed.Remap(0, 10, 1, 2);
+		_passedActions.bulletSpeed = _passedActions.bulletSpeed * _tankSetup.attributes.bulletSpeed.Remap(0, 10, 1, 2);
+
+        //setup Scoreboard object for this tank
+        SetupScoreboard(_tankSetup);
 
 		//setup name
 		_tankLabel.Text = _tankSetup.name;
@@ -148,6 +166,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 	internal void Shoot()
 	{
 		Bullet bulletInstance = (Bullet)bullet.Instantiate();
+		bulletInstance.bulletSpeedMultiplier = _passedActions.bulletSpeed;
 		bulletInstance.Position = turret.GlobalPosition;
 		bulletInstance.Rotation = this.Rotation;
 		bulletInstance.initializer = this;
