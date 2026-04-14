@@ -10,4 +10,8 @@
     <EmbeddedResource Remove="Helpers\**" />
     <EmbeddedResource Remove="OLD.godot\**" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="TANKATHON.sln" />
+  </ItemGroup>
 </Project>

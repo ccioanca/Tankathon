@@ -12,10 +12,10 @@ public partial class GameManager : Node2D
 	BattleInfo battleInfo;
 
 
-	TheTank tlTank = null;
-	TheTank trTank = null;
-	TheTank blTank = null;
-	TheTank brTank = null;
+	TheTank tankFirst = null; //tlTank
+    TheTank tankSecond = null; //brTank
+    TheTank tankThird = null; //trTank
+	TheTank tankFourth = null; //blTank
 
 	//list of combatants
 	private List<TeamData> _tankTypes;
@@ -45,36 +45,47 @@ public partial class GameManager : Node2D
 		}
 
 		//getting all the tanks if they exist & depedent on the setup array
-		tlTank = GetNode<TheTank>("TopLeftTank");
-		brTank = GetNode<TheTank>("BottomRightTank");
-		trTank = GetNodeOrNull<TheTank>("TopRightTank");
-        blTank = GetNodeOrNull<TheTank>("BottomLeftTank");
+		tankFirst = GetNode<TheTank>("TopLeftTank");
+		tankSecond = GetNode<TheTank>("BottomRightTank");
+		tankThird = GetNodeOrNull<TheTank>("TopRightTank");
+        tankFourth = GetNodeOrNull<TheTank>("BottomLeftTank");
 
-		//gotta remove display tanks if the array isnt long enough to host them or else we're going to throw errors.
-		if (teamsArray.Count < 4 && trTank != null)
+
+		//==============================================//
+		//===============Tank Setup Start===============//
+
+		tankFirst.thisTank = new EvilTank.DumTank(); //Sets up `MyTank` as the top tank
+		tankSecond.thisTank = new MyTank.MyTank(); //Sets up `DumTank` as the bottom tank
+
+        //===============Tank Setup End===============//
+        //==============================================//
+
+
+        //gotta remove display tanks if the array isnt long enough to host them or else we're going to throw errors.
+        if (teamsArray.Count < 4 && tankThird != null)
 		{
-			trTank.QueueFree();
-			trTank = null;
+			tankThird.QueueFree();
+			tankThird = null;
 		}
-		if (teamsArray.Count < 3 && blTank != null)
+		if (teamsArray.Count < 3 && tankFourth != null)
 		{
-			blTank.QueueFree();
-			blTank = null;
+			tankFourth.QueueFree();
+			tankFourth = null;
 		}
 
-        tlTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
-		brTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[1].tankType)) as ITank;
-		if (trTank != null)
-			trTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[2].tankType)) as ITank;
-		if (blTank != null)
-			blTank.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[3].tankType)) as ITank;
+        if (tankFirst.thisTank == null) tankFirst.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
+        if (tankSecond.thisTank == null) tankSecond.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[1].tankType)) as ITank;
+		if (tankThird != null)
+			tankThird.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[2].tankType)) as ITank;
+		if (tankFourth != null)
+			tankFourth.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[3].tankType)) as ITank;
 
-		tlTank.Init(_tankTypes[0]);
-		brTank.Init(_tankTypes[1]);
-		if (trTank != null)
-			trTank.Init(_tankTypes[2]);
-		if (blTank != null)
-			blTank.Init(_tankTypes[3]);
+		tankFirst.Init(_tankTypes[0]);
+		tankSecond.Init(_tankTypes[1]);
+		if (tankThird != null)
+			tankThird.Init(_tankTypes[2]);
+		if (tankFourth != null)
+			tankFourth.Init(_tankTypes[3]);
 
 		//REMOVE THIS FOR FINAL DISPLAY BATTLE
 		StartGame();
@@ -96,10 +107,10 @@ public partial class GameManager : Node2D
 		if(Input.IsActionJustPressed("toggle_debug"))
 		{
 			DEBUG = !DEBUG;
-			tlTank.QueueRedraw();
-			brTank.QueueRedraw();
-			trTank?.QueueRedraw();
-			blTank?.QueueRedraw();
+			tankFirst.QueueRedraw();
+			tankSecond.QueueRedraw();
+			tankThird?.QueueRedraw();
+			tankFourth?.QueueRedraw();
 		}
 		base._Process(delta);
 	}
