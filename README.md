@@ -198,8 +198,36 @@ tankSecond.thisTank = new MyTank.MyTank();
 
  Happy tanking! 
 
-## Submission
+---
 
+## Code Validation & Security
+
+### Submission Rules
+
+To ensure fair competition, all submitted tank code must not use any of the following forbidden features:
+- **Reflection** - No use of `System.Reflection`, `GetField`, `GetValue`, `SetValue`, etc.
+- **Internal Access** - No accessing `Tankathon.API.Internal` namespace directly
+- **Godot API Abuse** - No direct `using Godot;` or accessing `Engine`, `SceneTree`, etc.
+- **System APIs** - No `System.IO`, `System.Net`, `System.Threading`, etc.
+- **Unsafe Code** - No `unsafe` keyword or pointer manipulation
+- **Async/Await** - No `async`, `await`, or `Task<T>` (the `Do()` method must be synchronous)
+- **Type Casting Exploits** - No casting to `Actions`, `TheTank`, `GameManager`, or other internal types
+
+#### Why These Rules?
+The competition runs all tank code in the same assembly with the game engine. Without validation:
+- Tanks could use reflection to give themselves invincibility or immediate reloads
+- Tanks could access internal game state and manipulate the match
+- Tanks could crash the game or create unfair advantages
+
+#### How Do I Ensure My Code is Valid?
+The project is already set up to run the `MyTank.cs` file through the tank code validator! The results of the validation are automatically printed out in Godot's Output window (where all other print statements show up)!
+
+### What Happens if My Code Violates the Rules?
+
+- **Pre-Tournament:** Your submission will be rejected and you'll need to fix the violations. All submissions undergo manual review before the tournament
+- **Tournament Day:** Only validated, clean and sanitized code will be run in the official matches
+
+---
 > [!WARNING]
 > Submission deadline date is June 5th, 2026 at 11:59PM
 
