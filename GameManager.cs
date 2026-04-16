@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Tankathon.Scripts;
+using Tankathon.Tools;
 
 namespace Tankathon.API.Internal;
 
@@ -59,6 +60,11 @@ public partial class GameManager : Node2D
 
         //===============Tank Setup End===============//
         //==============================================//
+
+        var result = TankCodeValidator.ValidateFile("MyTank/MyTank.cs");
+        GD.Print("======TANK CODE VALIDATION RESULTS======");
+        GD.Print(result);
+        GD.Print("========================================");
 
 
         //gotta remove display tanks if the array isnt long enough to host them or else we're going to throw errors.
