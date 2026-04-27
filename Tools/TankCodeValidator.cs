@@ -9,21 +9,69 @@ namespace Tankathon.Tools;
 
 public static class TankCodeValidator
 {
-    private static readonly string[] ForbiddenNamespaces =
+    #region Blacklist Definitions
+
+    private static readonly string[] BlacklistNamespaces =
     {
         "System.Reflection",
         "System.Runtime.CompilerServices",
         "System.Runtime.InteropServices",
         "Tankathon.API.Internal",
-        "Godot.Engine",
-        "Godot.SceneTree",
         "System.IO",
         "System.Net",
         "System.Threading",
         "System.Threading.Tasks"
     };
 
-    private static readonly string[] ForbiddenTypes =
+    // Godot API calls that can manipulate engine/scene state
+    private static readonly string[] BlacklistGodotApis =
+    {
+        // Engine Access
+        "Engine.GetMainLoop",
+        "Engine.GetSingleton",
+        "Engine.TimeScale",
+
+        // Scene Tree Access
+        "SceneTree.Root",
+        "SceneTree.CurrentScene",
+        "SceneTree.Quit",
+        "SceneTree.Paused",
+
+        // Node Manipulation
+        "GetNode",
+        "GetNodeOrNull",
+        "GetTree",
+        "AddChild",
+        "RemoveChild",
+        "QueueFree",
+        "GetParent",
+        "GetChild",
+        "FindChild",
+
+        // Resource Loading
+        "GD.Load",
+        "ResourceLoader.Load",
+        "ResourceLoader.Exists",
+
+        // System Access
+        "OS.Execute",
+        "OS.Kill",
+        "OS.ShellOpen",
+        "ProjectSettings.Get",
+        "ProjectSettings.Set",
+
+        // Input Access (bypasses API)
+        "Input.IsActionPressed",
+        "Input.IsKeyPressed",
+        "Input.GetMousePosition",
+        "Input.GetVector",
+
+        // File System
+        "FileAccess.Open",
+        "DirAccess.Open"
+    };
+
+    private static readonly string[] BlacklistTypes =
     {
         "BindingFlags",
         "GetField",
@@ -37,22 +85,65 @@ public static class TankCodeValidator
         "Activator"
     };
 
-    private static readonly string[] ForbiddenKeywords =
-    {
-        "unsafe",
-        "async",
-        "await"
-    };
-
-    private static readonly string[] ForbiddenCastPatterns =
+    private static readonly string[] BlacklistCastPatterns =
     {
         "Tankathon.API.Internal",
         "Actions",
         "TheTank",
         "GameManager"
     };
+    #endregion
 
-    public static ValidationResult ValidateFile(string filePath)
+
+
+    /// <summary>
+    /// Validates all C# files in a directory recursively.
+    /// This is the primary entry point for validating tank submissions.
+    /// </summary>
+    /// <param name="directoryPath">Path to the directory containing tank code</param>
+    /// <returns>ValidationResult with aggregated violations from all files</returns>
+    public static ValidationResult ValidateDirectory(string directoryPath)
+    {
+        var result = new ValidationResult(true);
+
+        if (!Directory.Exists(directoryPath))
+        {
+            result.AddViolation($"Directory not found: '{directoryPath}'");
+            return result;
+        }
+
+        // Get all .cs files - recursively + subdirectories
+        var csFiles = Directory.GetFiles(directoryPath, "*.cs", SearchOption.AllDirectories);
+
+        if (csFiles.Length == 0)
+        {
+            //result.AddViolation($"No C# files found in directory: '{directoryPath}'");
+            return result;
+        }
+
+        foreach (var file in csFiles)
+        {
+            var fileName = Path.GetFileName(file);
+            var fileResult = ValidateFile(file);
+
+            // Aggregate violations with file context
+            foreach (var violation in fileResult.Violations)
+            {
+                result.AddViolation($"[{fileName}] {violation}");
+            }
+
+            // Aggregate warnings 
+            foreach (var warning in fileResult.Warnings)
+            {
+                result.AddWarning($"[{fileName}] {warning}");
+            }
+        }
+
+        return result;
+    }
+
+    //privated this method cause I don't think it'll be used by any competitors.
+    private static ValidationResult ValidateFile(string filePath)
     {
         var result = new ValidationResult(true);
 
@@ -90,11 +181,11 @@ public static class TankCodeValidator
             var root = syntaxTree.GetRoot();
 
             ValidateUsingDirectives(root, result);
-            ValidateForbiddenTypes(root, result);
-            ValidateForbiddenKeywords(root, result);
-            ValidateForbiddenCasts(root, result);
+            ValidateBlacklistTypes(root, result);
+            ValidateBlacklistKeywords(root, result);
+            ValidateBlacklistCasts(root, result);
             ValidateTaskUsage(root, result);
-            ValidateGodotUsage(root, result);
+            ValidateGodotApiCalls(root, result);
         }
         catch (Exception ex)
         {
@@ -103,7 +194,11 @@ public static class TankCodeValidator
 
         return result;
     }
+    
 
+
+    #region Blacklist Item Validation
+    
     private static void ValidateUsingDirectives(SyntaxNode root, ValidationResult result)
     {
         var usingDirectives = root.DescendantNodes().OfType<UsingDirectiveSyntax>();
@@ -114,25 +209,19 @@ public static class TankCodeValidator
             if (string.IsNullOrEmpty(namespaceName))
                 continue;
 
-            // Check for forbidden namespaces
-            foreach (var forbidden in ForbiddenNamespaces)
+            // Check for blacklisted namespaces
+            foreach (var blacklisted in BlacklistNamespaces)
             {
-                if (namespaceName.Equals(forbidden, StringComparison.OrdinalIgnoreCase) ||
-                    namespaceName.StartsWith(forbidden + ".", StringComparison.OrdinalIgnoreCase))
+                if (namespaceName.Equals(blacklisted, StringComparison.OrdinalIgnoreCase) ||
+                    namespaceName.StartsWith(blacklisted + ".", StringComparison.OrdinalIgnoreCase))
                 {
                     result.AddViolation($"Forbidden namespace: '{namespaceName}' (Line {usingDirective.GetLocation().GetLineSpan().StartLinePosition.Line + 1})");
                 }
             }
-
-            // Check for direct Godot namespace (not aliased as GD)
-            if (usingDirective.Alias == null && namespaceName.Equals("Godot", StringComparison.OrdinalIgnoreCase))
-            {
-                result.AddViolation($"Direct 'using Godot;' is forbidden. Use 'using GD = Godot.GD;' instead (Line {usingDirective.GetLocation().GetLineSpan().StartLinePosition.Line + 1})");
-            }
         }
     }
 
-    private static void ValidateForbiddenTypes(SyntaxNode root, ValidationResult result)
+    private static void ValidateBlacklistTypes(SyntaxNode root, ValidationResult result)
     {
         var identifiers = root.DescendantNodes().OfType<IdentifierNameSyntax>();
 
@@ -140,25 +229,25 @@ public static class TankCodeValidator
         {
             var identifierText = identifier.Identifier.Text;
 
-            foreach (var forbiddenType in ForbiddenTypes)
+            foreach (var BlacklistType in BlacklistTypes)
             {
-                if (identifierText.Equals(forbiddenType, StringComparison.OrdinalIgnoreCase))
+                if (identifierText.Equals(BlacklistType, StringComparison.OrdinalIgnoreCase))
                 {
                     var lineNumber = identifier.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-                    result.AddViolation($"Forbidden type/method: '{identifierText}' (Line {lineNumber})");
+                    result.AddViolation($"Blacklist type/method: '{identifierText}' (Line {lineNumber})");
                 }
             }
         }
     }
 
-    private static void ValidateForbiddenKeywords(SyntaxNode root, ValidationResult result)
+    private static void ValidateBlacklistKeywords(SyntaxNode root, ValidationResult result)
     {
         // Check for unsafe keyword
         var unsafeStatements = root.DescendantNodes().OfType<UnsafeStatementSyntax>();
         foreach (var unsafeStmt in unsafeStatements)
         {
             var lineNumber = unsafeStmt.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-            result.AddViolation($"Forbidden keyword: 'unsafe' (Line {lineNumber})");
+            result.AddViolation($"Blacklist keyword: 'unsafe' (Line {lineNumber})");
         }
 
         // Check for async keyword
@@ -168,7 +257,7 @@ public static class TankCodeValidator
         foreach (var method in asyncMethods)
         {
             var lineNumber = method.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-            result.AddViolation($"Forbidden keyword: 'async' in method '{method.Identifier.Text}' (Line {lineNumber})");
+            result.AddViolation($"Blacklist keyword: 'async' in method '{method.Identifier.Text}' (Line {lineNumber})");
         }
 
         // Check for await keyword
@@ -176,11 +265,11 @@ public static class TankCodeValidator
         foreach (var awaitExpr in awaitExpressions)
         {
             var lineNumber = awaitExpr.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-            result.AddViolation($"Forbidden keyword: 'await' (Line {lineNumber})");
+            result.AddViolation($"Blacklist keyword: 'await' (Line {lineNumber})");
         }
     }
 
-    private static void ValidateForbiddenCasts(SyntaxNode root, ValidationResult result)
+    private static void ValidateBlacklistCasts(SyntaxNode root, ValidationResult result)
     {
         // Check for "as" casts
         var binaryExpressions = root.DescendantNodes()
@@ -191,12 +280,12 @@ public static class TankCodeValidator
         {
             var castType = cast.Right.ToString();
 
-            foreach (var forbiddenPattern in ForbiddenCastPatterns)
+            foreach (var BlacklistPattern in BlacklistCastPatterns)
             {
-                if (castType.Contains(forbiddenPattern, StringComparison.OrdinalIgnoreCase))
+                if (castType.Contains(BlacklistPattern, StringComparison.OrdinalIgnoreCase))
                 {
                     var lineNumber = cast.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-                    result.AddViolation($"Forbidden cast: 'as {castType}' (Line {lineNumber})");
+                    result.AddViolation($"Blacklist cast: 'as {castType}' (Line {lineNumber})");
                 }
             }
         }
@@ -207,12 +296,12 @@ public static class TankCodeValidator
         {
             var castType = cast.Type.ToString();
 
-            foreach (var forbiddenPattern in ForbiddenCastPatterns)
+            foreach (var BlacklistPattern in BlacklistCastPatterns)
             {
-                if (castType.Contains(forbiddenPattern, StringComparison.OrdinalIgnoreCase))
+                if (castType.Contains(BlacklistPattern, StringComparison.OrdinalIgnoreCase))
                 {
                     var lineNumber = cast.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-                    result.AddViolation($"Forbidden cast: '({castType})' (Line {lineNumber})");
+                    result.AddViolation($"Blacklist cast: '({castType})' (Line {lineNumber})");
                 }
             }
         }
@@ -227,7 +316,7 @@ public static class TankCodeValidator
             if (generic.Identifier.Text.Equals("Task", StringComparison.OrdinalIgnoreCase))
             {
                 var lineNumber = generic.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-                result.AddViolation($"Forbidden type: 'Task<T>' (Line {lineNumber})");
+                result.AddViolation($"Blacklist type: 'Task<T>' (Line {lineNumber})");
             }
         }
 
@@ -238,30 +327,49 @@ public static class TankCodeValidator
             if (identifier.Identifier.Text.Equals("Thread", StringComparison.OrdinalIgnoreCase))
             {
                 var lineNumber = identifier.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-                result.AddViolation($"Forbidden type: 'Thread' (Line {lineNumber})");
+                result.AddViolation($"Blacklist type: 'Thread' (Line {lineNumber})");
             }
         }
     }
 
-    private static void ValidateGodotUsage(SyntaxNode root, ValidationResult result)
+    //The Godot namespace is a bit of a special case since there's things in there that are fine to use - like vectors and mathf - but others that can manipulate the scene or engine states. This is validated here.
+    private static void ValidateGodotApiCalls(SyntaxNode root, ValidationResult result)
     {
-        // Check for Godot API access patterns (Engine, SceneTree, etc.)
         var memberAccess = root.DescendantNodes().OfType<MemberAccessExpressionSyntax>();
+        var invocations = root.DescendantNodes().OfType<InvocationExpressionSyntax>();
 
+        // Check member access expressions
         foreach (var access in memberAccess)
         {
             var fullText = access.ToString();
 
-            // Check for Engine.GetMainLoop() or similar Godot API calls
-            if (fullText.Contains("Engine.GetMainLoop", StringComparison.OrdinalIgnoreCase) ||
-                fullText.Contains("SceneTree.Root", StringComparison.OrdinalIgnoreCase) ||
-                fullText.Contains("GD.Load", StringComparison.OrdinalIgnoreCase))
+            foreach (var dangerousApi in BlacklistGodotApis)
             {
-                var lineNumber = access.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-                result.AddViolation($"Forbidden Godot API access: '{fullText}' (Line {lineNumber})");
+                if (fullText.Contains(dangerousApi, StringComparison.OrdinalIgnoreCase))
+                {
+                    var lineNumber = access.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
+                    result.AddViolation($"Forbidden Godot API call: '{dangerousApi}' detected in '{fullText}' (Line {lineNumber})");
+                }
+            }
+        }
+
+        // Also check method invocations to catch calls like GetNode("path")
+        foreach (var invocation in invocations)
+        {
+            var invocationText = invocation.ToString();
+
+            foreach (var dangerousApi in BlacklistGodotApis)
+            {
+                // Check if the dangerous API is part of the invocation
+                if (invocationText.Contains(dangerousApi, StringComparison.OrdinalIgnoreCase))
+                {
+                    var lineNumber = invocation.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
+                    result.AddViolation($"Forbidden Godot API call: '{dangerousApi}' (Line {lineNumber})");
+                }
             }
         }
     }
 
+    #endregion
 
 }
