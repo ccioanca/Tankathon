@@ -200,34 +200,8 @@ tankSecond.thisTank = new MyTank.MyTank();
 
 ---
 
-## Code Validation & Security
+## Code Submission
 
-### Submission Rules
-
-To ensure fair competition, all submitted tank code must not use any of the following forbidden features:
-- **Reflection** - No use of `System.Reflection`, `GetField`, `GetValue`, `SetValue`, etc.
-- **Internal Access** - No accessing `Tankathon.API.Internal` namespace directly
-- **Godot API Abuse** - No direct `using Godot;` or accessing `Engine`, `SceneTree`, etc.
-- **System APIs** - No `System.IO`, `System.Net`, `System.Threading`, etc.
-- **Unsafe Code** - No `unsafe` keyword or pointer manipulation
-- **Async/Await** - No `async`, `await`, or `Task<T>` (the `Do()` method must be synchronous)
-- **Type Casting Exploits** - No casting to `Actions`, `TheTank`, `GameManager`, or other internal types
-
-#### Why These Rules?
-The competition runs all tank code in the same assembly with the game engine. Without validation:
-- Tanks could use reflection to give themselves invincibility or immediate reloads
-- Tanks could access internal game state and manipulate the match
-- Tanks could crash the game or create unfair advantages
-
-#### How Do I Ensure My Code is Valid?
-The project is already set up to run the `MyTank.cs` file through the tank code validator! The results of the validation are automatically printed out in Godot's Output window (where all other print statements show up)!
-
-### What Happens if My Code Violates the Rules?
-
-- **Pre-Tournament:** Your submission will be rejected and you'll need to fix the violations. All submissions undergo manual review before the tournament
-- **Tournament Day:** Only validated, clean and sanitized code will be run in the official matches
-
----
 > [!WARNING]
 > Submission deadline date is June 5th, 2026 at 11:59PM
 
@@ -246,14 +220,36 @@ Alongside the code for the tank, you will also be asked to submit the following:
 - Your tank’s custom sound effects - include a sound effect (wav/ogg/mp3) of your choice for your tank’s “shoot” sound, and “death” sound (that’s the one you don’t want to hear).
    - Please feel free to be as creative as possible! I will try to make the sound levels be consistent so we don’t explode any eardrums.
 
-## Competition Rules, Considerations, & Conduct
+## Competition Rules, Considerations, & Validation
+
+### Code Validation
+
+In the spirit of the competition, we've outlawed some language and engine specific features.
+
+Things like reflection, internal access, engine access, resource loading, input access, unsafe code, async/await, and type casting have been restricted with a runtime validator.
+
+This validator will run on the `MyTank` directory when running the game. The godot game window will showcase any violations that have been identified along with the file and line number of the violation, so you can easily find and fix any issues.
+
+If you think the validator is wrong, or if you have any questions about whether or not something is allowed, feel free to ask - I'm sure I haven't thought of everything. I can clarify any questions and update the validator as needed. 
+
+
+As General Rule of Thumb: **If it's a calculation or data structure, it's allowed. If it touches the internal game state or engine, it's probably not allowed.**
+
+To ensure we don't encounter weird stuff, I've also disallowed `async`/`await`, the `unsafe` keyword, and type casting. These can create all sorts of weird edge cases.
+
+#### How Do I Ensure My Code is Valid?
+The project is already set up to run the `MyTank` directory through the tank code validator! The results of the validation are automatically printed out in Godot's Output window (where all other print statements show up)!
+
+I'll also run the validator for all submissions, as well as some slight clean up/sanitization to make sure everything is in line for the tournament runs. I will let you know if I see anything strange and will give you a chance to fix it.
+
+#### Other Rules & Considerations
 
 While this is a friendly competition for the most part, there are some rules that need to be obeyed to make this fair and fun for everyone. 
 
 - I will try to test all of the bots ahead of time and give the teams a heads up if a bot seems broken when running on my machine. I will give an extension/allowance past the due date for fixes, if the bot was submitted on time.
 - If a bot breaks the game during the competition, i.e. with an infinite loop and it cannot be fixed, it will be disqualified. 
-- In the spirit of the game, while there may be ways to gain access to the greater Godot functions and features, which in turn will provide your tank greater control of the game state as a whole, we ask that you do not go out of your way to access these features, and use instead only what is provided for you. If you are unsure if you’re using something out of bounds, feel free to ask, and I can clarify that for you. Trying to circumvent the rules in this way may lead to a disqualification. 
-   - Unfortunately it’s quite difficult, if not impossible, to lock down everything as I'd want since both the C# paradigms, as well as Godot’s paradigms would like you to have as much access to the resources around you as possible. In other words, neither C#, nor the Godot game engine are made for the purpose we’re using it for.
+- In the spirit of the game, while there may be ways to gain access to the greater Godot functions and features - even with the newly added code validator - which in turn will provide your tank greater control of the game state as a whole, we ask that you do not go out of your way to access these features, and use instead only what is provided for you. If you are unsure if you’re using something out of bounds, feel free to ask, and I can clarify that for you. Trying to circumvent the rules in this way may lead to a disqualification. 
+   - Unfortunately it’s quite difficult, if not impossible, to lock down everything tightly since both the C# paradigms, as well as Godot’s paradigms would like you to have as much access to the resources around you as possible. In other words, neither C#, nor the Godot game engine are made for the purpose we’re using it for.
 - Third party packages are out of bounds. You shouldn’t need any third party libraries to accomplish a working bot-brain.
    - This also includes third party web requests too! (No you can’t write an interface to connect to an Xbox controller or hook up your bot-brain to an AI!) There’s no guarantee of internet access when the official game runs.
 - If you're doing something and you're not sure if you're breaking the rules, always feel free to ask me! I’ll confirm one way or another.
