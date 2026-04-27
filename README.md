@@ -228,7 +228,9 @@ In the spirit of the competition, we've outlawed some language and engine specif
 
 Things like reflection, internal access, engine access, resource loading, input access, unsafe code, async/await, and type casting have been restricted with a runtime validator.
 
-This validator will run on the `MyTank` directory when running the game. The godot game window will showcase any violations that have been identified along with the file and line number of the violation, so you can easily find and fix any issues.
+This validator will run on the `MyTank` directory when running the game. The godot game window will showcase any violations that have been identified along with the file and line number of the violation, so you can easily find and fix any issues. If all's in order, you'll see the following message in the Godot Output Window:
+<img width="1137" height="243" alt="image" src="https://github.com/user-attachments/assets/351fdef1-c6e4-4ec3-8048-dc9b415e4b9f" />
+
 
 If you think the validator is wrong, or if you have any questions about whether or not something is allowed, feel free to ask - I'm sure I haven't thought of everything. I can clarify any questions and update the validator as needed. 
 
