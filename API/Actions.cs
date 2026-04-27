@@ -5,9 +5,9 @@ using Tankathon.API;
 
 namespace Tankathon.API.Internal;
 
-internal partial class Actions : Node2D, IActions
+internal sealed partial class Actions : Node2D, IActions
 {
-	TheTank tank;
+	private TheTank tank;
 	TankStats _stats;
 
     public ITankStats stats
@@ -18,10 +18,10 @@ internal partial class Actions : Node2D, IActions
     Timer _timer = new Timer();
     bool canShoot = true;
 
-	public float reloadCooldown = 5f;
-	public float tankSpeed = 200;
-	public float rotateSpeed = 2;
-	public float bulletSpeed = 1;
+	internal float reloadCooldown = 5f;
+	internal float tankSpeed = 200;
+	internal float rotateSpeed = 2;
+	internal float bulletSpeed = 1;
 
     private bool canRotate = false;
 

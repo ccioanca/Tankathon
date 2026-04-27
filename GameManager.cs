@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Tankathon.Scripts;
+using Tankathon.Tools;
 
 namespace Tankathon.API.Internal;
 
@@ -57,11 +58,16 @@ public partial class GameManager : Node2D
 		tankFirst.thisTank = new EvilTank.DumTank(); //Sets up `MyTank` as the top tank
 		tankSecond.thisTank = new MyTank.MyTank(); //Sets up `DumTank` as the bottom tank
 
-        //===============Tank Setup End===============//
-        //==============================================//
+		//===============Tank Setup End===============//
+		//==============================================//
 
+		// Runtime validation - scans entire MyTank directory for blacklist items
+		var result = TankCodeValidator.ValidateDirectory("MyTank");
+		GD.Print("======TANK CODE VALIDATION RESULTS======");
+		GD.Print(result);
+		GD.Print("========================================");
 
-        //gotta remove display tanks if the array isnt long enough to host them or else we're going to throw errors.
+		//gotta remove display tanks if the array isnt long enough to host them or else we're going to throw errors.
         if (teamsArray.Count < 4 && tankThird != null)
 		{
 			tankThird.QueueFree();

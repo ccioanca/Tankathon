@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tankathon.Scripts;
+using Tankathon.Tools;
 
 namespace Tankathon.API.Internal;
 
@@ -14,13 +15,12 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	public EntityType eType => EntityType.Tank; 
 
-	public bool col = false;
-	public Vector2 _velocity = Vector2.Zero;
-	public int health = 10;
-	public int points = 0;
+	internal bool col = false;
+	internal Vector2 _velocity = Vector2.Zero;
+	internal int health = 10;
+	internal int points = 0;
 	
 	public ITank thisTank;
-	Actions actions;
 	private Actions _passedActions;
 	private TankSetup _tankSetup;
 	private Scoreboard _scoreboard;
@@ -59,7 +59,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 	private CpuParticles2D treadsL;
 	private CpuParticles2D treadsR;
 
-	public GameManager gm;
+	private GameManager gm;
 
 	public override void _Ready()
 	{

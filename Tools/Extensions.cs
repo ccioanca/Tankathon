@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tankathon.API
+namespace Tankathon.Tools
 {
     internal static class Extensions
     {
