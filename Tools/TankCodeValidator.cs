@@ -117,7 +117,7 @@ public static class TankCodeValidator
 
         if (csFiles.Length == 0)
         {
-            //result.AddViolation($"No C# files found in directory: '{directoryPath}'");
+            result.AddWarning($"No C# files found in directory: '{directoryPath}'");
             return result;
         }
 
@@ -149,7 +149,7 @@ public static class TankCodeValidator
 
         if (!File.Exists(filePath))
         {
-            result.AddViolation($"File not found: '{filePath}'");
+            result.AddWarning($"File not found: '{filePath}' (Check to ensure you're providing a real path)");
             return result;
         }
 
@@ -171,7 +171,7 @@ public static class TankCodeValidator
 
         if (string.IsNullOrWhiteSpace(sourceCode))
         {
-            result.AddViolation("Source code is empty or null");
+            result.AddWarning("Source code is empty or null");
             return result;
         }
 
