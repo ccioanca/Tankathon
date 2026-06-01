@@ -46,7 +46,6 @@ internal sealed partial class Actions : Node2D, IActions
 		//set the timeLeft signal
 		_timer.Timeout += () => canShoot = true;
 
-		GD.Print(tank.TankName);
 		base._Ready();
 	}
 
