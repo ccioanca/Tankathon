@@ -11,6 +11,9 @@ namespace Tankathon.API
 {
 	public partial class Scoreboard : Control, IScoreboard
 	{
+		[Signal]
+		public delegate void BattleFrozenEventHandler();
+
 		public int timeLeft => (int)_timer.TimeLeft;
 
 
@@ -46,6 +49,7 @@ namespace Tankathon.API
 		private void Timeout()
 		{
 			Engine.TimeScale = 0;
+			EmitSignal(SignalName.BattleFrozen);
 		}
 		public void RestartPressed()
 		{
