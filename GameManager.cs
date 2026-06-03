@@ -76,6 +76,8 @@ public partial class GameManager : Node2D
 
 		//gotta remove display tanks if the array isnt long enough to host them or else we're going to throw errors.
         if (teamsArray.Count < 4 && tankThird != null)
+		//REMOVE THIS FOR FINAL DISPLAY BATTLE
+		//StartGame();
 		{
 			tankThird.QueueFree();
 			tankThird = null;
@@ -101,8 +103,28 @@ public partial class GameManager : Node2D
 		if (tankFourth != null)
 			tankFourth.Init(_tankTypes[3]);
 
-		//REMOVE THIS FOR FINAL DISPLAY BATTLE
-		StartGame();
+	private void ResetBattle()
+	{
+		Engine.TimeScale = 1;
+		GAMESTART = false;
+
+		// Free existing tank nodes
+		tankFirst?.QueueFree();
+		tankSecond?.QueueFree();
+		tankThird?.QueueFree();
+		tankFourth?.QueueFree();
+		tankFirst = null;
+		tankSecond = null;
+		tankThird = null;
+		tankFourth = null;
+
+		// Clear scoreboard tank panels
+		var scoreContainer = GetNodeOrNull<BoxContainer>("%TanksScoreContainer");
+		if (scoreContainer != null)
+		{
+			foreach (var child in scoreContainer.GetChildren())
+				child.QueueFree();
+		}
 	}
 
 	public override void _Process(double delta)
