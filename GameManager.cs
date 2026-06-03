@@ -14,21 +14,27 @@ public partial class GameManager : Node2D
 
 
 	TheTank tankFirst = null; //tlTank
-    TheTank tankSecond = null; //brTank
-    TheTank tankThird = null; //trTank
+	TheTank tankSecond = null; //brTank
+	TheTank tankThird = null; //trTank
 	TheTank tankFourth = null; //blTank
 
 	//list of combatants
 	private List<TeamData> _tankTypes;
 
+	[Export]
+	private PackedScene _tankScene;
+
+	// Spawn positions/rotations captured from editor-placed nodes at startup
+	private (string name, Vector2 position, float rotation)[] _tankSpawns;
+
 	//Game state
 	[Export]
 	public bool GAMESTART = false;
-    //Game state
-    [Export]
-    public bool DEBUG = false;
+	//Game state
+	[Export]
+	public bool DEBUG = false;
 
-    AudioStreamPlayer musicPlayer;
+	AudioStreamPlayer musicPlayer;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
