@@ -21,14 +21,15 @@ public partial class GameManager : Node2D
 	//list of combatants
 	private List<TeamData> _tankTypes;
 
-	[Export]
-	private PackedScene _tankScene;
-
 	// Spawn positions/rotations captured from editor-placed nodes at startup
 	private (string name, Vector2 position, float rotation)[] _tankSpawns;
 
-	//Game state
-	[Export]
+    [ExportGroup("Setup")]
+    [Export]
+    private PackedScene _tankScene;
+
+    //Game state
+    [Export]
 	public bool GAMESTART = false;
 	//Game state
 	[Export]

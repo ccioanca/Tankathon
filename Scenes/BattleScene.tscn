@@ -583,6 +583,7 @@ glow_hdr_threshold = 0.9
 [node name="GameScene" type="Node2D" unique_id=564896941]
 script = ExtResource("1_u810s")
 battleInfo = ExtResource("2_2trbe")
+_tankScene = ExtResource("2_8uoga")
 
 [node name="G1" type="TileMapLayer" parent="." unique_id=39200976]
 self_modulate = Color(0.6808, 0.74, 0.72224, 1)
