@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://oaqnkya2frwb"]
 
 [ext_resource type="Script" uid="uid://b4tgpx0u887fo" path="res://GameManager.cs" id="1_u810s"]
-[ext_resource type="Resource" uid="uid://dsh2l1q7exoxi" path="res://BattleAssets/TestBattle/test_battle.tres" id="2_2trbe"]
-[ext_resource type="PackedScene" path="res://Scenes/Tank/BaseTank_Display.tscn" id="2_8uoga"]
+[ext_resource type="Resource" uid="uid://5jr0j7l8csdw" path="res://BattleAssets/Battles/test_battle.tres" id="2_2trbe"]
+[ext_resource type="PackedScene" uid="uid://bqdhwae30soqx" path="res://Scenes/Tank/BaseTank_Display.tscn" id="2_8uoga"]
 [ext_resource type="TileSet" uid="uid://db08e7muwuxi5" path="res://Assets/tileset.tres" id="3_i7srl"]
 [ext_resource type="PackedScene" uid="uid://b8bl3fg1j15cw" path="res://Scenes/Obstacle.tscn" id="4_2tp6q"]
 [ext_resource type="Script" uid="uid://cldikdy7y7gym" path="res://API/Scoreboard.cs" id="5_kwfy1"]
@@ -828,7 +828,6 @@ position = Vector2(1130, 150)
 rotation = -2.35619
 
 [node name="IntroLayer" type="CanvasLayer" parent="." unique_id=815539315]
-visible = false
 script = ExtResource("7_8uoga")
 
 [node name="BattlePanel" type="Panel" parent="IntroLayer" unique_id=1336655401]
