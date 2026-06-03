@@ -82,8 +82,9 @@ public partial class GameManager : Node2D
         if (tankFirst.thisTank == null) tankFirst.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
         if (tankSecond.thisTank == null) tankSecond.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[1].tankType)) as ITank;
 		if (tankThird != null)
+		if (tankThird != null && tankThird.thisTank == null)
 			tankThird.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[2].tankType)) as ITank;
-		if (tankFourth != null)
+		if (tankFourth != null && tankFourth.thisTank == null)
 			tankFourth.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[3].tankType)) as ITank;
 
 		tankFirst.Init(_tankTypes[0]);
