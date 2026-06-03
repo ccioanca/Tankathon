@@ -31,9 +31,12 @@ public partial class GameManager : Node2D
     //Game state
     [Export]
 	public bool GAMESTART = false;
-	//Game state
+	//show debug info on tanks
 	[Export]
 	public bool DEBUG = false;
+	//game style dev vs display
+	[Export]
+	public bool DEVELOPMENT = false;
 
 	AudioStreamPlayer musicPlayer;
 
@@ -42,6 +45,83 @@ public partial class GameManager : Node2D
 	{
 		musicPlayer = GetNodeOrNull<AudioStreamPlayer>("%MusicPlayer");
 
+		// Grab the static scene tank nodes and record their spawn data
+		tankFirst = GetNode<TheTank>("TopLeftTank");
+		tankSecond = GetNode<TheTank>("BottomRightTank");
+		tankThird = GetNodeOrNull<TheTank>("TopRightTank");
+		tankFourth = GetNodeOrNull<TheTank>("BottomLeftTank");
+
+		_tankSpawns =
+		[
+			(tankFirst.Name,  tankFirst.Position,  tankFirst.Rotation),
+			(tankSecond.Name, tankSecond.Position, tankSecond.Rotation),
+			(tankThird?.Name  ?? "TopRightTank",   tankThird?.Position  ?? Vector2.Zero, tankThird?.Rotation  ?? 0f),
+			(tankFourth?.Name ?? "BottomLeftTank",  tankFourth?.Position ?? Vector2.Zero, tankFourth?.Rotation ?? 0f),
+		];
+
+
+		if (DEVELOPMENT)
+		{
+
+			SetupTanks();
+
+			//==============================================//
+			//===============Tank Setup Start===============//
+
+			tankFirst.thisTank = new EvilTank.DumTank(); //Sets up `MyTank` as the top tank
+			tankSecond.thisTank = new MyTank.MyTank(); //Sets up `DumTank` as the bottom tank
+
+			//===============Tank Setup End===============//
+			//==============================================//
+
+			InitTanks();
+
+
+			// Runtime validation - scans entire MyTank directory for blacklist items
+			var result = TankCodeValidator.ValidateDirectory("MyTank");
+			GD.Print("======TANK CODE VALIDATION RESULTS======");
+			GD.Print(result);
+			GD.Print("========================================");
+
+            StartGame();
+        }
+		else
+		{
+			LoadBattle(battleInfo);
+        }
+	}
+
+	/// <summary>
+	/// Will be called by TournamentManager to configure and run a battle
+	/// without reloading the scene.
+	/// </summary>
+	public void LoadBattle(BattleInfo info)
+	{
+		battleInfo = info;
+		ResetBattle();
+		SpawnTanks();
+		SetupTanks();
+		InitTanks();
+	}
+
+	/// <summary>
+	/// Returns the TeamData at the given position index (0-based).
+	/// To be used by TournamentManager for winner assignment.
+	/// </summary>
+	public TeamData GetTeamAtPosition(int index)
+	{
+		if (index < 0 || index >= _tankTypes.Count)
+			return null;
+		return _tankTypes[index];
+	}
+
+	/// <summary>
+	/// Returns the number of teams in the current battle.
+	/// </summary>
+	public int TeamCount => _tankTypes?.Count ?? 0;
+
+	private void SetupTanks()
+	{
 		_tankTypes = new List<TeamData>();
 		var teamsArray = battleInfo.Get("teams").As<Godot.Collections.Array>();
 
@@ -52,45 +132,56 @@ public partial class GameManager : Node2D
 				_tankTypes.Add(teamData);
 		}
 
-		//getting all the tanks if they exist & depedent on the setup array
-		tankFirst = GetNode<TheTank>("TopLeftTank");
-		tankSecond = GetNode<TheTank>("BottomRightTank");
-		tankThird = GetNodeOrNull<TheTank>("TopRightTank");
-        tankFourth = GetNodeOrNull<TheTank>("BottomLeftTank");
-
-
-		//==============================================//
-		//===============Tank Setup Start===============//
-
-		tankFirst.thisTank = new EvilTank.DumTank(); //Sets up `MyTank` as the top tank
-		tankSecond.thisTank = new MyTank.MyTank(); //Sets up `DumTank` as the bottom tank
-
-		//===============Tank Setup End===============//
-		//==============================================//
-
-		// Runtime validation - scans entire MyTank directory for blacklist items
-		var result = TankCodeValidator.ValidateDirectory("MyTank");
-		GD.Print("======TANK CODE VALIDATION RESULTS======");
-		GD.Print(result);
-		GD.Print("========================================");
-
-		//gotta remove display tanks if the array isnt long enough to host them or else we're going to throw errors.
-        if (teamsArray.Count < 4 && tankThird != null)
-		//REMOVE THIS FOR FINAL DISPLAY BATTLE
-		//StartGame();
+		// Remove tanks we don't need
+		if (_tankTypes.Count < 4 && tankThird != null)
 		{
 			tankThird.QueueFree();
 			tankThird = null;
 		}
-		if (teamsArray.Count < 3 && tankFourth != null)
+		if (_tankTypes.Count < 3 && tankFourth != null)
 		{
 			tankFourth.QueueFree();
 			tankFourth = null;
 		}
+        //Technically should never need this unless we accidentally load a battle with only one team, representing a "bye" battle. 
+        if (_tankTypes.Count < 2 && tankSecond != null)
+        {
+            tankSecond.QueueFree();
+            tankSecond = null;
+        }
+    }
 
-        if (tankFirst.thisTank == null) tankFirst.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
-        if (tankSecond.thisTank == null) tankSecond.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[1].tankType)) as ITank;
-		if (tankThird != null)
+	/// <summary>
+	/// Instantiates fresh tank nodes from the PackedScene.
+	/// Used by LoadBattle() after ResetBattle() has freed the previous tanks.
+	/// Positions and rotations match the original scene layout.
+	/// </summary>
+	private void SpawnTanks()
+	{
+		var teamsArray = battleInfo.Get("teams").As<Godot.Collections.Array>();
+		int count = Math.Min(teamsArray.Count, 4);
+
+		tankFirst = SpawnTank(_tankSpawns[0]);
+		tankSecond = SpawnTank(_tankSpawns[1]);
+		tankThird = count > 2 ? SpawnTank(_tankSpawns[2]) : null;
+		tankFourth = count > 3 ? SpawnTank(_tankSpawns[3]) : null;
+	}
+
+	private TheTank SpawnTank((string name, Vector2 position, float rotation) spawn)
+	{
+		var tank = _tankScene.Instantiate<TheTank>();
+		tank.Name = spawn.name;
+		tank.Position = spawn.position;
+		tank.Rotation = spawn.rotation;
+		AddChild(tank);
+		return tank;
+	}
+
+	private void InitTanks()
+	{
+		// Assign tank AI via Activator if not already hardcoded
+		if (tankFirst.thisTank == null) tankFirst.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[0].tankType)) as ITank;
+		if (tankSecond.thisTank == null) tankSecond.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[1].tankType)) as ITank;
 		if (tankThird != null && tankThird.thisTank == null)
 			tankThird.thisTank = Activator.CreateInstance(Type.GetType(_tankTypes[2].tankType)) as ITank;
 		if (tankFourth != null && tankFourth.thisTank == null)
@@ -102,6 +193,7 @@ public partial class GameManager : Node2D
 			tankThird.Init(_tankTypes[2]);
 		if (tankFourth != null)
 			tankFourth.Init(_tankTypes[3]);
+	}
 
 	private void ResetBattle()
 	{
