@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://oaqnkya2frwb"]
+
+[ext_resource type="Script" uid="uid://bca7ph0dioyj2" path="res://Scripts/TournamentManager.cs" id="1_lnjhm"]
+[ext_resource type="Resource" uid="uid://b4jjt70jxuh1s" path="res://BattleAssets/Battles/test/TestTournament.tres" id="2_jbynr"]
+[ext_resource type="PackedScene" uid="uid://domu3muy85ank" path="res://Scenes/BattleScene.tscn" id="3_wl08f"]
+
+[node name="TournamentManager" type="Node2D" unique_id=1940887184]
+script = ExtResource("1_lnjhm")
+bracket = ExtResource("2_jbynr")
+_battleScene = ExtResource("3_wl08f")
+winnerOverlayPath = NodePath("WinnerOverlay")
+winnerLabelPath = NodePath("WinnerOverlay/Label")
+
+[node name="WinnerOverlay" type="CanvasLayer" parent="." unique_id=334826188]
+layer = 999
+visible = false
+
+[node name="Label" type="Label" parent="WinnerOverlay" unique_id=670229938]
+z_index = 999
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
+text = "Winner! "
+horizontal_alignment = 1
+vertical_alignment = 1
