@@ -10,7 +10,7 @@ public partial class GameManager : Node2D
 {
 	[ExportGroup("Battle Info")]
 	[Export]
-	BattleInfo battleInfo;
+	public BattleInfo battleInfo;
 
 
 	TheTank tankFirst = null; //tlTank
@@ -21,15 +21,10 @@ public partial class GameManager : Node2D
 	//list of combatants
 	private List<TeamData> _tankTypes;
 
-	// Spawn positions/rotations captured from editor-placed nodes at startup
-	private (string name, Vector2 position, float rotation)[] _tankSpawns;
+	[ExportGroup("Setup")]
 
-    [ExportGroup("Setup")]
-    [Export]
-    private PackedScene _tankScene;
-
-    //Game state
-    [Export]
+	//Game state
+	[Export]
 	public bool GAMESTART = false;
 	//show debug info on tanks
 	[Export]
@@ -50,17 +45,12 @@ public partial class GameManager : Node2D
 		tankSecond = GetNode<TheTank>("BottomRightTank");
 		tankThird = GetNodeOrNull<TheTank>("TopRightTank");
 		tankFourth = GetNodeOrNull<TheTank>("BottomLeftTank");
+		tankFirst.gm = this;
+		tankSecond.gm = this;
+		tankThird.gm = this;
+		tankFourth.gm = this;
 
-		_tankSpawns =
-		[
-			(tankFirst.Name,  tankFirst.Position,  tankFirst.Rotation),
-			(tankSecond.Name, tankSecond.Position, tankSecond.Rotation),
-			(tankThird?.Name  ?? "TopRightTank",   tankThird?.Position  ?? Vector2.Zero, tankThird?.Rotation  ?? 0f),
-			(tankFourth?.Name ?? "BottomLeftTank",  tankFourth?.Position ?? Vector2.Zero, tankFourth?.Rotation ?? 0f),
-		];
-
-
-		if (DEVELOPMENT)
+        if (DEVELOPMENT)
 		{
 
 			SetupTanks();
@@ -83,36 +73,14 @@ public partial class GameManager : Node2D
 			GD.Print(result);
 			GD.Print("========================================");
 
-            StartGame();
-        }
+			StartGame();
+		}
 		else
 		{
-			LoadBattle(battleInfo);
-        }
-	}
-
-	/// <summary>
-	/// Will be called by TournamentManager to configure and run a battle
-	/// without reloading the scene.
-	/// </summary>
-	public void LoadBattle(BattleInfo info)
-	{
-		battleInfo = info;
-		ResetBattle();
-		SpawnTanks();
-		SetupTanks();
-		InitTanks();
-	}
-
-	/// <summary>
-	/// Returns the TeamData at the given position index (0-based).
-	/// To be used by TournamentManager for winner assignment.
-	/// </summary>
-	public TeamData GetTeamAtPosition(int index)
-	{
-		if (index < 0 || index >= _tankTypes.Count)
-			return null;
-		return _tankTypes[index];
+			// Display/tournament path — battleInfo is set before scene enters tree
+			SetupTanks();
+			InitTanks();
+		}
 	}
 
 	/// <summary>
@@ -151,32 +119,6 @@ public partial class GameManager : Node2D
         }
     }
 
-	/// <summary>
-	/// Instantiates fresh tank nodes from the PackedScene.
-	/// Used by LoadBattle() after ResetBattle() has freed the previous tanks.
-	/// Positions and rotations match the original scene layout.
-	/// </summary>
-	private void SpawnTanks()
-	{
-		var teamsArray = battleInfo.Get("teams").As<Godot.Collections.Array>();
-		int count = Math.Min(teamsArray.Count, 4);
-
-		tankFirst = SpawnTank(_tankSpawns[0]);
-		tankSecond = SpawnTank(_tankSpawns[1]);
-		tankThird = count > 2 ? SpawnTank(_tankSpawns[2]) : null;
-		tankFourth = count > 3 ? SpawnTank(_tankSpawns[3]) : null;
-	}
-
-	private TheTank SpawnTank((string name, Vector2 position, float rotation) spawn)
-	{
-		var tank = _tankScene.Instantiate<TheTank>();
-		tank.Name = spawn.name;
-		tank.Position = spawn.position;
-		tank.Rotation = spawn.rotation;
-		AddChild(tank);
-		return tank;
-	}
-
 	private void InitTanks()
 	{
 		// Assign tank AI via Activator if not already hardcoded
@@ -193,30 +135,6 @@ public partial class GameManager : Node2D
 			tankThird.Init(_tankTypes[2]);
 		if (tankFourth != null)
 			tankFourth.Init(_tankTypes[3]);
-	}
-
-	private void ResetBattle()
-	{
-		Engine.TimeScale = 1;
-		GAMESTART = false;
-
-		// Free existing tank nodes
-		tankFirst?.QueueFree();
-		tankSecond?.QueueFree();
-		tankThird?.QueueFree();
-		tankFourth?.QueueFree();
-		tankFirst = null;
-		tankSecond = null;
-		tankThird = null;
-		tankFourth = null;
-
-		// Clear scoreboard tank panels
-		var scoreContainer = GetNodeOrNull<BoxContainer>("%TanksScoreContainer");
-		if (scoreContainer != null)
-		{
-			foreach (var child in scoreContainer.GetChildren())
-				child.QueueFree();
-		}
 	}
 
 	public override void _Process(double delta)
@@ -250,15 +168,24 @@ public partial class GameManager : Node2D
 		GetNode<Scoreboard>("%Scoreboard").StartTimer((double)battleInfo.battleTime);
 	}
 
+	public void StopGame()
+    {
+        GAMESTART = false;
+        musicPlayer?.Stop();
+    }
+
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event is InputEventKey eventKey)
 			if (eventKey.Pressed && eventKey.Keycode == Key.Alt) //TODO: maybe use a different key? 
-				Engine.TimeScale = 3f;
-			else
-				Engine.TimeScale = 1f;
+				if(Engine.TimeScale > 1f)
+                    Engine.TimeScale = 1f;
+                else
+                    Engine.TimeScale = 5f;
+        //else if(eventKey.)
+        //	Engine.TimeScale = 1f;
 
-			base._UnhandledInput(@event);
+        base._UnhandledInput(@event);
 	}
 	
 }
