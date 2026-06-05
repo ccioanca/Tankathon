@@ -59,7 +59,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 	private CpuParticles2D treadsL;
 	private CpuParticles2D treadsR;
 
-	private GameManager gm;
+	public GameManager gm;
 
 	public override void _Ready()
 	{
@@ -89,7 +89,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 		treadsR = GetNodeOrNull<Node2D>("TreadsR")?.GetChild<CpuParticles2D>(0);
 
 		//get ref to GM
-		gm = GetTree().Root.GetNodeOrNull<GameManager>("GameScene");
+		//gm = GetTree().Root.FindChild("GameScene") as GameManager;
 
         base._Ready();
 	}
