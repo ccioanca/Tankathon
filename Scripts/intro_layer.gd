@@ -9,7 +9,7 @@ var brTeam;
 
 func _ready() -> void:
 	# Get the battle info from the gamemanager to display
-	battleInfo = get_tree().root.get_node("GameScene").battleInfo
+	battleInfo = get_parent().battleInfo
 
 	tlTeam = get_node("%TLContainer")
 	brTeam = get_node("%BRContainer")
