@@ -9,6 +9,6 @@
 [resource]
 script = ExtResource("1_u2aej")
 battleName = "Battle 3"
-battleTime = 180
+battleTime = 60
 teams = Array[Object]([ExtResource("2_47yls"), ExtResource("3_2m2qs"), ExtResource("4_tha31"), ExtResource("5_81jal")])
 metadata/_custom_type_script = "uid://d4nywqktaoidk"
