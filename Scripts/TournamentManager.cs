@@ -66,7 +66,8 @@ public partial class TournamentManager : Node2D
 			_winnerOverlay.Visible = false;
 
 		_phase = Phase.PreBattle;
-		GD.Print("Tournament initialized. Press Enter/Space to start first battle.");
+		//GD.Print("Tournament initialized. Press Enter/Space to start first battle.");
+		StartCurrentBattle();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -156,6 +157,7 @@ public partial class TournamentManager : Node2D
 		// Free previous battle scene if one exists
 		if (_gameManager != null)
 		{
+			_gameManager.StopGame();
 			_gameManager.QueueFree();
 			_gameManager = null;
 			_scoreboard = null;
@@ -323,7 +325,7 @@ public partial class TournamentManager : Node2D
 
 			var battle = new BattleInfo
 			{
-				battleName = $"Round {_state.CurrentRoundIndex + 1} - Battle {nextRound.Matches.Count + 1}",
+				battleName = $"Bracket {_state.CurrentRoundIndex + 1} - Battle {nextRound.Matches.Count + 1}",
 				battleTime = bracket.templateBattle != null
 					? bracket.templateBattle.battleTime
 					: BattleInfo.BattleLength.Standard,

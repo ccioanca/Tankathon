@@ -18,14 +18,16 @@ func _ready() -> void:
 
 
 	tlTeam.get_node("Logo").texture = battleInfo.teams[0].logo
-	brTeam.get_node("Logo").texture = battleInfo.teams[1].logo
+	if battleInfo.teams.size() > 1:
+		brTeam.get_node("Logo").texture = battleInfo.teams[1].logo
 	if battleInfo.teams.size() > 2:
 		trTeam.get_node("Logo").texture = battleInfo.teams[2].logo
 	if battleInfo.teams.size() > 3:
 		blTeam.get_node("Logo").texture = battleInfo.teams[3].logo
 
 	tlTeam.get_node("Label").text = battleInfo.teams[0].teamName
-	brTeam.get_node("Label").text = battleInfo.teams[1].teamName
+	if battleInfo.teams.size() > 1:
+			brTeam.get_node("Label").text = battleInfo.teams[1].teamName
 	if battleInfo.teams.size() > 2:
 		trTeam.get_node("Label").text = battleInfo.teams[2].teamName
 	else:
@@ -35,7 +37,7 @@ func _ready() -> void:
 	else:
 		blTeam.queue_free()
 
-	get_node("%BattleName").text = battleInfo.battleName
+	get_node("%BattleName").text = "Bracket 1 - " + battleInfo.battleName
 
 	pass
 

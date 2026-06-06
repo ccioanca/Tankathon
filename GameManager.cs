@@ -46,9 +46,9 @@ public partial class GameManager : Node2D
 		tankThird = GetNodeOrNull<TheTank>("TopRightTank");
 		tankFourth = GetNodeOrNull<TheTank>("BottomLeftTank");
 		tankFirst.gm = this;
-		tankSecond.gm = this;
-		tankThird.gm = this;
-		tankFourth.gm = this;
+		tankSecond?.gm = this;
+		tankThird?.gm = this;
+		tankFourth?.gm = this;
 
         if (DEVELOPMENT)
 		{
