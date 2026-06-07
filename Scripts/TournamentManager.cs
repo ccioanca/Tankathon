@@ -76,7 +76,7 @@ public partial class TournamentManager : Node2D
 		switch (_phase)
 		{
 			case Phase.PreBattle:
-				if (key.Keycode is Key.Enter or Key.Space)
+				if (key.Keycode is Key.Space)
 					StartCurrentBattle();
 				break;
 
@@ -231,18 +231,19 @@ public partial class TournamentManager : Node2D
 
 	private void HandleTieSecondSelection(Key key)
 	{
-		var secondSelection = ParseWinnerIndex(key);
-		if (!IsValidTeamIndex(secondSelection))
+		var _tieSecondselection = ParseWinnerIndex(key);
+		if (!IsValidTeamIndex(_tieSecondselection))
 			return;
 
-		if (secondSelection == _tieFirstSelection)
+		if (_tieSecondselection == _tieFirstSelection)
 		{
 			GD.Print("Tie mode: second team must be different from first team.");
 			return;
 		}
 
 		var teams = _state.CurrentMatch.BattleInfo.teams;
-		InjectTiebreaker(teams[_tieFirstSelection], teams[secondSelection]);
+		InjectTiebreaker(teams[_tieFirstSelection], teams[_tieSecondselection]);
+		AdvanceToNext();
 		_phase = Phase.PreBattle;
 		GD.Print("Tiebreaker inserted. Press Enter/Space to continue.");
 	}
