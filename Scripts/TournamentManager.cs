@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Tankathon.API;
 using Tankathon.API.Internal;
 using Tankathon.Scripts;
@@ -21,11 +22,14 @@ public partial class TournamentManager : Node2D
 	private NodePath animationPlayerPath;
 	[Export]
 	private NodePath winnerLabelPath;
+    [Export]
+    private NodePath preWinnerLabelPath;
 
-	private GameManager _gameManager;
+    private GameManager _gameManager;
 	private Scoreboard _scoreboard;
 	private AnimationPlayer _animPlayer;
 	private Label _winnerLabel;
+	private Label _preWinnerLabel;
 
 	private TournamentState _state;
 
@@ -34,7 +38,7 @@ public partial class TournamentManager : Node2D
 		PreBattle,
 		BattleRunning,
 		BattleFrozen,
-		ShowingWinner,
+		ShowingResults,
 		TieSelectFirst,
 		TieSelectSecond
 	}
@@ -47,6 +51,7 @@ public partial class TournamentManager : Node2D
 	{
 		_animPlayer = GetNodeOrNull<AnimationPlayer>(animationPlayerPath);
 		_winnerLabel = GetNodeOrNull<Label>(winnerLabelPath);
+		_preWinnerLabel = GetNodeOrNull<Label>(preWinnerLabelPath);
 
 
 		if (_battleScene == null)
@@ -100,7 +105,7 @@ public partial class TournamentManager : Node2D
 				HandleTieSecondSelection(key.Keycode);
 				break;
 
-			case Phase.ShowingWinner:
+			case Phase.ShowingResults:
 				if (key.Keycode is Key.Enter or Key.Space)
 					AdvanceToNext();
 				break;
@@ -208,7 +213,7 @@ public partial class TournamentManager : Node2D
 		currentMatch.Winner = winner;
 
 		GD.Print($"Winner assigned: {winner.teamName}");
-		ShowWinnerScreen(winner.teamName);
+		ShowResultsScreen(winner.teamName);
 	}
 
 	private void BeginTieSelection()
@@ -243,9 +248,8 @@ public partial class TournamentManager : Node2D
 
 		var teams = _state.CurrentMatch.BattleInfo.teams;
 		InjectTiebreaker(teams[_tieFirstSelection], teams[_tieSecondselection]);
-		AdvanceToNext();
-		_phase = Phase.PreBattle;
-		GD.Print("Tiebreaker inserted. Press Enter/Space to continue.");
+        ShowResultsScreen($"{teams[_tieFirstSelection]} and {teams[_tieSecondselection]}", "It's A Tie Between");
+		_phase = Phase.ShowingResults;
 	}
 
 	private bool IsValidTeamIndex(int index)
@@ -264,7 +268,7 @@ public partial class TournamentManager : Node2D
 	{
 		var tiebreaker = new BattleInfo
 		{
-			battleName = $"Tiebreaker - {teamA.teamName} vs {teamB.teamName}",
+			battleName = $"Tiebreaker",
 			battleTime = bracket.tiebreakerTemplate != null
 				? bracket.tiebreakerTemplate.battleTime
 				: BattleInfo.BattleLength.SuddenDeath,
@@ -337,16 +341,19 @@ public partial class TournamentManager : Node2D
 		_state.Rounds[_state.CurrentRoundIndex] = nextRound;
 	}
 
-	private void ShowWinnerScreen(string text)
+	private void ShowResultsScreen(string text, string preText = "And The Winner Is")
 	{
         Engine.TimeScale = 1f;
 
         if (_winnerLabel != null)
 			_winnerLabel.Text = text;
 
-		_animPlayer.Play("show_win_screen");
+        if (_preWinnerLabel != null)
+            _preWinnerLabel.Text = preText;
 
-        _phase = Phase.ShowingWinner;
+        _animPlayer.Play("show_win_screen");
+
+        _phase = Phase.ShowingResults;
 	}
 
 	private void ShowChampion()
@@ -355,7 +362,7 @@ public partial class TournamentManager : Node2D
 		var champion = lastCompletedRound?.Matches.LastOrDefault()?.Winner;
 		var championName = champion?.teamName ?? "Unknown";
 
-		ShowWinnerScreen(championName);
+		ShowResultsScreen(championName, "And The Champion Is");
 		GD.Print($"Tournament complete. Champion: {championName}");
 	}
 }
