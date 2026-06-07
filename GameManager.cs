@@ -139,7 +139,7 @@ public partial class GameManager : Node2D
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionPressed("Fullscreen"))
+		if (Input.IsActionJustPressed("Fullscreen"))
 		{
 			if (DisplayServer.WindowGetMode() != DisplayServer.WindowMode.Fullscreen)
 			{

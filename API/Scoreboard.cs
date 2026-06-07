@@ -48,7 +48,6 @@ namespace Tankathon.API
 
 		private void Timeout()
 		{
-			Engine.TimeScale = 0;
 			EmitSignal(SignalName.BattleFrozen);
 		}
 		public void RestartPressed()

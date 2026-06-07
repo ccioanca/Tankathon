@@ -18,13 +18,13 @@ public partial class TournamentManager : Node2D
 	[Export]
 	private PackedScene _battleScene;
 	[Export]
-	private NodePath winnerOverlayPath;
+	private NodePath animationPlayerPath;
 	[Export]
 	private NodePath winnerLabelPath;
 
 	private GameManager _gameManager;
 	private Scoreboard _scoreboard;
-	private CanvasLayer _winnerOverlay;
+	private AnimationPlayer _animPlayer;
 	private Label _winnerLabel;
 
 	private TournamentState _state;
@@ -45,8 +45,9 @@ public partial class TournamentManager : Node2D
 
 	public override void _Ready()
 	{
-		_winnerOverlay = GetNodeOrNull<CanvasLayer>(winnerOverlayPath);
+		_animPlayer = GetNodeOrNull<AnimationPlayer>(animationPlayerPath);
 		_winnerLabel = GetNodeOrNull<Label>(winnerLabelPath);
+
 
 		if (_battleScene == null)
 		{
@@ -62,11 +63,8 @@ public partial class TournamentManager : Node2D
 
 		_state = BuildBracket(bracket);
 
-		if (_winnerOverlay != null)
-			_winnerOverlay.Visible = false;
-
 		_phase = Phase.PreBattle;
-		//GD.Print("Tournament initialized. Press Enter/Space to start first battle.");
+
 		StartCurrentBattle();
 	}
 
@@ -113,6 +111,8 @@ public partial class TournamentManager : Node2D
 	{
 		if (_phase != Phase.BattleRunning)
 			return;
+
+		_gameManager.StopGame();
 
 		_phase = Phase.BattleFrozen;
 		GD.Print("Battle frozen. Press 1-4 to assign winner, or T for tiebreaker.");
@@ -163,7 +163,6 @@ public partial class TournamentManager : Node2D
 			_scoreboard = null;
 		}
 
-		Engine.TimeScale = 1f;
 
         // Instantiate a fresh battle scene with battleInfo set before entering the tree
         _gameManager = _battleScene.Instantiate<GameManager>();
@@ -209,7 +208,7 @@ public partial class TournamentManager : Node2D
 		currentMatch.Winner = winner;
 
 		GD.Print($"Winner assigned: {winner.teamName}");
-		ShowWinnerScreen($"{winner.teamName} advances!");
+		ShowWinnerScreen(winner.teamName);
 	}
 
 	private void BeginTieSelection()
@@ -279,15 +278,14 @@ public partial class TournamentManager : Node2D
 
 	private void AdvanceToNext()
 	{
-		if (_winnerOverlay != null)
-			_winnerOverlay.Visible = false;
+		_animPlayer.Play("RESET");
 
 		_state.CurrentBattleIndex++;
 
 		if (_state.CurrentBattleIndex < _state.CurrentRound.Matches.Count)
 		{
 			_phase = Phase.PreBattle;
-			GD.Print("Press Enter/Space to start next battle.");
+			StartCurrentBattle();
 			return;
 		}
 
@@ -340,13 +338,14 @@ public partial class TournamentManager : Node2D
 
 	private void ShowWinnerScreen(string text)
 	{
-		if (_winnerLabel != null)
+        Engine.TimeScale = 1f;
+
+        if (_winnerLabel != null)
 			_winnerLabel.Text = text;
 
-		if (_winnerOverlay != null)
-			_winnerOverlay.Visible = true;
+		_animPlayer.Play("show_win_screen");
 
-		_phase = Phase.ShowingWinner;
+        _phase = Phase.ShowingWinner;
 	}
 
 	private void ShowChampion()
@@ -355,7 +354,7 @@ public partial class TournamentManager : Node2D
 		var champion = lastCompletedRound?.Matches.LastOrDefault()?.Winner;
 		var championName = champion?.teamName ?? "Unknown";
 
-		ShowWinnerScreen($"TOURNAMENT CHAMPION: {championName}");
+		ShowWinnerScreen(championName);
 		GD.Print($"Tournament complete. Champion: {championName}");
 	}
 }
