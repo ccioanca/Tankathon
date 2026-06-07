@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TeamData" load_steps=5 format=3 uid="uid://be820bgb457eb"]
+
+[ext_resource type="AudioStream" uid="uid://cf8jerhx5dpuc" path="res://Audio/debug_death.wav" id="1_xsvkk"]
+[ext_resource type="Texture2D" uid="uid://2s17p84n040a" path="res://icon.svg" id="2_5fcrh"]
+[ext_resource type="Script" uid="uid://tppmlshjytpd" path="res://Scripts/TeamData.cs" id="3_5s1xt"]
+[ext_resource type="AudioStream" uid="uid://cnjp78iguj8th" path="res://Audio/debug_pop.wav" id="4_fyoc1"]
+
+[resource]
+script = ExtResource("3_5s1xt")
+shootSound = ExtResource("4_fyoc1")
+deathSound = ExtResource("1_xsvkk")
+logo = ExtResource("2_5fcrh")
+teamName = "Dum Tank TL"
+tankType = "Tankathon.EvilTank.DumTank"
+metadata/_custom_type_script = "uid://tppmlshjytpd"
