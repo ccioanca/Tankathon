@@ -4,15 +4,12 @@
 [ext_resource type="Script" uid="uid://d4nywqktaoidk" path="res://Scripts/BattleInfo.cs" id="2_xcooj"]
 [ext_resource type="Resource" uid="uid://c1p35egbhtciw" path="res://BattleAssets/Battles/test/test_BI_1.tres" id="3_k0asl"]
 [ext_resource type="Resource" uid="uid://cl6rvni1mcsw2" path="res://BattleAssets/Battles/test/test_BI_2.tres" id="4_yhdor"]
-[ext_resource type="Resource" uid="uid://dsqjpxajrrm4e" path="res://BattleAssets/Battles/test/test_BI_3.tres" id="5_sk2p6"]
-[ext_resource type="Resource" uid="uid://bbbfb4o0qnwqe" path="res://BattleAssets/Battles/test/test_BI_4.tres" id="6_h2s0h"]
-[ext_resource type="Resource" uid="uid://dhj67g2lk7qu7" path="res://BattleAssets/Battles/test/test_BI_5.tres" id="7_7jrs7"]
 [ext_resource type="Resource" uid="uid://wfiomi8h1oq8" path="res://BattleAssets/Templates/templateBattleInfo.tres" id="8_qa71g"]
 [ext_resource type="Resource" uid="uid://cmwpxp2gwxr5h" path="res://BattleAssets/Templates/templateTiebreakerBattleInfo.tres" id="9_405by"]
 
 [resource]
 script = ExtResource("1_3rci1")
-seedBattles = Array[ExtResource("2_xcooj")]([ExtResource("3_k0asl"), ExtResource("4_yhdor"), ExtResource("5_sk2p6"), ExtResource("6_h2s0h"), ExtResource("7_7jrs7")])
+seedBattles = Array[ExtResource("2_xcooj")]([ExtResource("3_k0asl"), ExtResource("4_yhdor")])
 templateBattle = ExtResource("8_qa71g")
 tiebreakerTemplate = ExtResource("9_405by")
 metadata/_custom_type_script = "uid://bgbi1ks43r7d2"
