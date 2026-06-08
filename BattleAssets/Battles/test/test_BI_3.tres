@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="BattleInfo" format=3 uid="uid://dsqjpxajrrm4e"]
 
 [ext_resource type="Script" uid="uid://d4nywqktaoidk" path="res://Scripts/BattleInfo.cs" id="1_u2aej"]
-[ext_resource type="Resource" uid="uid://di34icha6e3ep" path="res://BattleAssets/TestTeams/test_team_BL.tres" id="2_47yls"]
-[ext_resource type="Resource" uid="uid://box8ke1m7g4ms" path="res://BattleAssets/TestTeams/test_team_BR.tres" id="3_2m2qs"]
-[ext_resource type="Resource" uid="uid://be820bgb457eb" path="res://BattleAssets/TestTeams/test_team_TL.tres" id="4_tha31"]
-[ext_resource type="Resource" uid="uid://dk16hv1psfh8p" path="res://BattleAssets/TestTeams/test_team_TR.tres" id="5_81jal"]
+[ext_resource type="Resource" uid="uid://cjtnriaejg0w8" path="res://BattleAssets/TestTeams/Battle 3/tt_B3_BL.tres" id="2_u2aej"]
+[ext_resource type="Resource" uid="uid://dicxse8yvornk" path="res://BattleAssets/TestTeams/Battle 3/tt_B3_BR.tres" id="3_47yls"]
+[ext_resource type="Resource" uid="uid://b3tvbinvwbh3x" path="res://BattleAssets/TestTeams/Battle 3/tt_B3_TL.tres" id="4_2m2qs"]
+[ext_resource type="Resource" uid="uid://du1qyhxntha85" path="res://BattleAssets/TestTeams/Battle 3/tt_B3_TR.tres" id="5_tha31"]
 
 [resource]
 script = ExtResource("1_u2aej")
 battleName = "Battle 3"
-battleTime = 60
-teams = Array[Object]([ExtResource("2_47yls"), ExtResource("3_2m2qs"), ExtResource("4_tha31"), ExtResource("5_81jal")])
+battleTime = 10
+teams = Array[Object]([ExtResource("2_u2aej"), ExtResource("3_47yls"), ExtResource("4_2m2qs"), ExtResource("5_tha31")])
 metadata/_custom_type_script = "uid://d4nywqktaoidk"

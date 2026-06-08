@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TeamData" format=3 uid="uid://bgwj6m24u24d6"]
+
+[ext_resource type="AudioStream" uid="uid://cf8jerhx5dpuc" path="res://Audio/debug_death.wav" id="1_wdp83"]
+[ext_resource type="Texture2D" uid="uid://2s17p84n040a" path="res://icon.svg" id="2_u0yuy"]
+[ext_resource type="Script" uid="uid://tppmlshjytpd" path="res://Scripts/TeamData.cs" id="3_fdu04"]
+[ext_resource type="AudioStream" uid="uid://cnjp78iguj8th" path="res://Audio/debug_pop.wav" id="4_x13yn"]
+
+[resource]
+script = ExtResource("3_fdu04")
+shootSound = ExtResource("4_x13yn")
+deathSound = ExtResource("1_wdp83")
+logo = ExtResource("2_u0yuy")
+teamName = "tt B5 BR"
+tankType = "Tankathon.MyTank.MyTank"
+metadata/_custom_type_script = "uid://tppmlshjytpd"
