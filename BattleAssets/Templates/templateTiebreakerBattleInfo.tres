@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_02eww")
-battleName = "Template Battle Info"
-battleTime = 180
-teams = Array[Object]([null, null, null, null])
+battleName = "Template Tie Battle Info"
+battleTime = 5
+teams = Array[Object]([null, null])
 metadata/_custom_type_script = "uid://d4nywqktaoidk"

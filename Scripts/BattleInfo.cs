@@ -13,6 +13,7 @@ public partial class BattleInfo : Resource
     [Export]
     public Godot.Collections.Array<TeamData> teams;
 
+    public bool injected = false;
 
     public BattleInfo()
     {

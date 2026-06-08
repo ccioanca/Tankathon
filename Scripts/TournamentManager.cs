@@ -106,7 +106,7 @@ public partial class TournamentManager : Node2D
 				break;
 
 			case Phase.ShowingResults:
-				if (key.Keycode is Key.Enter or Key.Space)
+				if (key.Keycode is Key.Space)
 					AdvanceToNext();
 				break;
 		}
@@ -248,7 +248,7 @@ public partial class TournamentManager : Node2D
 
 		var teams = _state.CurrentMatch.BattleInfo.teams;
 		InjectTiebreaker(teams[_tieFirstSelection], teams[_tieSecondselection]);
-        ShowResultsScreen($"{teams[_tieFirstSelection]} and {teams[_tieSecondselection]}", "It's A Tie Between");
+        ShowResultsScreen($"{teams[_tieFirstSelection].teamName} and {teams[_tieSecondselection].teamName}", "It's A Tie Between");
 		_phase = Phase.ShowingResults;
 	}
 
@@ -272,6 +272,7 @@ public partial class TournamentManager : Node2D
 			battleTime = bracket.tiebreakerTemplate != null
 				? bracket.tiebreakerTemplate.battleTime
 				: BattleInfo.BattleLength.SuddenDeath,
+			injected = true,
 			teams = new Godot.Collections.Array<TeamData> { teamA, teamB }
 		};
 
@@ -283,6 +284,16 @@ public partial class TournamentManager : Node2D
 
 	private void AdvanceToNext()
 	{
+		//Handle Tiebreaker rules. 
+		if (_state.CurrentMatch.BattleInfo.injected)
+		{
+			//set previous round winner. 
+			_state.CurrentRound.Matches[_state.CurrentBattleIndex - 1].Winner = _state.CurrentMatch.Winner;
+			//remove the tiebreaker
+			_state.CurrentRound.Matches.Remove(_state.CurrentMatch);
+			_state.CurrentBattleIndex--;
+		}
+
 		_animPlayer.Play("RESET");
 
 		_state.CurrentBattleIndex++;
@@ -305,7 +316,7 @@ public partial class TournamentManager : Node2D
 
 		BuildNextRound();
 		_phase = Phase.PreBattle;
-		GD.Print($"Round {_state.CurrentRoundIndex + 1} ready. Press Enter/Space to start.");
+		StartCurrentBattle();
 	}
 
 	private void BuildNextRound()
