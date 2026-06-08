@@ -7,6 +7,9 @@ var trTeam;
 var blTeam;
 var brTeam;
 
+var gamemanager
+var introPlayed = false
+
 func _ready() -> void:
 	# Get the battle info from the gamemanager to display
 	battleInfo = get_parent().battleInfo
@@ -15,6 +18,8 @@ func _ready() -> void:
 	brTeam = get_node("%BRContainer")
 	trTeam = get_node("%TRContainer")
 	blTeam = get_node("%BLContainer")
+
+	gamemanager = get_parent()
 
 
 	tlTeam.get_node("Logo").texture = battleInfo.teams[0].logo
@@ -46,6 +51,7 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_ENTER:
+		if event.pressed and event.keycode == KEY_ENTER and gamemanager.GAMESTART == false and not introPlayed:
 			(get_node("AnimationPlayer") as AnimationPlayer).play("intro_enter")
+			introPlayed = true
 	pass

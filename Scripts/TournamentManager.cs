@@ -19,8 +19,10 @@ public partial class TournamentManager : Node2D
 	[Export]
 	private PackedScene _battleScene;
 	[Export]
-	private NodePath animationPlayerPath;
-	[Export]
+	private NodePath animResultsPlayerPath;
+    [Export]
+    private NodePath animConfettiPath;
+    [Export]
 	private NodePath winnerLabelPath;
     [Export]
     private NodePath preWinnerLabelPath;
@@ -28,7 +30,8 @@ public partial class TournamentManager : Node2D
     private GameManager _gameManager;
 	private Scoreboard _scoreboard;
 	private AnimationPlayer _animPlayer;
-	private Label _winnerLabel;
+	private AnimationPlayer _animConfetti;
+    private Label _winnerLabel;
 	private Label _preWinnerLabel;
 
 	private TournamentState _state;
@@ -49,7 +52,8 @@ public partial class TournamentManager : Node2D
 
 	public override void _Ready()
 	{
-		_animPlayer = GetNodeOrNull<AnimationPlayer>(animationPlayerPath);
+		_animPlayer = GetNodeOrNull<AnimationPlayer>(animResultsPlayerPath);
+		_animConfetti = GetNodeOrNull<AnimationPlayer>(animConfettiPath);
 		_winnerLabel = GetNodeOrNull<Label>(winnerLabelPath);
 		_preWinnerLabel = GetNodeOrNull<Label>(preWinnerLabelPath);
 
@@ -162,7 +166,6 @@ public partial class TournamentManager : Node2D
 		// Free previous battle scene if one exists
 		if (_gameManager != null)
 		{
-			_gameManager.StopGame();
 			_gameManager.QueueFree();
 			_gameManager = null;
 			_scoreboard = null;
@@ -284,6 +287,7 @@ public partial class TournamentManager : Node2D
 
 	private void AdvanceToNext()
 	{
+		Engine.TimeScale = 1;
 		//Handle Tiebreaker rules. 
 		if (_state.CurrentMatch.BattleInfo.injected)
 		{
@@ -363,6 +367,7 @@ public partial class TournamentManager : Node2D
             _preWinnerLabel.Text = preText;
 
         _animPlayer.Play("show_win_screen");
+        //_animConfetti.Play("show_champ_confetti");
 
         _phase = Phase.ShowingResults;
 	}
@@ -374,6 +379,7 @@ public partial class TournamentManager : Node2D
 		var championName = champion?.teamName ?? "Unknown";
 
 		ShowResultsScreen(championName, "And The Champion Is");
-		GD.Print($"Tournament complete. Champion: {championName}");
+        _animConfetti.Play("show_champ_confetti");
+        GD.Print($"Tournament complete. Champion: {championName}");
 	}
 }

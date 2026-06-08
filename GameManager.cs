@@ -171,6 +171,7 @@ public partial class GameManager : Node2D
 	public void StopGame()
     {
         GAMESTART = false;
+		Engine.TimeScale = 0.5;
         musicPlayer?.Stop();
     }
 
@@ -182,8 +183,6 @@ public partial class GameManager : Node2D
                     Engine.TimeScale = 1f;
                 else
                     Engine.TimeScale = 5f;
-        //else if(eventKey.)
-        //	Engine.TimeScale = 1f;
 
         base._UnhandledInput(@event);
 	}
