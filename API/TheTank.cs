@@ -59,7 +59,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 	private CpuParticles2D treadsL;
 	private CpuParticles2D treadsR;
 
-	private GameManager gm;
+	public GameManager gm;
 
 	public override void _Ready()
 	{
@@ -89,7 +89,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 		treadsR = GetNodeOrNull<Node2D>("TreadsR")?.GetChild<CpuParticles2D>(0);
 
 		//get ref to GM
-		gm = GetTree().Root.GetNodeOrNull<GameManager>("GameScene");
+		//gm = GetTree().Root.FindChild("GameScene") as GameManager;
 
         base._Ready();
 	}
@@ -108,10 +108,14 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if(!gm.GAMESTART)
-			return;
+        if (gm.GAMESTART == false)
+        {
+            treadsL.Emitting = false;
+            treadsR.Emitting = false;
+            return;
+        }
 
-		thisTank.Do(_passedActions, _scoreboard);
+        thisTank.Do(_passedActions, _scoreboard);
 		var k2d = MoveAndCollide(_velocity);
 		if (k2d != null)
 			col = true;
@@ -273,6 +277,9 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	internal void Hurt()
 	{
+		if (gm.GAMESTART == false)
+			return;
+
 		health--;
 		//_scoreboard.ScoreChanged(team);
 
@@ -290,7 +297,10 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	internal void Score()
 	{
-		points++;
+        if (gm.GAMESTART == false)
+            return;
+
+        points++;
 		scorePanel.Call("change_points", points);
 	}
 }
