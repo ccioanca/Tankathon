@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://crra2028b2168"]
+
+[ext_resource type="Shader" uid="uid://bp52plcab8fj6" path="res://Shaders/Tank.gdshader" id="1_3emb3"]
+
+[resource]
+shader = ExtResource("1_3emb3")
+shader_parameter/_oldcolor1 = Color(0, 1, 0, 1)
+shader_parameter/_oldcolor2 = Color(0, 0, 1, 1)
+shader_parameter/_newcolor1 = Color(1, 1, 1, 1)
+shader_parameter/_newcolor2 = Color(1, 1, 1, 1)

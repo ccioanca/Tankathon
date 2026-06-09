@@ -58,6 +58,6 @@ toggle_debug={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_filter=2
 viewport/hdr_2d=true
 anti_aliasing/quality/msaa_2d=2
