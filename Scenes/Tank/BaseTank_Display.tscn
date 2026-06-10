@@ -77,13 +77,160 @@ modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_smute")
 
-[node name="TreadsL" parent="." index="8" unique_id=173937655 instance=ExtResource("5_bocum")]
+[node name="Fill" type="Sprite2D" parent="TankSprite/Treads/0" index="0" unique_id=370497618]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("2_7hkwp")
+
+[node name="Stroke" type="Sprite2D" parent="TankSprite/Treads/0" index="1" unique_id=694218224]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("3_h8075")
+
+[node name="1" type="Sprite2D" parent="TankSprite/Treads" index="1" unique_id=1264543165]
+visible = false
+
+[node name="Fill" type="Sprite2D" parent="TankSprite/Treads/1" index="0" unique_id=1881232077]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("4_2dx4l")
+
+[node name="Stroke" type="Sprite2D" parent="TankSprite/Treads/1" index="1" unique_id=365811477]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("5_qpvve")
+
+[node name="2" type="Sprite2D" parent="TankSprite/Treads" index="2" unique_id=134956447]
+visible = false
+
+[node name="Fill" type="Sprite2D" parent="TankSprite/Treads/2" index="0" unique_id=1084921892]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("6_hesa0")
+
+[node name="Stroke" type="Sprite2D" parent="TankSprite/Treads/2" index="1" unique_id=1240054498]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("7_fk3s4")
+
+[node name="Thrusters" type="Node2D" parent="TankSprite" index="1" unique_id=1984216905]
+scale = Vector2(2, 2)
+
+[node name="Thruster0" type="Sprite2D" parent="TankSprite/Thrusters" index="0" unique_id=510925180]
+
+[node name="Fill" type="Sprite2D" parent="TankSprite/Thrusters/Thruster0" index="0" unique_id=2041529592]
+material = ExtResource("25_7hkwp")
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("8_bn0ml")
+
+[node name="Stroke" type="Sprite2D" parent="TankSprite/Thrusters/Thruster0" index="1" unique_id=896034519]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("9_e60yn")
+
+[node name="Thruster1" type="Sprite2D" parent="TankSprite/Thrusters" index="1" unique_id=1361769792]
+visible = false
+
+[node name="Fill" type="Sprite2D" parent="TankSprite/Thrusters/Thruster1" index="0" unique_id=1106953487]
+material = ExtResource("25_7hkwp")
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("10_uf3r8")
+
+[node name="Stroke" type="Sprite2D" parent="TankSprite/Thrusters/Thruster1" index="1" unique_id=1552808934]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("11_hex71")
+
+[node name="Thruster2" type="Sprite2D" parent="TankSprite/Thrusters" index="2" unique_id=1239723007]
+visible = false
+
+[node name="Fill" type="Sprite2D" parent="TankSprite/Thrusters/Thruster2" index="0" unique_id=1454442638]
+material = ExtResource("25_7hkwp")
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("12_7k3rj")
+
+[node name="Stroke" type="Sprite2D" parent="TankSprite/Thrusters/Thruster2" index="1" unique_id=658313899]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("13_7h00a")
+
+[node name="Body" type="Node2D" parent="TankSprite" index="2" unique_id=497660454]
+scale = Vector2(2, 2)
+
+[node name="Body" type="Sprite2D" parent="TankSprite/Body" index="0" unique_id=653294843]
+
+[node name="BodyFill" type="Sprite2D" parent="TankSprite/Body/Body" index="0" unique_id=576352056]
+material = ExtResource("25_7hkwp")
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("14_gkvcr")
+
+[node name="BodyStroke" type="Sprite2D" parent="TankSprite/Body/Body" index="1" unique_id=1933836246]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("15_goa64")
+
+[node name="Turrets" type="Node2D" parent="TankSprite" index="3" unique_id=1323439613]
+scale = Vector2(2, 2)
+
+[node name="Turret0" type="Sprite2D" parent="TankSprite/Turrets" index="0" unique_id=573728260]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("16_trutf")
+
+[node name="Turret1" type="Sprite2D" parent="TankSprite/Turrets" index="1" unique_id=672939741]
+visible = false
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("17_7oc72")
+
+[node name="Turret2" type="Sprite2D" parent="TankSprite/Turrets" index="2" unique_id=948682598]
+visible = false
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("18_1pwci")
+
+[node name="Hulls" type="Node2D" parent="TankSprite" index="4" unique_id=1569400301]
+scale = Vector2(2, 2)
+
+[node name="Hull0" type="Sprite2D" parent="TankSprite/Hulls" index="0" unique_id=224821090]
+
+[node name="Fill" type="Sprite2D" parent="TankSprite/Hulls/Hull0" index="0" unique_id=1774447913]
+material = ExtResource("25_7hkwp")
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("19_l6t2y")
+
+[node name="Stroke" type="Sprite2D" parent="TankSprite/Hulls/Hull0" index="1" unique_id=1750814309]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("20_bq5xw")
+
+[node name="Hull1" type="Sprite2D" parent="TankSprite/Hulls" index="1" unique_id=1713352211]
+visible = false
+
+[node name="Fill" type="Sprite2D" parent="TankSprite/Hulls/Hull1" index="0" unique_id=306640606]
+material = ExtResource("25_7hkwp")
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("21_jh7jn")
+
+[node name="Stroke" type="Sprite2D" parent="TankSprite/Hulls/Hull1" index="1" unique_id=1343058343]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("22_hppwk")
+
+[node name="Hull2" type="Sprite2D" parent="TankSprite/Hulls" index="2" unique_id=1286351152]
+visible = false
+
+[node name="Fill" type="Sprite2D" parent="TankSprite/Hulls/Hull2" index="0" unique_id=1274066956]
+material = ExtResource("25_7hkwp")
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("23_37don")
+
+[node name="Stroke" type="Sprite2D" parent="TankSprite/Hulls/Hull2" index="1" unique_id=469852602]
+scale = Vector2(0.163, 0.163)
+texture = ExtResource("24_prm18")
+
+[node name="HealthBar" parent="." index="4" unique_id=1708015097]
+visible = false
+offset_left = 32.0
+offset_top = 35.0
+offset_right = 82.0
+offset_bottom = 45.0
+rotation = -1.5707964
+indeterminate = true
+editor_preview_indeterminate = false
+
+[node name="TreadsL" parent="." index="6" unique_id=173937655 instance=ExtResource("5_bocum")]
 position = Vector2(-23, 46)
 
-[node name="TreadsR" parent="." index="9" unique_id=403223440 instance=ExtResource("5_bocum")]
+[node name="TreadsR" parent="." index="7" unique_id=403223440 instance=ExtResource("5_bocum")]
 position = Vector2(25, 46)
 
-[node name="Tracks" type="Node2D" parent="." index="10" unique_id=1903286162]
+[node name="Tracks" type="Node2D" parent="." index="8" unique_id=1903286162]
 
 [node name="Marker2D" type="Marker2D" parent="Tracks" index="0" unique_id=82899207]
 position = Vector2(-19, 31)
@@ -95,7 +242,7 @@ position = Vector2(21, 31)
 script = ExtResource("6_n80pc")
 segment_scene = ExtResource("7_ek7rw")
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="11" unique_id=1796212915]
+[node name="PointLight2D" type="PointLight2D" parent="." index="9" unique_id=1796212915]
 position = Vector2(18, -2)
 scale = Vector2(0.440209, 0.440209)
 color = Color(1, 0, 0, 1)
