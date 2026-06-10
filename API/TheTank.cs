@@ -13,7 +13,19 @@ public partial class TheTank : CharacterBody2D, IEntity
 	[Export]
 	public string TankName = "TankName";
 
-	public EntityType eType => EntityType.Tank; 
+	[ExportGroup("Tank Visuals")]
+	[Export]
+	public Array<Sprite2D> Treads = null;
+    [Export]
+    public Array<Sprite2D> Thrusters = null;
+    [Export]
+    public Sprite2D BodyFill = null;
+    [Export]
+    public Array<Sprite2D> Turrets = null;
+    [Export]
+    public Array<Sprite2D> Hulls = null;
+
+    public EntityType eType => EntityType.Tank; 
 
 	internal bool col = false;
 	internal Vector2 _velocity = Vector2.Zero;
@@ -59,7 +71,11 @@ public partial class TheTank : CharacterBody2D, IEntity
 	private CpuParticles2D treadsL;
 	private CpuParticles2D treadsR;
 
-	private GameManager gm;
+	public GameManager gm;
+
+	//visuals
+	private const int firstUpgradeVal = 2;
+	private const int secondUpgradeVal = 4;
 
 	public override void _Ready()
 	{
@@ -89,7 +105,7 @@ public partial class TheTank : CharacterBody2D, IEntity
 		treadsR = GetNodeOrNull<Node2D>("TreadsR")?.GetChild<CpuParticles2D>(0);
 
 		//get ref to GM
-		gm = GetTree().Root.GetNodeOrNull<GameManager>("GameScene");
+		//gm = GetTree().Root.FindChild("GameScene") as GameManager;
 
         base._Ready();
 	}
@@ -108,10 +124,14 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if(!gm.GAMESTART)
-			return;
+        if (gm.GAMESTART == false)
+        {
+            treadsL.Emitting = false;
+            treadsR.Emitting = false;
+            return;
+        }
 
-		thisTank.Do(_passedActions, _scoreboard);
+        thisTank.Do(_passedActions, _scoreboard);
 		var k2d = MoveAndCollide(_velocity);
 		if (k2d != null)
 			col = true;
@@ -156,11 +176,93 @@ public partial class TheTank : CharacterBody2D, IEntity
 		shootPlayer.Stream = shootSound;
 		deathPlayer.Stream = deathSound;
 
-		//setup team colors
-		//Need to duplicate the material or else sometimes it is treated as shared
-		GetNode<Sprite2D>("TankSprite").Material = ((ShaderMaterial)GetNode<Sprite2D>("TankSprite").Material).Duplicate() as ShaderMaterial;
-		((ShaderMaterial)GetNode<Sprite2D>("TankSprite").Material).SetShaderParameter("_newcolor1", Color.FromHtml(_tankSetup.primaryColor));
-		((ShaderMaterial)GetNode<Sprite2D>("TankSprite").Material).SetShaderParameter("_newcolor2", Color.FromHtml(_tankSetup.secondaryColor));	
+		//set up tank display sprites
+		//hide all treads, then re-enable the right sprites
+		if (Treads?.Count > 2)
+		{
+			Treads.All(e => e.Visible = false);
+			if (_tankSetup.attributes.rotationSpeed >= secondUpgradeVal)
+				Treads[2].Visible = true;
+			else if (_tankSetup.attributes.rotationSpeed >= firstUpgradeVal)
+				Treads[1].Visible = true;
+			else
+				Treads[0].Visible = true;
+		}
+		//hide all thrusters, then re-enable the right sprites
+		if (Thrusters?.Count > 2)
+		{
+			Thrusters.All(e => e.Visible = false);
+			if (_tankSetup.attributes.moveSpeed >= secondUpgradeVal)
+			{
+				Thrusters[2].Visible = true;
+				LocalizeAndSetTeamColors(Thrusters[2].GetNode<Sprite2D>("Fill"));
+			}
+			else if (_tankSetup.attributes.moveSpeed >= firstUpgradeVal)
+			{
+				Thrusters[1].Visible = true;
+                LocalizeAndSetTeamColors(Thrusters[1].GetNode<Sprite2D>("Fill"));
+            }
+            else
+			{
+				Thrusters[0].Visible = true;
+                LocalizeAndSetTeamColors(Thrusters[0].GetNode<Sprite2D>("Fill"));
+            }
+
+        }
+
+		//body doesn't need any logic, there's just the one BodyFill.
+		if(BodyFill?.Texture != null)
+            LocalizeAndSetTeamColors(BodyFill);
+
+        //hide all turrets, then re-enable the right sprites
+        if (Turrets?.Count > 2)
+		{
+			Turrets.All(e => e.Visible = false);
+			if (_tankSetup.attributes.bulletSpeed >= secondUpgradeVal)
+				Turrets[2].Visible = true;
+			else if (_tankSetup.attributes.bulletSpeed >= firstUpgradeVal)
+				Turrets[1].Visible = true;
+			else
+				Turrets[0].Visible = true;
+		}
+
+		//hide all hulls, then re-enable the right sprites
+		if (Hulls?.Count > 2)
+		{
+			Hulls.All(e => e.Visible = false);
+			if (_tankSetup.attributes.reloadSpeed >= secondUpgradeVal)
+			{
+                LocalizeAndSetTeamColors(Hulls[2].GetNode<Sprite2D>("Fill"));
+                Hulls[2].Visible = true;
+            }
+            else if (_tankSetup.attributes.reloadSpeed >= firstUpgradeVal)
+			{
+                LocalizeAndSetTeamColors(Hulls[1].GetNode<Sprite2D>("Fill"));
+				Hulls[1].Visible = true;
+            }
+			else
+			{
+                LocalizeAndSetTeamColors(Hulls[0].GetNode<Sprite2D>("Fill"));
+                Hulls[0].Visible = true;
+			}
+		}
+
+        //This is for our devs mostly.
+        var baseTankSprite = GetNode<Sprite2D>("TankSprite");
+		if (baseTankSprite.Texture != null) {
+			LocalizeAndSetTeamColors(baseTankSprite);
+        }
+	}
+
+	internal void LocalizeAndSetTeamColors(Sprite2D sprite)
+	{
+		if (sprite.Material != null)
+		{
+            //Need to duplicate the material or else sometimes it is treated as shared
+            sprite.Material = (ShaderMaterial)sprite.Material.Duplicate();
+			((ShaderMaterial)sprite.Material).SetShaderParameter("_newcolor1", Color.FromHtml(_tankSetup.primaryColor));
+            ((ShaderMaterial)sprite.Material).SetShaderParameter("_newcolor2", Color.FromHtml(_tankSetup.secondaryColor));
+        }
 	}
 
 	internal void Shoot()
@@ -273,6 +375,9 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	internal void Hurt()
 	{
+		if (gm.GAMESTART == false)
+			return;
+
 		health--;
 		//_scoreboard.ScoreChanged(team);
 
@@ -290,7 +395,10 @@ public partial class TheTank : CharacterBody2D, IEntity
 
 	internal void Score()
 	{
-		points++;
+        if (gm.GAMESTART == false)
+            return;
+
+        points++;
 		scorePanel.Call("change_points", points);
 	}
 }
