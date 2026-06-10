@@ -1,20 +1,33 @@
 [gd_scene format=3 uid="uid://bqdhwae30soqx"]
 
 [ext_resource type="PackedScene" uid="uid://csdeqbowgvt6y" path="res://Scenes/Tank/BaseTank.tscn" id="1_5j20a"]
-[ext_resource type="Texture2D" uid="uid://puf5hciiojkm" path="res://Assets/Tank/Tank.png" id="2_lb668"]
-[ext_resource type="Shader" uid="uid://bp52plcab8fj6" path="res://Shaders/Tank.gdshader" id="2_ur8nl"]
-[ext_resource type="Texture2D" uid="uid://dtf43g861n37g" path="res://Assets/Tank/Tank_shadow.png" id="3_ur8nl"]
-[ext_resource type="Texture2D" uid="uid://dphovgb51yvbd" path="res://Assets/Tank/Tank_highlights.png" id="4_smute"]
+[ext_resource type="Texture2D" uid="uid://dq0cgma2ip82h" path="res://Assets/Tank/New Tank/Treads/Treads_0_Fill.png" id="2_7hkwp"]
+[ext_resource type="Texture2D" uid="uid://b6kv7kk1bgwld" path="res://Assets/Tank/New Tank/Treads/Treads_0_Stroke.png" id="3_h8075"]
+[ext_resource type="Texture2D" uid="uid://c2xikmhc57wvy" path="res://Assets/Tank/New Tank/Treads/Treads_1_Fill.png" id="4_2dx4l"]
 [ext_resource type="PackedScene" uid="uid://ct3r80a6a4li0" path="res://Scenes/Tank/TreadParticles.tscn" id="5_bocum"]
+[ext_resource type="Texture2D" uid="uid://chc4rmxby23ay" path="res://Assets/Tank/New Tank/Treads/Treads_1_Stroke.png" id="5_qpvve"]
+[ext_resource type="Texture2D" uid="uid://l1vuuh3yy44y" path="res://Assets/Tank/New Tank/Treads/Treads_2_Fill.png" id="6_hesa0"]
 [ext_resource type="Script" uid="uid://b1wp33hu88o1q" path="res://Scripts/tread_footprint.gd" id="6_n80pc"]
 [ext_resource type="PackedScene" uid="uid://b3i72ol6h2unu" path="res://Scenes/Tank/TreadFootprint.tscn" id="7_ek7rw"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_smute"]
-shader = ExtResource("2_ur8nl")
-shader_parameter/_oldcolor1 = Color(0, 1, 0, 1)
-shader_parameter/_oldcolor2 = Color(0, 0, 1, 1)
-shader_parameter/_newcolor1 = Color(1, 1, 1, 1)
-shader_parameter/_newcolor2 = Color(1, 1, 1, 1)
+[ext_resource type="Texture2D" uid="uid://b7cpjl83fqlfx" path="res://Assets/Tank/New Tank/Treads/Treads_2_Stroke.png" id="7_fk3s4"]
+[ext_resource type="Texture2D" uid="uid://b4xi4byi73g3s" path="res://Assets/Tank/New Tank/Thrusters/Thrusters_0_Fill.png" id="8_bn0ml"]
+[ext_resource type="Texture2D" uid="uid://dgddbqpxd4q66" path="res://Assets/Tank/New Tank/Thrusters/Thrusters_0_Stroke.png" id="9_e60yn"]
+[ext_resource type="Texture2D" uid="uid://br61kqovy4dc5" path="res://Assets/Tank/New Tank/Thrusters/Thrusters_1_Fill.png" id="10_uf3r8"]
+[ext_resource type="Texture2D" uid="uid://rfvqkshwqrjq" path="res://Assets/Tank/New Tank/Thrusters/Thrusters_1_Stroke.png" id="11_hex71"]
+[ext_resource type="Texture2D" uid="uid://xdca6t7peune" path="res://Assets/Tank/New Tank/Thrusters/Thrusters_2_Fill.png" id="12_7k3rj"]
+[ext_resource type="Texture2D" uid="uid://5016pafafg7a" path="res://Assets/Tank/New Tank/Thrusters/Thrusters_2_Stroke.png" id="13_7h00a"]
+[ext_resource type="Texture2D" uid="uid://tmc56htj54y" path="res://Assets/Tank/New Tank/Body/Body_Fill.png" id="14_gkvcr"]
+[ext_resource type="Texture2D" uid="uid://2y3k4k4dnflv" path="res://Assets/Tank/New Tank/Body/Body_Stroke.png" id="15_goa64"]
+[ext_resource type="Texture2D" uid="uid://drpouo2npevg6" path="res://Assets/Tank/New Tank/Turret/Turret_0.png" id="16_trutf"]
+[ext_resource type="Texture2D" uid="uid://bu164hq3cm81d" path="res://Assets/Tank/New Tank/Turret/Turret_1.png" id="17_7oc72"]
+[ext_resource type="Texture2D" uid="uid://bm4awuvkj21i5" path="res://Assets/Tank/New Tank/Turret/Turret_2.png" id="18_1pwci"]
+[ext_resource type="Texture2D" uid="uid://bv20j8kfh0mhd" path="res://Assets/Tank/New Tank/Hull/Hull_0_Fill.png" id="19_l6t2y"]
+[ext_resource type="Texture2D" uid="uid://mgpr1bf8q7dx" path="res://Assets/Tank/New Tank/Hull/Hull_0_Stroke.png" id="20_bq5xw"]
+[ext_resource type="Texture2D" uid="uid://ch8gd35m7jgtv" path="res://Assets/Tank/New Tank/Hull/Hull_1_Fill.png" id="21_jh7jn"]
+[ext_resource type="Texture2D" uid="uid://cdmxo27721wwh" path="res://Assets/Tank/New Tank/Hull/Hull_1_Stroke.png" id="22_hppwk"]
+[ext_resource type="Texture2D" uid="uid://c56h4v4id71pu" path="res://Assets/Tank/New Tank/Hull/Hull_2_Fill.png" id="23_37don"]
+[ext_resource type="Texture2D" uid="uid://pa6u4jix4rx7" path="res://Assets/Tank/New Tank/Hull/Hull_2_Stroke.png" id="24_prm18"]
+[ext_resource type="Material" uid="uid://crra2028b2168" path="res://Assets/Tank/tank_color_shader_material.tres" id="25_7hkwp"]
 
 [sub_resource type="Gradient" id="Gradient_44y1t"]
 offsets = PackedFloat32Array(0, 0.538462)
@@ -61,21 +74,20 @@ _data = {
 &"light": SubResource("Animation_1cwpn")
 }
 
-[node name="BaseTank" unique_id=659871116 instance=ExtResource("1_5j20a")]
+[node name="BaseTank" unique_id=659871116 node_paths=PackedStringArray("Treads", "Thrusters", "BodyFill", "Turrets", "Hulls") instance=ExtResource("1_5j20a")]
+Treads = [NodePath("TankSprite/Treads/0"), NodePath("TankSprite/Treads/1"), NodePath("TankSprite/Treads/2")]
+Thrusters = [NodePath("TankSprite/Thrusters/Thruster0"), NodePath("TankSprite/Thrusters/Thruster1"), NodePath("TankSprite/Thrusters/Thruster2")]
+BodyFill = NodePath("TankSprite/Body/Body/BodyFill")
+Turrets = [NodePath("TankSprite/Turrets/Turret0"), NodePath("TankSprite/Turrets/Turret1"), NodePath("TankSprite/Turrets/Turret2")]
+Hulls = [NodePath("TankSprite/Hulls/Hull0"), NodePath("TankSprite/Hulls/Hull1"), NodePath("TankSprite/Hulls/Hull2")]
 
 [node name="TankSprite" parent="." index="0" unique_id=1720148775]
-material = SubResource("ShaderMaterial_smute")
-texture = ExtResource("2_lb668")
+texture = null
 
-[node name="TankShadow" type="Sprite2D" parent="." index="1" unique_id=1101269023]
-modulate = Color(1, 1, 1, 0.666667)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_ur8nl")
+[node name="Treads" type="Node2D" parent="TankSprite" index="0" unique_id=860309981]
+scale = Vector2(2, 2)
 
-[node name="TankHighlights" type="Sprite2D" parent="." index="2" unique_id=918214886]
-modulate = Color(1, 1, 1, 0.392157)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_smute")
+[node name="0" type="Sprite2D" parent="TankSprite/Treads" index="0" unique_id=971040390]
 
 [node name="Fill" type="Sprite2D" parent="TankSprite/Treads/0" index="0" unique_id=370497618]
 scale = Vector2(0.163, 0.163)
@@ -214,42 +226,53 @@ texture = ExtResource("23_37don")
 scale = Vector2(0.163, 0.163)
 texture = ExtResource("24_prm18")
 
+[node name="Actions" parent="." index="1" unique_id=1215133736]
+visible = false
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=621507364]
+visible = false
+
+[node name="Turret" parent="." index="3" unique_id=915425740]
+visible = false
+
 [node name="HealthBar" parent="." index="4" unique_id=1708015097]
 visible = false
-offset_left = 32.0
-offset_top = 35.0
-offset_right = 82.0
-offset_bottom = 45.0
-rotation = -1.5707964
-indeterminate = true
-editor_preview_indeterminate = false
+
+[node name="NameLabel" parent="." index="5" unique_id=1237416405]
+visible = false
 
 [node name="TreadsL" parent="." index="6" unique_id=173937655 instance=ExtResource("5_bocum")]
+visible = false
 position = Vector2(-23, 46)
 
 [node name="TreadsR" parent="." index="7" unique_id=403223440 instance=ExtResource("5_bocum")]
+visible = false
 position = Vector2(25, 46)
 
 [node name="Tracks" type="Node2D" parent="." index="8" unique_id=1903286162]
+visible = false
 
 [node name="Marker2D" type="Marker2D" parent="Tracks" index="0" unique_id=82899207]
+visible = false
 position = Vector2(-19, 31)
 script = ExtResource("6_n80pc")
 segment_scene = ExtResource("7_ek7rw")
 
 [node name="Marker2D2" type="Marker2D" parent="Tracks" index="1" unique_id=507057021]
+visible = false
 position = Vector2(21, 31)
 script = ExtResource("6_n80pc")
 segment_scene = ExtResource("7_ek7rw")
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="9" unique_id=1796212915]
+visible = false
 position = Vector2(18, -2)
 scale = Vector2(0.440209, 0.440209)
 color = Color(1, 0, 0, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_raglw")
 
-[node name="ColorRect" type="ColorRect" parent="." index="12" unique_id=73185029]
+[node name="ColorRect" type="ColorRect" parent="." index="10" unique_id=73185029]
 visible = false
 offset_left = -19.0
 offset_top = -37.0
@@ -258,6 +281,6 @@ offset_bottom = 3.0
 scale = Vector2(1.90511, 1.81692)
 color = Color(0.742015, 0.375452, 0.227324, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="13" unique_id=1639315609]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11" unique_id=1639315609]
 libraries/ = SubResource("AnimationLibrary_tccap")
 autoplay = &"light"

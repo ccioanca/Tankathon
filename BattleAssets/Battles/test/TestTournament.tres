@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TournamentBracket" format=3 uid="uid://b4jjt70jxuh1s"]
+
+[ext_resource type="Script" uid="uid://bgbi1ks43r7d2" path="res://Scripts/TournamentBracket.cs" id="1_3rci1"]
+[ext_resource type="Script" uid="uid://d4nywqktaoidk" path="res://Scripts/BattleInfo.cs" id="2_xcooj"]
+[ext_resource type="Resource" uid="uid://c1p35egbhtciw" path="res://BattleAssets/Battles/test/test_BI_1.tres" id="3_k0asl"]
+[ext_resource type="Resource" uid="uid://cl6rvni1mcsw2" path="res://BattleAssets/Battles/test/test_BI_2.tres" id="4_yhdor"]
+[ext_resource type="Resource" uid="uid://wfiomi8h1oq8" path="res://BattleAssets/Templates/templateBattleInfo.tres" id="8_qa71g"]
+[ext_resource type="Resource" uid="uid://cmwpxp2gwxr5h" path="res://BattleAssets/Templates/templateTiebreakerBattleInfo.tres" id="9_405by"]
+
+[resource]
+script = ExtResource("1_3rci1")
+seedBattles = Array[ExtResource("2_xcooj")]([ExtResource("3_k0asl"), ExtResource("4_yhdor")])
+templateBattle = ExtResource("8_qa71g")
+tiebreakerTemplate = ExtResource("9_405by")
+metadata/_custom_type_script = "uid://bgbi1ks43r7d2"

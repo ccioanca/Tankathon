@@ -1,0 +1,405 @@
+[gd_scene format=3 uid="uid://oaqnkya2frwb"]
+
+[ext_resource type="Script" uid="uid://bca7ph0dioyj2" path="res://Scripts/TournamentManager.cs" id="1_lnjhm"]
+[ext_resource type="Resource" uid="uid://b4jjt70jxuh1s" path="res://BattleAssets/Battles/test/TestTournament.tres" id="2_jbynr"]
+[ext_resource type="PackedScene" uid="uid://domu3muy85ank" path="res://Scenes/BattleScene.tscn" id="3_wl08f"]
+[ext_resource type="FontFile" uid="uid://ctonyk3pm50er" path="res://Other/Revamped.otf" id="4_jbynr"]
+[ext_resource type="Texture2D" uid="uid://0rfxgyjsilid" path="res://Assets/Rectangle 1.png" id="5_wl08f"]
+
+[sub_resource type="Gradient" id="Gradient_jbynr"]
+colors = PackedColorArray(0.007843138, 0.02745098, 0.023529412, 0, 0.11764706, 0.1882353, 0.22352941, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wl08f"]
+gradient = SubResource("Gradient_jbynr")
+height = 512
+fill_from = Vector2(1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jbynr"]
+font_size = 46
+font_color = Color(1.499905, 1.499905, 1.499905, 0)
+outline_size = 35
+outline_color = Color(0, 0, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ixjr5"]
+font_size = 62
+font_color = Color(1.499905, 1.499905, 1.499905, 0)
+outline_size = 35
+outline_color = Color(0, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_lnjhm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WinnerOverlay/VBoxContainer/Battle_Preamble:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1.499905, 1.499905, 1.499905, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:label_settings:font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1.499905, 1.499905, 1.499905, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WinnerOverlay/VBoxContainer/Battle_Preamble:label_settings:outline_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:label_settings:outline_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WinnerOverlay/VBoxContainer/Battle_Preamble:label_settings:font_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [46]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:label_settings:font_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [62]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:theme_override_font_sizes/font_size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WinnerOverlay/Background:texture:gradient:colors")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedColorArray(0.007843138, 0.02745098, 0.023529412, 0, 0.11764706, 0.1882353, 0.22352941, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jbynr"]
+resource_name = "show_win_screen"
+length = 0.96666664
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WinnerOverlay/VBoxContainer/Battle_Preamble:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.36666667, 0.46666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.499905, 1.499905, 1.499905, 0), Color(1.25516, 1.25516, 1.25516, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:label_settings:font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.73333335, 0.8333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(2.454227, 2.454227, 2.454227, 0), Color(1.353256, 1.353256, 1.353256, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WinnerOverlay/VBoxContainer/Battle_Preamble:label_settings:outline_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.36666667, 0.6333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:label_settings:outline_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.73333335, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WinnerOverlay/VBoxContainer/Battle_Preamble:label_settings:font_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.36666667, 0.5, 0.53333336),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [20, 50, 46]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:label_settings:font_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.73333335, 0.8333333, 0.86666673),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [20, 68, 62]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WinnerOverlay/Background:texture:gradient:colors")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedColorArray(0.007843138, 0.02745098, 0.023529412, 0, 0.11764706, 0.1882353, 0.22352941, 0), PackedColorArray(0.007843138, 0.02745098, 0.023529412, 1, 0.11764706, 0.1882353, 0.22352941, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wl08f"]
+_data = {
+&"RESET": SubResource("Animation_lnjhm"),
+&"show_win_screen": SubResource("Animation_jbynr")
+}
+
+[sub_resource type="Animation" id="Animation_wl08f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_i4onm"]
+resource_name = "show_champ_confetti"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.76666665),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q1ljy"]
+_data = {
+&"RESET": SubResource("Animation_wl08f"),
+&"show_champ_confetti": SubResource("Animation_i4onm")
+}
+
+[sub_resource type="Curve" id="Curve_i4onm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q1ljy"]
+curve = SubResource("Curve_i4onm")
+
+[sub_resource type="Curve" id="Curve_o5cwm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.8983212, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xlkqo"]
+curve = SubResource("Curve_o5cwm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qkehn"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 85.02
+spread = 28.855
+initial_velocity_min = 210.54
+initial_velocity_max = 266.1
+gravity = Vector3(0, 98, 0)
+damping_min = 100.00001
+damping_max = 250.00002
+damping_curve = SubResource("CurveTexture_q1ljy")
+scale_min = 0.099999994
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_xlkqo")
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+
+[sub_resource type="Environment" id="Environment_jbynr"]
+background_mode = 3
+background_canvas_max_layer = 999
+glow_enabled = true
+glow_intensity = 0.71
+glow_blend_mode = 0
+glow_hdr_threshold = 0.9
+
+[node name="TournamentManager" type="Node2D" unique_id=1940887184]
+script = ExtResource("1_lnjhm")
+bracket = ExtResource("2_jbynr")
+_battleScene = ExtResource("3_wl08f")
+animResultsPlayerPath = NodePath("WinnerOverlay/AnimationPlayer")
+animConfettiPath = NodePath("WinnerOverlay/AnimationPlayer2")
+winnerLabelPath = NodePath("WinnerOverlay/VBoxContainer/Winner_Name")
+preWinnerLabelPath = NodePath("WinnerOverlay/VBoxContainer/Battle_Preamble")
+
+[node name="WinnerOverlay" type="CanvasLayer" parent="." unique_id=334826188]
+layer = 999
+
+[node name="Background" type="TextureRect" parent="WinnerOverlay" unique_id=1277004952]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_wl08f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinnerOverlay" unique_id=1606210170]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -67.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="Battle_Preamble" type="Label" parent="WinnerOverlay/VBoxContainer" unique_id=670229938]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 50
+theme_override_constants/shadow_outline_size = 35
+theme_override_fonts/font = ExtResource("4_jbynr")
+text = "And The Winner Is"
+label_settings = SubResource("LabelSettings_jbynr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Winner_Name" type="Label" parent="WinnerOverlay/VBoxContainer" unique_id=462670966]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 50
+theme_override_constants/shadow_outline_size = 35
+theme_override_fonts/font = ExtResource("4_jbynr")
+theme_override_font_sizes/font_size = 0
+text = "[Winner]"
+label_settings = SubResource("LabelSettings_ixjr5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WinnerOverlay" unique_id=304958356]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_wl08f")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="WinnerOverlay" unique_id=1163408372]
+libraries/ = SubResource("AnimationLibrary_q1ljy")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="WinnerOverlay" unique_id=69571161]
+position = Vector2(994, 405)
+emitting = false
+amount = 100
+texture = ExtResource("5_wl08f")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_qkehn")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="WinnerOverlay" unique_id=2035939989]
+position = Vector2(262, 405)
+scale = Vector2(-1, -1)
+emitting = false
+amount = 100
+texture = ExtResource("5_wl08f")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_qkehn")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2102675563]
+environment = SubResource("Environment_jbynr")
