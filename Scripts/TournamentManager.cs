@@ -367,7 +367,6 @@ public partial class TournamentManager : Node2D
             _preWinnerLabel.Text = preText;
 
         _animPlayer.Play("show_win_screen");
-        //_animConfetti.Play("show_champ_confetti");
 
         _phase = Phase.ShowingResults;
 	}

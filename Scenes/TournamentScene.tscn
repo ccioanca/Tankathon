@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://oaqnkya2frwb"]
 
 [ext_resource type="Script" uid="uid://bca7ph0dioyj2" path="res://Scripts/TournamentManager.cs" id="1_lnjhm"]
-[ext_resource type="Resource" uid="uid://b4jjt70jxuh1s" path="res://BattleAssets/Battles/test/TestTournament.tres" id="2_jbynr"]
+[ext_resource type="Resource" uid="uid://bld52w7ag3vh5" path="res://BattleAssets/TeamAssets/2026/Tournament/2026_Tournament.tres" id="2_wl08f"]
 [ext_resource type="PackedScene" uid="uid://domu3muy85ank" path="res://Scenes/BattleScene.tscn" id="3_wl08f"]
 [ext_resource type="FontFile" uid="uid://ctonyk3pm50er" path="res://Other/Revamped.otf" id="4_jbynr"]
 [ext_resource type="Texture2D" uid="uid://0rfxgyjsilid" path="res://Assets/Rectangle 1.png" id="5_wl08f"]
@@ -321,7 +321,7 @@ glow_hdr_threshold = 0.9
 
 [node name="TournamentManager" type="Node2D" unique_id=1940887184]
 script = ExtResource("1_lnjhm")
-bracket = ExtResource("2_jbynr")
+bracket = ExtResource("2_wl08f")
 _battleScene = ExtResource("3_wl08f")
 animResultsPlayerPath = NodePath("WinnerOverlay/AnimationPlayer")
 animConfettiPath = NodePath("WinnerOverlay/AnimationPlayer2")

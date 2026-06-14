@@ -803,21 +803,37 @@ text = "Restart"
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TopLeftTank" parent="." unique_id=659871116 instance=ExtResource("2_8uoga")]
+[node name="TopLeftTank" parent="." unique_id=659871116 node_paths=PackedStringArray("Treads", "Thrusters", "Turrets", "Hulls") instance=ExtResource("2_8uoga")]
 position = Vector2(150, 150)
 rotation = 2.35619
+Treads = []
+Thrusters = []
+Turrets = []
+Hulls = []
 
-[node name="BottomRightTank" parent="." unique_id=737485410 instance=ExtResource("2_8uoga")]
+[node name="BottomRightTank" parent="." unique_id=737485410 node_paths=PackedStringArray("Treads", "Thrusters", "Turrets", "Hulls") instance=ExtResource("2_8uoga")]
 position = Vector2(1130, 570)
 rotation = -0.785398
+Treads = []
+Thrusters = []
+Turrets = []
+Hulls = []
 
-[node name="BottomLeftTank" parent="." unique_id=1211227192 instance=ExtResource("2_8uoga")]
+[node name="BottomLeftTank" parent="." unique_id=1211227192 node_paths=PackedStringArray("Treads", "Thrusters", "Turrets", "Hulls") instance=ExtResource("2_8uoga")]
 position = Vector2(150, 570)
 rotation = 0.785398
+Treads = []
+Thrusters = []
+Turrets = []
+Hulls = []
 
-[node name="TopRightTank" parent="." unique_id=616449855 instance=ExtResource("2_8uoga")]
+[node name="TopRightTank" parent="." unique_id=616449855 node_paths=PackedStringArray("Treads", "Thrusters", "Turrets", "Hulls") instance=ExtResource("2_8uoga")]
 position = Vector2(1130, 150)
 rotation = -2.35619
+Treads = []
+Thrusters = []
+Turrets = []
+Hulls = []
 
 [node name="IntroLayer" type="CanvasLayer" parent="." unique_id=1596309943]
 script = ExtResource("7_8uoga")
