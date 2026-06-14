@@ -101,12 +101,12 @@ public partial class GameManager : Node2D
 		}
 
 		// Remove tanks we don't need
-		if (_tankTypes.Count < 4 && tankThird != null)
+		if (_tankTypes.Count < 4 && tankFourth != null)
 		{
             tankFourth.QueueFree();
             tankFourth = null;
         }
-		if (_tankTypes.Count < 3 && tankFourth != null)
+		if (_tankTypes.Count < 3 && tankThird != null)
 		{
             tankThird.QueueFree();
             tankThird = null;

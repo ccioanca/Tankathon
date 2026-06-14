@@ -356,7 +356,7 @@ public partial class TournamentManager : Node2D
 		_state.Rounds[_state.CurrentRoundIndex] = nextRound;
 	}
 
-	private void ShowResultsScreen(string text, string preText = "And The Winner Is")
+	private void ShowResultsScreen(string text, string preText = "And The Winner Is", bool isChamp = false)
 	{
         Engine.TimeScale = 1f;
 
@@ -366,7 +366,10 @@ public partial class TournamentManager : Node2D
         if (_preWinnerLabel != null)
             _preWinnerLabel.Text = preText;
 
-        _animPlayer.Play("show_win_screen");
+		if(!isChamp)
+			_animPlayer.Play("show_win_screen");
+		else if(isChamp)
+            _animPlayer.Play("show_champ_screen");
 
         _phase = Phase.ShowingResults;
 	}
@@ -377,7 +380,7 @@ public partial class TournamentManager : Node2D
 		var champion = lastCompletedRound?.Matches.LastOrDefault()?.Winner;
 		var championName = champion?.teamName ?? "Unknown";
 
-		ShowResultsScreen(championName, "And The Champion Is");
+		ShowResultsScreen(championName, "And The Champion Is", true);
         _animConfetti.Play("show_champ_confetti");
         GD.Print($"Tournament complete. Champion: {championName}");
 	}
