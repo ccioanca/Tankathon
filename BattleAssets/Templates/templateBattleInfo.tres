@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_nrmpk")
 battleName = "Template Battle Info"
-battleTime = 10
+battleTime = 180
 teams = Array[Object]([null, null, null, null])
 metadata/_custom_type_script = "uid://d4nywqktaoidk"

@@ -21,8 +21,6 @@ public partial class TournamentManager : Node2D
 	[Export]
 	private NodePath animResultsPlayerPath;
     [Export]
-    private NodePath animConfettiPath;
-    [Export]
 	private NodePath winnerLabelPath;
     [Export]
     private NodePath preWinnerLabelPath;
@@ -30,7 +28,6 @@ public partial class TournamentManager : Node2D
     private GameManager _gameManager;
 	private Scoreboard _scoreboard;
 	private AnimationPlayer _animPlayer;
-	private AnimationPlayer _animConfetti;
     private Label _winnerLabel;
 	private Label _preWinnerLabel;
 
@@ -53,7 +50,6 @@ public partial class TournamentManager : Node2D
 	public override void _Ready()
 	{
 		_animPlayer = GetNodeOrNull<AnimationPlayer>(animResultsPlayerPath);
-		_animConfetti = GetNodeOrNull<AnimationPlayer>(animConfettiPath);
 		_winnerLabel = GetNodeOrNull<Label>(winnerLabelPath);
 		_preWinnerLabel = GetNodeOrNull<Label>(preWinnerLabelPath);
 
@@ -356,7 +352,7 @@ public partial class TournamentManager : Node2D
 		_state.Rounds[_state.CurrentRoundIndex] = nextRound;
 	}
 
-	private void ShowResultsScreen(string text, string preText = "And The Winner Is")
+	private void ShowResultsScreen(string text, string preText = "And The Winner Is", bool isChamp = false)
 	{
         Engine.TimeScale = 1f;
 
@@ -366,8 +362,10 @@ public partial class TournamentManager : Node2D
         if (_preWinnerLabel != null)
             _preWinnerLabel.Text = preText;
 
-        _animPlayer.Play("show_win_screen");
-        //_animConfetti.Play("show_champ_confetti");
+		if(!isChamp)
+			_animPlayer.Play("show_win_screen");
+		else if(isChamp)
+            _animPlayer.Play("show_champ_screen");
 
         _phase = Phase.ShowingResults;
 	}
@@ -378,8 +376,7 @@ public partial class TournamentManager : Node2D
 		var champion = lastCompletedRound?.Matches.LastOrDefault()?.Winner;
 		var championName = champion?.teamName ?? "Unknown";
 
-		ShowResultsScreen(championName, "And The Champion Is");
-        _animConfetti.Play("show_champ_confetti");
+		ShowResultsScreen(championName, "And The Champion Is", true);
         GD.Print($"Tournament complete. Champion: {championName}");
 	}
 }

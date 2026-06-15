@@ -101,16 +101,16 @@ public partial class GameManager : Node2D
 		}
 
 		// Remove tanks we don't need
-		if (_tankTypes.Count < 4 && tankThird != null)
+		if (_tankTypes.Count < 4 && tankFourth != null)
 		{
-			tankThird.QueueFree();
-			tankThird = null;
-		}
-		if (_tankTypes.Count < 3 && tankFourth != null)
+            tankFourth.QueueFree();
+            tankFourth = null;
+        }
+		if (_tankTypes.Count < 3 && tankThird != null)
 		{
-			tankFourth.QueueFree();
-			tankFourth = null;
-		}
+            tankThird.QueueFree();
+            tankThird = null;
+        }
         //Technically should never need this unless we accidentally load a battle with only one team, representing a "bye" battle. 
         if (_tankTypes.Count < 2 && tankSecond != null)
         {
