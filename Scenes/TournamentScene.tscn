@@ -4,7 +4,9 @@
 [ext_resource type="Resource" uid="uid://bld52w7ag3vh5" path="res://BattleAssets/TeamAssets/2026/Tournament/2026_Tournament.tres" id="2_wl08f"]
 [ext_resource type="PackedScene" uid="uid://domu3muy85ank" path="res://Scenes/BattleScene.tscn" id="3_wl08f"]
 [ext_resource type="FontFile" uid="uid://ctonyk3pm50er" path="res://Other/Revamped.otf" id="4_jbynr"]
+[ext_resource type="AudioStream" uid="uid://bxjk1ofcocnaf" path="res://Audio/ArenaMusic.ogg" id="5_q1ljy"]
 [ext_resource type="Texture2D" uid="uid://0rfxgyjsilid" path="res://Assets/Rectangle 1.png" id="5_wl08f"]
+[ext_resource type="AudioStream" uid="uid://bkfb68gg4e14m" path="res://Audio/EM_FIRE_IMPACT_01.ogg" id="6_o5cwm"]
 
 [sub_resource type="Gradient" id="Gradient_jbynr"]
 colors = PackedColorArray(0.007843138, 0.02745098, 0.023529412, 0, 0.11764706, 0.1882353, 0.22352941, 0)
@@ -123,10 +125,70 @@ tracks/7/keys = {
 "update": 0,
 "values": [PackedColorArray(0.007843138, 0.02745098, 0.023529412, 0, 0.11764706, 0.1882353, 0.22352941, 0)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WinnerOverlay/Victory Screen:volume_db")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("WinnerOverlay/Victory Screen:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("WinnerOverlay/Woosh:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("WinnerOverlay/Victory Screen:stream")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_q1ljy")]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("WinnerOverlay/Woosh:stream")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_o5cwm")]
+}
 
 [sub_resource type="Animation" id="Animation_q1ljy"]
 resource_name = "show_win_screen"
-length = 1.5
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -146,7 +208,7 @@ tracks/1/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:label_settings
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.2333333, 1.3333333),
+"times": PackedFloat32Array(1.6333333, 1.7333332),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(2.454227, 2.454227, 2.454227, 0), Color(1.353256, 1.353256, 0.5837601, 1)]
@@ -170,7 +232,7 @@ tracks/3/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:label_settings
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1.2333333, 1.4666667),
+"times": PackedFloat32Array(1.6333333, 1.8666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0.44828254, 0.24084193, 0.051515624, 1)]
@@ -194,7 +256,7 @@ tracks/5/path = NodePath("WinnerOverlay/VBoxContainer/Winner_Name:label_settings
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.2333333, 1.3333333, 1.3666668),
+"times": PackedFloat32Array(1.6333333, 1.7333332, 1.7666668),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [20, 68, 62]
@@ -211,10 +273,68 @@ tracks/6/keys = {
 "update": 0,
 "values": [PackedColorArray(0.007843138, 0.02745098, 0.023529412, 0, 0.11764706, 0.1882353, 0.22352941, 0), PackedColorArray(0.0775988, 0.0026169573, 0.013081209, 1, 0.2754737, 0.05146545, 0.095013954, 1)]
 }
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WinnerOverlay/Woosh")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/7/use_blend = true
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WinnerOverlay/Woosh:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.37, 1.6666666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/9/type = "audio"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("WinnerOverlay/Victory Screen")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/9/use_blend = true
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("WinnerOverlay/Victory Screen:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("WinnerOverlay/Victory Screen:volume_db")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -10.0]
+}
 
 [sub_resource type="Animation" id="Animation_jbynr"]
 resource_name = "show_win_screen"
-length = 1.5
+length = 15.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -298,6 +418,64 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [PackedColorArray(0.007843138, 0.02745098, 0.023529412, 0, 0.11764706, 0.1882353, 0.22352941, 0), PackedColorArray(0.007843138, 0.02745098, 0.023529412, 1, 0.11764706, 0.1882353, 0.22352941, 1)]
+}
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WinnerOverlay/Victory Screen")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/7/use_blend = true
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WinnerOverlay/Victory Screen:volume_db")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.0333333, 9.966666, 15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-80.0, -10.0, -10.0, -80.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("WinnerOverlay/Victory Screen:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/10/type = "audio"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("WinnerOverlay/Woosh")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/10/use_blend = true
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("WinnerOverlay/Woosh:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.37, 1.2666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wl08f"]
@@ -489,6 +667,14 @@ lifetime = 1.5
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_qkehn")
+
+[node name="Victory Screen" type="AudioStreamPlayer" parent="WinnerOverlay" unique_id=155394148]
+stream = ExtResource("5_q1ljy")
+volume_db = -80.0
+
+[node name="Woosh" type="AudioStreamPlayer" parent="WinnerOverlay" unique_id=200242257]
+stream = ExtResource("6_o5cwm")
+volume_db = -5.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2102675563]
 environment = SubResource("Environment_jbynr")
