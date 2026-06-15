@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b4lomwrh1gbly"
+path="res://.godot/imported/Champ Music.mp3-59e76da9083ca58530bb183f2b4e07fb.mp3str"
+
+[deps]
+
+source_file="res://Audio/Champ Music.mp3"
+dest_files=["res://.godot/imported/Champ Music.mp3-59e76da9083ca58530bb183f2b4e07fb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

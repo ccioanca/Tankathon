@@ -21,8 +21,6 @@ public partial class TournamentManager : Node2D
 	[Export]
 	private NodePath animResultsPlayerPath;
     [Export]
-    private NodePath animConfettiPath;
-    [Export]
 	private NodePath winnerLabelPath;
     [Export]
     private NodePath preWinnerLabelPath;
@@ -30,7 +28,6 @@ public partial class TournamentManager : Node2D
     private GameManager _gameManager;
 	private Scoreboard _scoreboard;
 	private AnimationPlayer _animPlayer;
-	private AnimationPlayer _animConfetti;
     private Label _winnerLabel;
 	private Label _preWinnerLabel;
 
@@ -53,7 +50,6 @@ public partial class TournamentManager : Node2D
 	public override void _Ready()
 	{
 		_animPlayer = GetNodeOrNull<AnimationPlayer>(animResultsPlayerPath);
-		_animConfetti = GetNodeOrNull<AnimationPlayer>(animConfettiPath);
 		_winnerLabel = GetNodeOrNull<Label>(winnerLabelPath);
 		_preWinnerLabel = GetNodeOrNull<Label>(preWinnerLabelPath);
 
@@ -381,7 +377,6 @@ public partial class TournamentManager : Node2D
 		var championName = champion?.teamName ?? "Unknown";
 
 		ShowResultsScreen(championName, "And The Champion Is", true);
-        _animConfetti.Play("show_champ_confetti");
         GD.Print($"Tournament complete. Champion: {championName}");
 	}
 }
