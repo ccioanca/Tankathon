@@ -226,46 +226,28 @@ texture = ExtResource("23_37don")
 scale = Vector2(0.163, 0.163)
 texture = ExtResource("24_prm18")
 
-[node name="Actions" parent="." index="1" unique_id=1215133736]
-visible = false
-
-[node name="CollisionShape2D" parent="." index="2" unique_id=621507364]
-visible = false
-
-[node name="Turret" parent="." index="3" unique_id=915425740]
-visible = false
-
 [node name="HealthBar" parent="." index="4" unique_id=1708015097]
 visible = false
 
-[node name="NameLabel" parent="." index="5" unique_id=1237416405]
-visible = false
-
 [node name="TreadsL" parent="." index="6" unique_id=173937655 instance=ExtResource("5_bocum")]
-visible = false
 position = Vector2(-23, 46)
 
 [node name="TreadsR" parent="." index="7" unique_id=403223440 instance=ExtResource("5_bocum")]
-visible = false
 position = Vector2(25, 46)
 
 [node name="Tracks" type="Node2D" parent="." index="8" unique_id=1903286162]
-visible = false
 
 [node name="Marker2D" type="Marker2D" parent="Tracks" index="0" unique_id=82899207]
-visible = false
 position = Vector2(-19, 31)
 script = ExtResource("6_n80pc")
 segment_scene = ExtResource("7_ek7rw")
 
 [node name="Marker2D2" type="Marker2D" parent="Tracks" index="1" unique_id=507057021]
-visible = false
 position = Vector2(21, 31)
 script = ExtResource("6_n80pc")
 segment_scene = ExtResource("7_ek7rw")
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="9" unique_id=1796212915]
-visible = false
 position = Vector2(18, -2)
 scale = Vector2(0.440209, 0.440209)
 color = Color(1, 0, 0, 1)

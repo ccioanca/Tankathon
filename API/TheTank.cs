@@ -171,8 +171,10 @@ public partial class TheTank : CharacterBody2D, IEntity
 		_tankLabel.Text = _tankSetup.name;
 
 		//setup sounds
-		shootSound = teamInfo.Get("shootSound").As<AudioStream>();
-		deathSound = teamInfo.Get("deathSound").As<AudioStream>();
+		if(teamInfo.Get("shootSound").As<AudioStream>() != null)
+			shootSound = teamInfo.Get("shootSound").As<AudioStream>();
+		if(teamInfo.Get("deathSound").As<AudioStream>() != null)
+			deathSound = teamInfo.Get("deathSound").As<AudioStream>();
 		shootPlayer.Stream = shootSound;
 		deathPlayer.Stream = deathSound;
 
