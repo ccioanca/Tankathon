@@ -229,6 +229,9 @@ texture = ExtResource("24_prm18")
 [node name="HealthBar" parent="." index="4" unique_id=1708015097]
 visible = false
 
+[node name="NameLabel" parent="." index="5" unique_id=1237416405]
+theme_override_colors/font_color = Color(1, 1, 1, 0.78431374)
+
 [node name="TreadsL" parent="." index="6" unique_id=173937655 instance=ExtResource("5_bocum")]
 position = Vector2(-23, 46)
 
