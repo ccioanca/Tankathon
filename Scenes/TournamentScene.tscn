@@ -591,7 +591,6 @@ script = ExtResource("1_lnjhm")
 bracket = ExtResource("2_wl08f")
 _battleScene = ExtResource("3_wl08f")
 animResultsPlayerPath = NodePath("WinnerOverlay/AnimationPlayer")
-animConfettiPath = NodePath("")
 winnerLabelPath = NodePath("WinnerOverlay/VBoxContainer/Winner_Name")
 preWinnerLabelPath = NodePath("WinnerOverlay/VBoxContainer/Battle_Preamble")
 
